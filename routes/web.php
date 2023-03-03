@@ -27,3 +27,11 @@ Route::resource('products', ProductController::class)->names('products');
 Route::resource('providers', ProviderController::class)->names('providers');
 Route::resource('purchases', PurchaseController::class)->names('purchases');
 Route::resource('sales', SaleController::class)->names('sales');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
