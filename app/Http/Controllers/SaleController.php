@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Sale;
 use App\Client;
+use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\Sale\StoreRequest;
 use App\Http\Requests\Sale\UpdateRequest;
@@ -18,7 +19,8 @@ class SaleController extends Controller
     public function create()
     {
         $clients = Client::get();
-        return view('admin.sale.create',compact('clients'));
+        $products = Product::get();
+        return view('admin.sale.create',compact('clients','products'));
     }
     public function store(StoreRequest $request)
     {
@@ -40,7 +42,7 @@ class SaleController extends Controller
     public function edit(Sale $sale)
     {
         $clients = Client::get();
-        return view('admin.sale.show',compact('sale'));
+        return view('admin.sale.edit',compact('sale'));
     }
     public function update(UpdateRequest $request, Sale $sale)
     {

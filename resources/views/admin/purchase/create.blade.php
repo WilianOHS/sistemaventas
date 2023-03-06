@@ -34,7 +34,7 @@
                    
                 </div>
                 <div class="card-footer text-muted">
-                <button type="submit" class="btn btn-primary mr-2">Registrar</button>
+                <button type="submit" id="guardar" class="btn btn-primary float-right">Registrar</button>
                     <a href="{{route('purchases.index')}}" class="btn btn-light">
                         Cancelar
                     </a>
