@@ -51,8 +51,8 @@
 
 
 <script>
-    $(document).ready(function () {
-  $("#agregar").click(function () {
+$(document).ready(function () {
+$("#agregar").click(function () {
     agregar();
   });
 });
@@ -64,12 +64,12 @@ subtotal = [];
 $("#guardar").hide();
 $('#product_id').change(mostrarValores);
 function mostrarValores() {
-  datosProducto = document.getElementById('product_id').ariaValueMax.split('_');
+  datosProducto = document.getElementById('product_id').value.split('_');
   $("#price").val(datosProducto[2]);
   $("#stock").val(datosProducto[1]);
 }
 function agregar() {
-    datosProducto = document.getElementById('product_id').ariaValueMax.split('_');
+    datosProducto = document.getElementById('product_id').value.split('_');
 
     product_id = datosProducto[0];
     producto = $("#product_id option:selected").text();

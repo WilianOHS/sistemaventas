@@ -5,12 +5,12 @@
             <option value="{{$client->id}}">{{$client->name}}</option>
             @endforeach
             </select>
-        </div>
+</div>
 
-        <div class="form-group">
-            <label for="iva">Impuesto (IVA)</label>
-                <input type="number" class="form-control" name="iva" id="iva" aria-describedby="helpId" placeholder="13%">
-        </div>
+<div class="form-group">
+    <label for="iva">Impuesto (IVA)</label>
+        <input type="number" class="form-control" name="iva" id="iva" aria-describedby="helpId" placeholder="13%">
+</div>
 
         <!-- '',
         'quantity',
@@ -20,6 +20,7 @@
         <div class="form-group">
         <label for="product_id">Producto</label>
             <select id="product_id" class="form-control" name="product_id">
+            <option value="" disabled selected>Seleccione un producto</option>
             @foreach ($products as $product)
             <option value="{{$product->id}}_{{$product->stock}}_{{$product->sale_price}}">{{$product->name}}</option>
             @endforeach
@@ -38,8 +39,8 @@
         </div>
 
         <div class="form-group">
-            <label for="sale_price">Precio de venta</label>
-                <input type="number" class="form-control" name="sale_price" id="sale_price" aria-describedby="helpId" disabled>
+            <label for="price">Precio de venta</label>
+                <input type="number" class="form-control" name="price" id="price" aria-describedby="helpId" disabled>
         </div>
 
         <div class="form-group">
