@@ -11,6 +11,11 @@ use App\Http\Requests\Sale\UpdateRequest;
 use App\saleDetail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Mike42\Escpos\PrintConnectors\FilePrintConnector;
+use Mike42\Escpos\Printer;
+use Mike42\Escpos\EscposImage;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 
 class SaleController extends Controller
 {
@@ -68,5 +73,42 @@ class SaleController extends Controller
     {
        // $sale->delete();
         //return redirect()->route('sales.index');
+    }
+    public function pdf(Sale $sale)
+    {
+        $subtotal = 0;
+        $saleDetails = $sale->saleDetails;
+        foreach ($saleDetails as $saleDetail){
+            $subtotal += $saleDetail->quantity * $saleDetail->price - (($saleDetail->quantity * $saleDetail->price)*($saleDetail->discount/100));
+        }
+        
+    $pdf = PDF::loadView('admin.sale.pdf', compact('sale', 'subtotal', 'saleDetails'));
+
+    return $pdf->download('Reporte_de_venta_'.$sale->id.'.pdf');
+    }
+
+    public function print(Sale $sale){
+        try {
+            $subtotal = 0;
+            $saleDetails = $sale->saleDetails;
+            foreach ($saleDetails as $saleDetail){
+            $subtotal += $saleDetail->quantity * $saleDetail->price - (($saleDetail->quantity * $saleDetail->price)*($saleDetail->discount/100));
+            }
+
+            $printer_name = "TM20";
+
+            $connector = new WindowsPrintConnector($printer_name);
+            $printer = new Printer($connector);
+
+            $printer->text("€ 9,95\n");
+
+            $printer->cut();
+            $printer->close();
+
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            return redirect()->back();
+        }
+        
     }
 }

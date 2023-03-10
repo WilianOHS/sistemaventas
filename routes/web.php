@@ -25,8 +25,31 @@ Route::resource('categories', CategoryController::class)->names('categories');
 Route::resource('clients', ClientController::class)->names('clients');
 Route::resource('products', ProductController::class)->names('products');
 Route::resource('providers', ProviderController::class)->names('providers');
-Route::resource('purchases', PurchaseController::class)->names('purchases');
-Route::resource('sales', SaleController::class)->names('sales');
+Route::resource('purchases', PurchaseController::class)->names('purchases')->except([
+    'edit', 'update', 'destroy'
+]);
+Route::resource('sales', SaleController::class)->names('sales')->except([
+    'edit', 'update', 'destroy'
+]);
+Route::get('purchases/pdf/{purchase}', 'PurchaseController@pdf')->name('purchases.pdf');
+
+Route::get('sales/pdf/{sale}', 'SaleController@pdf')->name('sales.pdf');
+
+Route::get('sales/print/{sale}', 'SaleController@print')->name('sales.print');
+
+Route::resource('business', BusinessController::class)->names('business')->only([
+    'index', 'update'
+]);;
+
+Route::resource('printers', PrinterController::class)->names('printers')->only([
+    'index', 'update'
+]);;
+
+Route::get('purchases/upload/{purchase}', 'PurchaseController@upload')->name('upload.purchases');
+
+Route::get('change_status/products/{product}', 'ProductController@change_status');
+Route::get('change_status/purchases/{purchase}', 'PurchaseController@change_status');
+Route::get('change_status/sales/{sale}', 'SaleController@change_status');
 
 Auth::routes();
 
