@@ -47,9 +47,14 @@ Route::resource('printers', PrinterController::class)->names('printers')->only([
 
 Route::get('purchases/upload/{purchase}', 'PurchaseController@upload')->name('upload.purchases');
 
-Route::get('change_status/products/{product}', 'ProductController@change_status');
-Route::get('change_status/purchases/{purchase}', 'PurchaseController@change_status');
-Route::get('change_status/sales/{sale}', 'SaleController@change_status');
+Route::get('change_status/products/{product}', 'ProductController@change_status')->name('change.status.products');
+Route::get('change_status/purchases/{purchase}', 'PurchaseController@change_status')->name('change.status.purchases');
+Route::get('change_status/sales/{sale}', 'SaleController@change_status')->name('change.status.sales');
+
+Route::get('sales/reports_day', 'ReportController@reports_day')->name('reports.day');
+Route::get('sales/reports_date', 'ReportController@reports_date')->name('reports.date');
+
+Route::post('sales/report_results', 'ReportController@report_results')->name('report.results');
 
 Auth::routes();
 
