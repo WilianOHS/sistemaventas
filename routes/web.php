@@ -56,6 +56,10 @@ Route::get('sales/reports_date', 'ReportController@reports_date')->name('reports
 
 Route::post('sales/report_results', 'ReportController@report_results')->name('report.results');
 
+Route::resource('users', UserController::class)->names('users');
+
+Route::resource('roles', RoleController::class)->names('roles');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

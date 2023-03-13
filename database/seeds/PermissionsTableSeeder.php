@@ -13,6 +13,58 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
         Permission::create([
+            'name'=>'Navegar usuarios',
+            'slug'=>'users.index',
+            'description'=>'Lista y navega por todos los usuarios del sistema',
+        ]);
+        Permission::create([
+            'name'=>'Ver detalle de usuario',
+            'slug'=>'users.show',
+            'description'=>'Ve en detalle cada usuario del sistema',
+        ]);
+        Permission::create([
+            'name'=>'Edición de usuarios',
+            'slug'=>'users.edit',
+            'description'=>'Editar cualquier dato de un  usuario del sistema',
+        ]);
+        Permission::create([
+            'name'=>'Creación de usuarios',
+            'slug'=>'users.create',
+            'description'=>'Crear cualquier dato de un  usuario del sistema',
+        ]);
+        Permission::create([
+            'name'=>'Eliminar usuarios',
+            'slug'=>'users.destroy',
+            'description'=>'Eliminar cualquier dato de un  usuario del sistema',
+        ]);
+        
+        Permission::create([
+            'name'=>'Navegar roles',
+            'slug'=>'roles.index',
+            'description'=>'Lista y navega por todos los roles del sistema',
+        ]);
+        Permission::create([
+            'name'=>'Ver detalle de rol',
+            'slug'=>'roles.show',
+            'description'=>'Ver en detalle cada rol del sistema',
+        ]);
+        Permission::create([
+            'name'=>'Edición de roles',
+            'slug'=>'roles.edit',
+            'description'=>'Editar cualquier dato de un  rol del sistema',
+        ]);
+        Permission::create([
+            'name'=>'Creación de roles',
+            'slug'=>'roles.create',
+            'description'=>'Crear cualquier dato de un  rol del sistema',
+        ]);
+        Permission::create([
+            'name'=>'Eliminar roles',
+            'slug'=>'roles.destroy',
+            'description'=>'Eliminar cualquier dato de un  rol del sistema',
+        ]);
+        
+        Permission::create([
             'name'=>'Navegar categorias',
             'slug'=>'categories.index',
             'description'=>'Lista y navega por todos las categorías del sistema',
