@@ -20,7 +20,17 @@ class BusinessController extends Controller
     }
     public function update(UpdateRequest $request, Business $business)
     {
-        $business->update($request->all());
+        if ($request->hasFile('logotipo')) {
+            $file = $request->file('logotipo');
+            $image_name = time().'_'.$file->getClientOriginalName();
+            $file->move(public_path("/image"),$image_name);
+        }
+        $business->update($request->all()+[
+            'logo' =>$image_name,
+        ]);
+
+
+
         return redirect()->route('business.index');
     }
 }

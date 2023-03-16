@@ -34,8 +34,7 @@
                         <div class="col-lg-4">
                             <div class="border-bottom text-center pb-4">
 
-                            <img src="{{asset('image/'.$product->image)}}" alt="profile"
-                            class="img-lg mb-3"/>
+                            <img src="{{asset('image/'.$product->image)}}" alt="profile" class="img-lg mb-3"/>
 
                                 <h3>{{$product->name}}</h3>
                                 <div class="d-flex justify-content-between">
