@@ -65,7 +65,7 @@
                                             <p align="right">SUBTOTAL:</p>
                                         </th>
                                         <th>
-                                            <p align="right">s/{{number_format($subtotal,2)}}</p>
+                                            <p align="right">${{number_format($subtotal,2)}}</p>
                                         </th>
                                     </tr>
 
@@ -74,7 +74,7 @@
                                             <p align="right">TOTAL IMPUESTO ({{$sale->iva}}%):</p>
                                         </th>
                                         <th>
-                                            <p align="right">s/{{number_format($subtotal*$sale->iva/100,2)}}</p>
+                                            <p align="right">${{number_format($subtotal*$sale->iva/100,2)}}</p>
                                         </th>
                                     </tr>
                                     <tr>
@@ -82,7 +82,7 @@
                                             <p align="right">TOTAL:</p>
                                         </th>
                                         <th>
-                                            <p align="right">s/{{number_format($sale->total,2)}}</p>
+                                            <p align="right">${{number_format($sale->total,2)}}</p>
                                         </th>
                                     </tr>
 
@@ -91,10 +91,10 @@
                                     @foreach($saleDetails as $saleDetail)
                                     <tr>
                                         <td>{{$saleDetail->product->name}}</td>
-                                        <td>s/ {{$saleDetail->price}}</td>
+                                        <td>$ {{$saleDetail->price}}</td>
                                         <td>{{$saleDetail->discount}} %</td>
                                         <td>{{$saleDetail->quantity}}</td>
-                                        <td>s/{{number_format($saleDetail->quantity*$saleDetail->price - $saleDetail->quantity*$saleDetail->price*$saleDetail->discount/100,2)}}
+                                        <td>${{number_format($saleDetail->quantity*$saleDetail->price - $saleDetail->quantity*$saleDetail->price*$saleDetail->discount/100,2)}}
                                         </td>
                                     </tr>
                                     @endforeach

@@ -18,7 +18,7 @@ class PrinterController extends Controller
         $printer = Printer::where('id',1)->firstOrFail();
         return view('admin.printer.index',compact('printer'));
     }
-    public function update(UpdateRequest $request, Business $printer)
+    public function update(UpdateRequest $request, Printer  $printer)
     {
         $printer->update($request->all());
         return redirect()->route('printers.index');

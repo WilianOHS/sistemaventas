@@ -72,7 +72,7 @@
                         <p align="right">TOTAL:</p>
                     </th>
                     <th>
-                        <p align="right"><span id="total">USD 0.00</span> </p>
+                        <p align="right"><span id="total">$ 0.00</span> </p>
                     </th>
                 </tr>
                 <tr>
@@ -80,7 +80,7 @@
                         <p align="right">TOTAL IMPUESTO (13%):</p>
                     </th>
                     <th>
-                        <p align="right"><span id="total_impuesto">USD 0.00</span></p>
+                        <p align="right"><span id="total_impuesto">$ 0.00</span></p>
                     </th>
                 </tr>
                 <tr>
@@ -88,7 +88,7 @@
                         <p align="right">TOTAL PAGAR:</p>
                     </th>
                     <th>
-                        <p align="right"><span align="right" id="total_pagar_html">USD 0.00</span> <input type="hidden"
+                        <p align="right"><span align="right" id="total_pagar_html">$ 0.00</span> <input type="hidden"
                                 name="total" id="total_pagar"></p>
                     </th>
                 </tr>

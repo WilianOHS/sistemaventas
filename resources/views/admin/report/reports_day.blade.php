@@ -1,5 +1,5 @@
 @extends('layouts.admin')
- @section('title','Gestion de compras')
+ @section('title','Reporte de ventas')
  @section('styles')
  <style type="text/css">
   .unstyled-button {
@@ -17,12 +17,12 @@
 <div class="content-wrapper">
     <div class="page-header">
         <h3 class="page-title">
-            Compras
+            Reporte de ventas
         </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Panel administrador</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Compras</li>
+                <li class="breadcrumb-item active" aria-current="page">Reporte de ventas</li>
             </ol>
         </nav>
     </div>
@@ -32,15 +32,35 @@
                 <div class="card-body">
                   
                     <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Compras</h4>
+                        <!-- <h4 class="card-title">Reporte de ventas</h4>
                           <div class="btn-group">
                           <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right">
-                            <a href="{{route('purchases.create')}}" class="dropdown-item">Registrar</a>
+                            <a href="{{route('sales.create')}}" class="dropdown-item">Registrar</a>
                           </div>
+                        </div> -->
+                    </div>
+                    <div class="row">
+                      <div class="col-12 col-md-4 text-center">
+                        <span>Fecha de consulta: <b></b></span>
+                        <div class="form-group">
+                          <strong>{{\Carbon\Carbon::now()->format('d/m/Y')}}</strong>
                         </div>
+                      </div>
+                      <div class="col-12 col-md-4 text-center">
+                        <span>Cantidad de registros: <b></b></span>
+                        <div class="form-group">
+                          <strong>{{$sales->count()}}</strong>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-4 text-center">
+                        <span>Total de ingresos: <b></b></span>
+                        <div class="form-group">
+                          <strong>$ {{$total}}</strong>
+                        </div>
+                      </div>
                     </div>
 
                   <div class="table-responsive">
@@ -55,25 +75,26 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($purchases as $purchase)
+                        @foreach ($sales as $sale)
                         <tr>
                             <th scope="row">
-                              <a href="{{route('purchases.show',$purchase)}}">{{$purchase->id}}</a>
+                              <a href="{{route('sales.show',$sale)}}">{{$sale->id}}</a>
                             </th>  
-                            <td>{{$purchase->purchase_date}}</td>
-                            <td>{{$purchase->total}}</td>  
-                            <td>{{$purchase->status}}</td>        
+                            <td>{{$sale->sale_date}}</td>
+                            <td>{{$sale->total}}</td>  
+                            <td>{{$sale->status}}</td>        
                             <td style="width:50px">
 
+                    
 
                                 <!-- <button class="jsgrid-button jsgrid-delete-button unstyled-button" 
                                 type="submit" title="Eliminar">
                                     <i class="far fa-trash-alt"></i>
                                 </button> -->
 
-                                <a href="{{route('purchases.pdf',$purchase)}}" class="jsgrid-button jsgrid-edit-button"><i class="fas fa-file-pdf"></i></a>
-                                <!-- <a href="#" class="jsgrid-button jsgrid-edit-button"><i class="fas fa-print"></i></a> -->
-                                <a href="{{route('purchases.show',$purchase)}}" class="jsgrid-button jsgrid-edit-button"><i class="fas fa-eye"></i></a>
+                                <a href="{{route('sales.pdf',$sale)}}" class="jsgrid-button jsgrid-edit-button"><i class="fas fa-file-pdf"></i></a>
+                                <a href="{{route('sales.print',$sale)}}" class="jsgrid-button jsgrid-edit-button"><i class="fas fa-print"></i></a>
+                                <a href="{{route('sales.show',$sale)}}" class="jsgrid-button jsgrid-edit-button"><i class="fas fa-eye"></i></a>
                                 
         
 
