@@ -62,7 +62,23 @@
                             </th>  
                             <td>{{$purchase->purchase_date}}</td>
                             <td>{{$purchase->total}}</td>  
-                            <td>{{$purchase->status}}</td>        
+                            @if ($purchase->status == 'VALID')
+                            <td>
+                            <a class="jsgrid-button btn btn-success" href="
+                                {{route('change.status.purchases',$purchase)}}"
+                                title="editar">
+                                Activo<i class="fas fa-check"></i>
+                                </a>  
+                            </td>
+                            @else   
+                            <td>
+                            <a class="jsgrid-button btn btn-danger" href="
+                                {{route('change.status.purchases',$purchase)}}"
+                                title="editar">
+                                Desactivado <i class="fas fa-times"></i>
+                                </a>  
+                            </td>
+                            @endif       
                             <td style="width:50px">
 
 
