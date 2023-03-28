@@ -21,12 +21,20 @@
               <span class="menu-title">Inicio</span>
             </a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" href="{{route('categories.index')}}">
-              <i class="fa fa-bookmark menu-icon"></i>
-              <span class="menu-title">Categorías</span>
+            <a class="nav-link" data-toggle="collapse" href="#page-layouts2" aria-expanded="false" aria-controls="page-layouts2">
+            <i class="fa fa-shopping-basket menu-icon"></i>
+              <span class="menu-title">Productos</span>
+              <i class="menu-arrow"></i>
             </a>
-          </li> 
+            <div class="collapse" id="page-layouts2">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{route('categories.index')}}">Categorías</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('products.index')}}">Productos</a></li>
+              </ul>
+            </div>
+          </li>
 
           <li class="nav-item">
             <a class="nav-link" href="{{route('clients.index')}}">
@@ -36,25 +44,18 @@
           </li> 
 
           <li class="nav-item">
-            <a class="nav-link" href="{{route('products.index')}}">
-              <i class="fa fa-shopping-basket menu-icon"></i>
-              <span class="menu-title">Productos</span>
-            </a>
-          </li> 
-
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('providers.index')}}">
-              <i class="fa fa-truck menu-icon"></i>
-              <span class="menu-title">Proveedores</span>
-            </a>
-          </li> 
-
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('purchases.index')}}">
-              <i class="fa fa-shopping-bag menu-icon"></i>
+            <a class="nav-link" data-toggle="collapse" href="#page-layouts1" aria-expanded="false" aria-controls="page-layouts1">
+            <i class="fa fa-shopping-bag menu-icon"></i>
               <span class="menu-title">Compras</span>
+              <i class="menu-arrow"></i>
             </a>
-          </li> 
+            <div class="collapse" id="page-layouts1">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{route('providers.index')}}">Proveedores</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('purchases.index')}}">Compras</a></li>
+              </ul>
+            </div>
+          </li>
 
           <li class="nav-item">
             <a class="nav-link" href="{{route('sales.index')}}">
@@ -73,24 +74,11 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="{{route('business.index')}}">Empresa</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{route('printers.index')}}">Impresora</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('users.index')}}">Usuarios</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('roles.index')}}">Roles</a></li>
               </ul>
             </div>
           </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('users.index')}}">
-              <i class="fa fa-user menu-icon"></i>
-              <span class="menu-title">Usuarios</span>
-            </a>
-          </li> 
-
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('roles.index')}}">
-              <i class="fa fa-unlock-alt menu-icon"></i>
-              <span class="menu-title">Roles</span>
-            </a>
-          </li> 
-
 
           <li class="nav-item d-none d-lg-block">
             <a class="nav-link" data-toggle="collapse" href="#sidebar-layouts" aria-expanded="false" aria-controls="sidebar-layouts">

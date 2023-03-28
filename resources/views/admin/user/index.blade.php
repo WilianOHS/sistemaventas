@@ -60,7 +60,7 @@
                             <td>
                                 <a href="{{route('users.show',$user)}}">{{$user->name}}</a>                                
                             </td>    
-                            <td>{{$user->email}}</td>      
+                            <td>{{$user->username}}</td>      
                             <td style="width:50px">
                                 {!! Form::open(['route'=>['users.destroy',
                                 $user], 'method'=>'DELETE']) !!}

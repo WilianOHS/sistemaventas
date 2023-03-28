@@ -36,8 +36,8 @@
                     <input type="text" name="name" id="name" value="{{$user->name}}" class="form-control" placeholder="" aria-describedby="helpId">
                     </div>
                     <div class="form-group">
-                    <label for="email">Correo electrónico</label>
-                    <input type="email" name="email" id="email" value="{{$user->email}}" class="form-control" placeholder="" aria-describedby="helpId">
+                    <label for="username">Correo electrónico</label>
+                    <input type="text" name="username" id="username" value="{{$user->username}}" class="form-control" placeholder="" aria-describedby="helpId">
                     </div>
                     <!-- <div class="form-group">
                     <label for="password">Contraseña</label>

@@ -38,14 +38,14 @@
                         <input type="text" name="name" id="name" class="form-control" aria-describedby="helpId" required>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="price">Precio</label>
-                        <input type="number" name="price" id="price" class="form-control" aria-describedby="helpId" required>
-                    </div>
+                        <input type="number" name="price" id="price" class="form-control" aria-describedby="helpId" step=".01" required>
+                    </div> -->
 
                     <div class="form-group">
                         <label for="sale_price">Precio de venta</label>
-                        <input type="number" name="sale_price" id="sale_price" class="form-control" aria-describedby="helpId" required>
+                        <input type="number" name="sale_price" id="sale_price" class="form-control" aria-describedby="helpId" step=".01" required>
                     </div>
 
                     <div class="form-group">

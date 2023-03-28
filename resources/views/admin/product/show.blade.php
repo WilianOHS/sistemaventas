@@ -136,11 +136,11 @@
                                             {{$product->stock}}
                                         </p>
                                         <hr>
-                                        <strong><i class="fas fa-money-bill mr-1"></i> Precio de compra</strong>
+                                        <!-- <strong><i class="fas fa-money-bill mr-1"></i> Precio de compra</strong>
                                         <p class="text-muted">
                                             {{$product->price}}
                                         </p>
-                                        <hr>
+                                        <hr> -->
                                         <strong><i class="fas fa-dollar-sign mr-1"></i> Precio de venta</strong>
                                         <p class="text-muted">
                                             {{$product->sale_price}}

@@ -1,6 +1,7 @@
         <div class="form-group">
         <label for="provider_id">Proveedor</label>
             <select id="provider_id" class="form-control" name="provider_id">
+            <option value="" disabled selected>Seleccione un proveedor</option>
             @foreach ($providers as $provider)
             <option value="{{$provider->id}}">{{$provider->name}}</option>
             @endforeach
@@ -9,12 +10,23 @@
 
         <div class="form-group">
             <label for="iva">Impuesto (IVA)</label>
-                <input type="number" class="form-control" name="iva" id="iva" aria-describedby="helpId" placeholder="13%">
+            <!--    <input type="number" class="form-control" name="iva" id="iva" aria-describedby="helpId" placeholder="13%"> -->
+            <div class="form-group">
+            <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-dark active"> Con IVA
+                        <input type="radio" name="iva" id="iva" autocomplete="off" value="13">
+                    </label>
+
+                    <label class="btn btn-dark">Sin IVA
+                        <input type="radio" name="iva" id="iva" autocomplete="off" value="0">
+                    </label>
+                </div>
         </div>
 
         <div class="form-group">
         <label for="product_id">Producto</label>
             <select id="product_id" class="form-control" name="product_id">
+            <option value="" disabled selected>Seleccione un producto</option>
             @foreach ($products as $product)
             <option value="{{$product->id}}">{{$product->name}}</option>
             @endforeach

@@ -136,4 +136,30 @@ function eliminar(index) {
     
 </script>
 
+<script type="text/javascript">
+ 
+        function xajax_changeColorImageAttribute(prod_option_value) {
+          var i, pos;
+          var sel = document.getElementById('cmbooption_1');
+          var rad = document.getElementsByName('id[1]');
+          for (i = 0; i < rad.length; i++) {
+            if (rad[i].value == prod_option_value) {
+              rad[i].checked = 'on';
+ //    alert('Value: ' + rad[i].value + '\n' + 'checked: ' + rad[i].checked);
+            }
+          }
+		  
+          for (i = 0; i <sel.options.length; i++) {
+	        if (sel.options[i].value == prod_option_value) {
+ //    alert(sel.options[i].value);
+           pos = i;
+        }
+      }
+ 
+    sel.selectedIndex = pos;
+  //   alert(sel.selectedIndex);
+ }
+ 
+</script>
+
 @endsection

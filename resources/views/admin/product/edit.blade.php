@@ -38,10 +38,10 @@
                         <input type="text" name="name" id="name" value="{{$product->name}}" class="form-control" aria-describedby="helpId" required>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="price">Precio</label>
                         <input type="number" name="price" id="price"  value="{{$product->price}}"  class="form-control" aria-describedby="helpId" required>
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                         <label for="sale_price">Precio de venta</label>

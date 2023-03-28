@@ -34,8 +34,8 @@
                     <input type="text" name="name" id="name" class="form-control" placeholder="" aria-describedby="helpId">
                     </div>
                     <div class="form-group">
-                    <label for="email">Correo electrónico</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="" aria-describedby="helpId">
+                    <label for="username">Nombre de Usuario</label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="" aria-describedby="helpId">
                     </div>
                     <div class="form-group">
                     <label for="password">Contraseña</label>

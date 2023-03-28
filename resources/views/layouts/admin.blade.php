@@ -57,10 +57,15 @@
                 Settings
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item">
-                <i class="fas fa-power-off text-primary"></i>
-                Logout
-              </a>
+              <a class="dropdown-item" href="{{ route('login') }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Logout"
+                            onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                                <i class="fas fa-power-off text-primary"></i>
+                                Logout
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
             </div>
           </li>
           
@@ -253,7 +258,7 @@
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
             <span class="text-muted text-center text-sm-left d-block d-sm-inline-block"></span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"><i class="far fa-heart text-danger"></i></span>
+            <!-- <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"><i class="far fa-heart text-danger"></i></span> -->
           </div>
         </footer>
         <!-- partial -->

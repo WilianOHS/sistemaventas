@@ -41,3 +41,4 @@ CREATE TRIGGER `tr_updStockVentaAnular` AFTER UPDATE ON `sales`
 end;
 //
 DELIMITER ;
+
