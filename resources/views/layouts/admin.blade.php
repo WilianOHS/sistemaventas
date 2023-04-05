@@ -53,8 +53,9 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
-                <i class="fas fa-cog text-primary"></i>
-                Settings
+                <form action="/logout" method="POST"></form>
+                @csrf
+                <a href="" onClick="this.closest('form').submit()">Salir</a>
               </a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{{ route('login') }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Logout"

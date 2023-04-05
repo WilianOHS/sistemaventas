@@ -31,20 +31,9 @@
               <div class="card">
                 <div class="card-body">
                   
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Categorías</h4>
-                          <div class="btn-group">
-                          <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v"></i>
-                          </a>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <a href="{{route('categories.create')}}" class="dropdown-item">Agregar</a>
-                          </div>
-                        </div>
-                    </div>
 
                   <div class="table-responsive">
-                    <table id="order-listing" class="table">
+                    <table id="category_listing" class="table">
                       <thead>
                         <tr>
                           <th>Id</th>
@@ -58,23 +47,23 @@
                         <tr>
                             <th scope="row">{{$category->id}}</th>
                             <td>
-                                <a href="{{route('categories.show',$category)}}">{{$category->name}}</a>                                
+                                                              
+                                <a href="#">{{$category->name}}</a>
                             </td>    
                             <td>{{$category->description}}</td>      
-                            <td style="width:50px">
+                            <td style="width: 20%;">
                                 {!! Form::open(['route'=>['categories.destroy',
                                 $category], 'method'=>'DELETE']) !!}
 
-                                <a class="jsgrid-button jsgrid-edit-button" href="
-                                {{route('categories.edit',$category)}}"
-                                title="editar">
-                                    <i class="far fa-edit"></i>
-                                </a>
+                                <a href="{{route('categories.edit',$category)}}" class="btn btn-outline-info"
+                                 title="Editar"><i class="far fa-edit"></i></a>
 
-                                <button class="jsgrid-button jsgrid-delete-button unstyled-button" 
+                                 <button class="btn btn-outline-danger" 
                                 type="submit" title="Eliminar">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
+                                   
+                            </td>
 
                                 {!! Form::close() !!}
 
@@ -94,5 +83,29 @@
 </div>            
 @endsection
 @section('scripts')
-{!! Html::script('melody/js/data-table.js') !!}
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var table = $('#category_listing').DataTable({
+            responsive: true,
+            language: {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            },
+            dom:
+			"<'row'<'col-sm-2'l><'col-sm-7 text-right'B><'col-sm-3'f>>" +
+			"<'row'<'col-sm-12'tr>>" +
+			"<'row'<'col-sm-5'i><'col-sm-7'p>>", 
+            buttons: [
+                {
+                    text: '<i class="fas fa-plus"></i> Nueva Categoría',
+                    className: 'btn btn-info',
+                    action: function ( e, dt, node, conf ) {
+                        window.location.href = "{{route('categories.create')}}"
+                    }
+                }
+            ]
+        });
+    });
+</script>
 @endsection

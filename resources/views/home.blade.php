@@ -206,7 +206,7 @@
             
                     echo '"'. $mes_traducido.'",';} ?>],
                     datasets: [{
-                        label: 'Compras',
+                        label: 'Compras $',
                         data: [<?php foreach ($comprasmes as $reg)
                             {echo ''. $reg->totalmes.',';} ?>],
                         backgroundColor: [
@@ -253,7 +253,7 @@
                     
                     echo '"'. $mes_traducido.'",';} ?>],
                     datasets: [{
-                        label: 'Ventas',
+                        label: 'Ventas $',
                         data: [<?php foreach ($ventasmes as $reg)
                         {echo ''. $reg->totalmes.',';} ?>],
                         backgroundColor: [
@@ -294,43 +294,50 @@
                 data: {
                     labels: [<?php foreach ($ventasdia as $ventadia)
                 {
-                    $dia= $ventadia->dia;
-                    
+                    $dia = \Carbon\Carbon::parse($ventadia->date)->format('d M Y');
                     echo '"'. $dia.'",';} ?>],
                     datasets: [{
-                        label: 'Ventas',
+                        label: 'Ventas $',
                         data: [<?php foreach ($ventasdia as $reg)
-                        {echo ''. $reg->totaldia.',';} ?>],
+                        {echo ''. $reg->total.',';} ?>],
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)',
+                        'rgba(255, 159, 64, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
                         borderWidth: 1,
                         fill: true, 
                     }]
                 },
-                options: {
-                    scales: {
-                      yAxes: [{
-                        ticks: {
-                            
-                            beginAtZero:true
-                        }
-                      }]
-                    }  
-                }
+                // options: {
+                //     scales: {
+                //       yAxes: [{
+                //         ticks: {
+                //             stepSize: 1,
+                //             beginAtZero:true
+                //         }
+                //       }]
+                //     },
+                //     legend: {
+                //       display: false
+                //     },
+                //     elements: {
+                //       point: {
+                //         radius: 5
+                //       }
+                //     }
+                // }
             });
 
             var varVenta=document.getElementById('ventas_categorias').getContext('2d');

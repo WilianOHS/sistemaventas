@@ -1,21 +1,21 @@
-<div class="form-group">
-        <label for="client_id">Cliente</label>
+<div class="form-row">
+    <div class="col-9">
+    <label for="client_id">Cliente</label>
             <select id="client_id" class="form-control" name="client_id">
             <option value="" disabled selected>Seleccione un cliente</option>
             @foreach ($clients as $client)
             <option value="{{$client->id}}">{{$client->name}}</option>
             @endforeach
             </select>
-</div>
-
-    <div class="form-group">
+    </div>
+    <div class="col">
     <label for="iva">Impuesto (IVA)</label>
     <!-- <input type="number" class="form-control" name="iva" id="iva" aria-describedby="helpId" placeholder="13%">  -->
-      <!-- <select class="form-control" name="iva" id="iva">
+      <select class="form-control" name="iva" id="iva">
         <option value="0">Sin IVA</option>
         <option value="13">Con IVA</option>
-      </select> -->
-    <div class="form-group">
+      </select>
+      <!-- <div class="form-group">
         <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-dark active">
                 <input type="radio" name="iva" id="iva" autocomplete="off" value="13"><label for="iva">Con IVA</label> 
@@ -25,12 +25,13 @@
                 <input type="radio" name="iva" id="iva" autocomplete="off" value="0"><label for="iva">Sin IVA</label> 
             </label>
         </div>
-    </div>  
-
-        
+    </div>   -->
     </div>
+</div>
 
-        <div class="form-group">
+<hr>
+
+        <div class="form-row">
         <label for="product_id">Producto</label>
             <select id="product_id" class="form-control" name="product_id">
             <option value="" disabled selected>Seleccione un producto</option>
@@ -39,28 +40,28 @@
             @endforeach
             </select>
         </div>
+        <hr>
 
-        <div class="form-group">
-          <label for="">Stock Actual</label>
-          <input type="text" name="" id="stock" value="" class="form-control" disabled>
-          
-        </div>
-
-        <div class="form-group">
+        <div class="form-row">
+            <div class="col">
+            <label for="">Stock Actual</label>
+                <input type="text" name="" id="stock" value="" class="form-control" disabled>
+            </div>
+            <div class="col">
             <label for="quantity">Cantidad</label>
                 <input type="number" class="form-control" name="quantity" id="quantity" aria-describedby="helpId">
-        </div>
-
-        <div class="form-group">
+            </div>
+            <div class="col">
             <label for="price">Precio de venta</label>
                 <input type="number" class="form-control" name="price" id="price" aria-describedby="helpId" disabled>
-        </div>
-
-        <div class="form-group">
+            </div>
+            <div class="col">
             <label for="discount">Porcentaje de descuento</label>
                 <input type="number" class="form-control" name="discount" id="discount" aria-describedby="helpId" value="0">
+            </div>
         </div>
 
+<hr>
         <div class="form-group">
             <button type="button" id="agregar" class="btn btn-primary float-right">Agregar producto</button>
         </div>

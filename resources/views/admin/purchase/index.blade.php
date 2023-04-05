@@ -31,20 +31,9 @@
               <div class="card">
                 <div class="card-body">
                   
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Compras</h4>
-                          <div class="btn-group">
-                          <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v"></i>
-                          </a>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <a href="{{route('purchases.create')}}" class="dropdown-item">Registrar</a>
-                          </div>
-                        </div>
-                    </div>
 
                   <div class="table-responsive">
-                    <table id="order-listing" class="table">
+                    <table id="purchases_listing" class="table">
                       <thead>
                         <tr>
                           <th>Id</th>
@@ -60,7 +49,9 @@
                             <th scope="row">
                               <a href="{{route('purchases.show',$purchase)}}">{{$purchase->id}}</a>
                             </th>  
-                            <td>{{$purchase->purchase_date}}</td>
+                            <td>
+                            {{\Carbon\Carbon::parse($purchase->purchase_date)->format('d M y h:i a')}}
+                            </td>
                             <td>{{$purchase->total}}</td>  
                             @if ($purchase->status == 'VALID')
                             <td>
@@ -79,7 +70,7 @@
                                 </a>  
                             </td>
                             @endif       
-                            <td style="width:50px">
+                            <td style="width: 20%;">
 
 
                                 <!-- <button class="jsgrid-button jsgrid-delete-button unstyled-button" 
@@ -87,9 +78,9 @@
                                     <i class="far fa-trash-alt"></i>
                                 </button> -->
 
-                                <a href="{{route('purchases.pdf',$purchase)}}" class="jsgrid-button jsgrid-edit-button"><i class="fas fa-file-pdf"></i></a>
+                                <a href="{{route('purchases.pdf',$purchase)}}" class="btn btn-outline-danger"><i class="fas fa-file-pdf"></i></a>
                                 <!-- <a href="#" class="jsgrid-button jsgrid-edit-button"><i class="fas fa-print"></i></a> -->
-                                <a href="{{route('purchases.show',$purchase)}}" class="jsgrid-button jsgrid-edit-button"><i class="fas fa-eye"></i></a>
+                                <a href="{{route('purchases.show',$purchase)}}" class="btn btn-outline-info"><i class="fas fa-eye"></i></a>
                                 
         
 
@@ -109,5 +100,29 @@
 </div>            
 @endsection
 @section('scripts')
-{!! Html::script('melody/js/data-table.js') !!}
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var table = $('#purchases_listing').DataTable({
+            responsive: true,
+            language: {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            },
+            dom:
+			"<'row'<'col-sm-2'l><'col-sm-7 text-right'B><'col-sm-3'f>>" +
+			"<'row'<'col-sm-12'tr>>" +
+			"<'row'<'col-sm-5'i><'col-sm-7'p>>", 
+            buttons: [
+                {
+                    text: '<i class="fas fa-plus"></i> Nuevo',
+                    className: 'btn btn-info',
+                    action: function ( e, dt, node, conf ) {
+                        window.location.href = "{{route('purchases.create')}}"
+                    }
+                }
+            ]
+        });
+    });
+</script>
 @endsection
