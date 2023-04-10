@@ -36,7 +36,7 @@
                     <input type="text" name="name" id="name" value="{{$user->name}}" class="form-control" placeholder="" aria-describedby="helpId">
                     </div>
                     <div class="form-group">
-                    <label for="username">Correo electrónico</label>
+                    <label for="username">Nombre de usuario</label>
                     <input type="text" name="username" id="username" value="{{$user->username}}" class="form-control" placeholder="" aria-describedby="helpId">
                     </div>
                     <!-- <div class="form-group">

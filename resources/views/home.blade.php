@@ -347,8 +347,9 @@
                     labels: [<?php foreach ($productoscategorias as $productoscategoria)
                 {
                     $name= $productoscategoria->name;
+                    //$cname= $productoscategoria->category_id;
                     
-                    echo '"'. $name.'",';} ?>],
+                    echo '"'. $name. '",';} ?>],
                     datasets: [{
                         label: 'Ventas',
                         data: [<?php foreach ($productoscategorias as $reg)

@@ -25,9 +25,6 @@
               <div class="card">
                 <div class="card-body">
                   
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Registro de productos</h4>    
-                    </div>
                     {!! Form::open(['route'=>'products.store','method'=>'POST','files'=>true]) !!}
                     
                     <!-- 'code', 'name', 'stock', 'image', 'price', 'sale_price',
@@ -38,24 +35,40 @@
                         <input type="text" name="name" id="name" class="form-control" aria-describedby="helpId" required>
                     </div>
 
-                    <!-- <div class="form-group">
-                        <label for="price">Precio</label>
-                        <input type="number" name="price" id="price" class="form-control" aria-describedby="helpId" step=".01" required>
-                    </div> -->
-
                     <div class="form-group">
                         <label for="sale_price">Precio de venta</label>
                         <input type="number" name="sale_price" id="sale_price" class="form-control" aria-describedby="helpId" step=".01" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-row">
+<!--                     <input type="text" name="presentation" id="presentation" class="form-control" aria-describedby="helpId" required> -->
+                        
+                        <!-- <select class="form-control" name="presentation" id="presentation">
+                        <option value="" disabled selected>Seleccione una presentación</option>
+                            <option value="Unidad">Unidad</option>
+                            <option value="Peso">Peso</option>
+                        </select> -->
+                        <div class="col">
+                        <label for="">Tipo de presentación</label>
+                            <select name="presentation_option" id="m_menu" class="custom-select">
+                            <option value="" disabled selected>Seleccione una presentación</option>
+                            <option value="Unidad">Unidad</option>
+                            <option value="Peso">Peso</option>
+                            </select>
+                        </div>
+                        <div class="col">
                         <label for="presentation">Presentación</label>
-                        <input type="text" name="presentation" id="presentation" class="form-control" aria-describedby="helpId" required>
+                            <select name="presentation" id="s_menu" class="custom-select"></select>
+                        </div>
+                        <div class="col">
+                            <label for="weight">Cantidad</label>
+                            <input type="number" name="weight" id="weight" class="form-control" aria-describedby="helpId" required>
+                        </div>
+
                     </div>
 
                     <div class="form-group">
-                        <label for="weight">Peso</label>
-                        <input type="number" name="weight" id="weight" class="form-control" aria-describedby="helpId" required>
+                        
                     </div>
 
                     <div class="form-group">
@@ -119,4 +132,23 @@
 @section('scripts')
 {!! Html::script('melody/js/data-table.js') !!}
 {!! Html::script('melody/js/dropify.js') !!}
+<script>
+    var presentations={
+      Unidad:['Unidad','Metro','Yarda','Pie'],
+      Peso:['Libra','Kilogramo','Onza']
+    }
+    var main= document.getElementById('m_menu');
+    var sub= document.getElementById('s_menu');
+
+    main.addEventListener('change',function(){
+      var selected_option = presentations[this.value];
+      while(sub.options.length > 0){
+        sub.options.remove(0);
+      }
+      Array.from(selected_option).forEach(function(el){
+        let option = new Option(el, el);
+        sub.appendChild(option);
+      });
+    });
+  </script>
 @endsection

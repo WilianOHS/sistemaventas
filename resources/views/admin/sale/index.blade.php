@@ -48,6 +48,7 @@
                       <thead>
                         <tr>
                           <th>Id</th>
+                          <th>Cliente</th>
                           <th>Fecha</th>
                           <th>Total</th>
                           <th>Estado</th>
@@ -59,10 +60,9 @@
                         <tr>
                             <th scope="row">
                               <a href="{{route('sales.show',$sale)}}">{{$sale->id}}</a>
-                            </th>  
-                            <td>
-                                        {{\Carbon\Carbon::parse($sale->sale_date)->format('d M y h:i a')}}
-                                    </td>
+                            </th>
+                            <td>{{$sale->client->name}}</td>  
+                            <td>{{\Carbon\Carbon::parse($sale->sale_date)->format('d M y h:i a')}}</td>
                             <td>$ {{$sale->total}}</td>  
                             @if ($sale->status == 'VALID')
                             <td>
@@ -113,6 +113,7 @@
     $(document).ready(function() {
         var table = $('#sales_listing').DataTable({
             responsive: true,
+            order: [[ 0, "desc" ]],
             language: {
                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
             },

@@ -25,16 +25,9 @@
               <div class="card">
                 <div class="card-body">
                   
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Registro de clientes</h4>    
-                    </div>
+                
                     {!! Form::open(['route'=>'clients.store','method'=>'POST','files'=>true]) !!}
-                    
-                    <!-- 'name',
-        'dui',
-        'address',
-        'phone',
-        'email', -->
+
                     <div class="form-group">
                         <label for="name">Nombre</label>
                         <input type="text" name="name" id="name" class="form-control" aria-describedby="helpId" required>
@@ -42,24 +35,22 @@
 
                     <div class="form-group">
                         <label for="dui">DUI</label>
-                        <input type="number" name="dui" id="dui" class="form-control" aria-describedby="helpId">
+                        <input type="text" name="dui" id="dui" class="form-control" aria-describedby="helpId" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="10">
                     </div>
 
                     <div class="form-group">
                         <label for="address">Dirección</label>
                         <input type="text" name="address" id="address" class="form-control" aria-describedby="helpId">
-                        <small id="helpId" class="form-text text-muted">Este campo es opcional.</small>
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Telefóno / Celular</label>
-                        <input type="number" name="phone" id="phone" class="form-control" aria-describedby="helpId" required>
+                        <input type="text" name="phone" id="phone" class="form-control" aria-describedby="helpId" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="9">
                     </div>
 
                     <div class="form-group">
                         <label for="email">Correo electrónico</label>
                         <input type="email" name="email" id="email" class="form-control" aria-describedby="helpId">
-                        <small id="helpId" class="form-text text-muted">Este campo es opcional.</small>
                     </div>
 
 
@@ -81,4 +72,28 @@
 @endsection
 @section('scripts')
 {!! Html::script('melody/js/data-table.js') !!}
+    <script>
+      const dui = document.querySelector('#dui')
+      dui.addEventListener('keypress', () => {
+      let inputLength = dui.value.length
+
+    // MAX LENGHT 10 dui
+    if (inputLength == 8) {
+        dui.value += '-'
+    }
+    })
+    </script>
+
+    <script>
+      const phone = document.querySelector('#phone')
+      phone.addEventListener('keypress', () => {
+      let inputLength = phone.value.length
+
+    // MAX LENGHT 10 dui
+    if (inputLength == 4) {
+        phone.value += '-'
+    }
+    })
+    </script>
+    
 @endsection

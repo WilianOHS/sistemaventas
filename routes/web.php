@@ -65,3 +65,5 @@ Route::resource('roles', RoleController::class)->names('roles');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::put('/login', [LoginController::class, 'logout']);

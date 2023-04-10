@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Sale;
 use Illuminate\Http\Request;
 use App\Http\Requests\Client\StoreRequest;
 use App\Http\Requests\Client\UpdateRequest;
@@ -34,7 +35,8 @@ class ClientController extends Controller
     }
     public function show(Client $client)
     {
-        return view('admin.client.show',compact('client'));
+        $sales = Sale::get();
+        return view('admin.client.show',compact('client','sales'));
     }
     public function edit(Client $client)
     {

@@ -3,14 +3,14 @@
           <li class="nav-item nav-profile">
             <div class="nav-link">
               <div class="profile-image">
-                <img src="{{asset('melody/images/faces/face5.jpg')}}" alt="image"/>
+                <img src="{{asset('melody/images/faces/user.png')}}" alt="image"/>
               </div>
               <div class="profile-name">
                 <p class="name">
-                  Bienvenido Usuario
+                {{ Auth::user()->name }}
                 </p>
-                <p class="designation">
-                  Super Admin
+                <p>
+                {{ Auth::user()->username }}
                 </p>
               </div>
             </div>
@@ -59,14 +59,14 @@
 
           <li class="nav-item">
             <a class="nav-link" href="{{route('sales.index')}}">
-              <i class="fas fa-dollar-sign menu-icon"></i>
+              <i class="fa fa-plus-circle menu-icon"></i>
               <span class="menu-title">Ventas</span>
             </a>
           </li> 
 
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false" aria-controls="page-layouts">
-            <i class="fas fa-cogs menu-icon"></i>
+            <i class="fa fa-cogs menu-icon"></i>
               <span class="menu-title">Configuración</span>
               <i class="menu-arrow"></i>
             </a>
@@ -80,7 +80,7 @@
             </div>
           </li>
 
-          <li class="nav-item d-none d-lg-block">
+          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#sidebar-layouts" aria-expanded="false" aria-controls="sidebar-layouts">
               <i class="fa fa-tasks menu-icon"></i>
               <span class="menu-title">Reportes</span>
@@ -97,7 +97,7 @@
         
           <li class="nav-item">
             <a class="nav-link" href="pages/documentation.html">
-              <i class="far fa-file-alt menu-icon"></i>
+              <i class="far fa-file-pdf menu-icon"></i>
               <span class="menu-title">Manual</span>
             </a>
           </li>
