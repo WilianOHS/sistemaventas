@@ -25,9 +25,7 @@
               <div class="card">
                 <div class="card-body">
                   
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Registro de proveedores</h4>    
-                    </div>
+                   
                     {!! Form::open(['route'=>'providers.store','method'=>'POST']) !!}
                     
                     <!-- 'name', 'email','nit_number', 'address','phone',  -->

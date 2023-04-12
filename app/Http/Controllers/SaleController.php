@@ -128,4 +128,7 @@ class SaleController extends Controller
             return redirect()->back();
         }
     }
+    public function exportar(){
+        return "hola mundo";
+    }
 }

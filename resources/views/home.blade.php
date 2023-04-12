@@ -198,7 +198,7 @@
             var charCompra = new Chart(varCompra, {
                 type: 'line',
                 data: {
-                    labels: [<?php foreach ($comprasmes as $reg)
+                    labels: [<?php foreach (array_reverse($comprasmes) as $reg)
                         { 
                     
                     setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish'); 
@@ -207,7 +207,7 @@
                     echo '"'. $mes_traducido.'",';} ?>],
                     datasets: [{
                         label: 'Compras $',
-                        data: [<?php foreach ($comprasmes as $reg)
+                        data: [<?php foreach (array_reverse($comprasmes) as $reg)
                             {echo ''. $reg->totalmes.',';} ?>],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
@@ -246,7 +246,7 @@
             var charVenta = new Chart(varVenta, {
                 type: 'line',
                 data: {
-                    labels: [<?php foreach ($ventasmes as $reg)
+                    labels: [<?php foreach (array_reverse($ventasmes) as $reg)
                 {
                     setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish'); 
                     $mes_traducido=strftime('%B',strtotime($reg->mes));
@@ -254,7 +254,7 @@
                     echo '"'. $mes_traducido.'",';} ?>],
                     datasets: [{
                         label: 'Ventas $',
-                        data: [<?php foreach ($ventasmes as $reg)
+                        data: [<?php foreach (array_reverse($ventasmes) as $reg)
                         {echo ''. $reg->totalmes.',';} ?>],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
