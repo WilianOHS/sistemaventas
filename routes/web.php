@@ -42,7 +42,7 @@ Route::get('sales/pdf/{sale}', 'SaleController@pdf')->name('sales.pdf');
 
 Route::get('sales/print/{sale}', 'SaleController@print')->name('sales.print');
 
-Route::get('/exportar', [SaleController::class, 'exportar']);
+Route::get('exportar/', 'SaleController@exportar')->name('sales.exportar');
 
 Route::resource('business', BusinessController::class)->names('business')->only([
     'index', 'update'

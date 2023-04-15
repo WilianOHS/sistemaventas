@@ -259,5 +259,10 @@ class PermissionsTableSeeder extends Seeder
             'slug'=>'reports.date',
             'description'=>'Permite ver los reportes de ventas por fechas.',
         ]);
+        Permission::create([
+            'name'=>'Descargar Excel reporte de ventas',
+            'slug'=>'sales.exportar',
+            'description'=>'Puede descargar todos los reportes de las ventas en excel.',
+        ]);
     }
 }

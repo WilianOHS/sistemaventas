@@ -128,6 +128,13 @@
                     action: function ( e, dt, node, conf ) {
                         window.location.href = "{{route('sales.create')}}"
                     }
+                },
+                {
+                    text: '<i class="fas fa-file-excel"></i> Excel',
+                    className: 'btn btn-success',
+                    action: function ( e, dt, node, conf ) {
+                        window.location.href = "{{route('sales.exportar')}}"
+                    }
                 }
             ]
         });

@@ -16,6 +16,8 @@ use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\EscposImage;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use App\Exports\SaleExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SaleController extends Controller
 {
@@ -29,6 +31,7 @@ class SaleController extends Controller
         $this->middleware('can:change.status.sales')->only(['change_status']);
         $this->middleware('can:sales.pdf')->only(['pdf']);
         $this->middleware('can:sales.print')->only(['print']);
+        $this->middleware('can:sales.exportar')->only(['exportar']);
     }
     
     public function index()
@@ -129,6 +132,7 @@ class SaleController extends Controller
         }
     }
     public function exportar(){
-        return "hola mundo";
+        //return "hola mundo";
+        return Excel::download(new SaleExport, 'ventas.xlsx');
     }
 }
