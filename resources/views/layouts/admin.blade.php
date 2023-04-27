@@ -16,7 +16,8 @@
   {!! Html::style('melody/css/style.css') !!}
   @yield('styles')
   <!-- endinject -->
-  <link rel="shortcut icon" href="http://www.urbanui.com/" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link rel="shortcut icon" href="http://www.urbanui.com/" /> -->
 </head>
 
 <body class="sidebar-dark">
