@@ -58,6 +58,7 @@ Route::get('change_status/products/{product}', 'ProductController@change_status'
 Route::get('change_status/purchases/{purchase}', 'PurchaseController@change_status')->name('change.status.purchases');
 Route::get('change_status/sales/{sale}', 'SaleController@change_status')->name('change.status.sales');
 
+Route::get('/get-filtered-data', 'HomeController@getFilteredData')->name('getFilteredData');
 
 
 Route::resource('users', UserController::class)->names('users');

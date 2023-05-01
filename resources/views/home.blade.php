@@ -9,11 +9,19 @@
   }
 </style>
 <style>
-		#ventas_categorias {
+		#productosmasvendidos {
 			width: 40%;
 			margin: 0 auto;
 		}
 	</style>
+    <style>
+         #miDiv {
+            height: 300px;
+        }
+        #miDiv2 {
+            height: 300px;
+        } 
+    </style>
  @endsection
  @section('options')
 @endsection
@@ -101,8 +109,14 @@
                 </div>
                     <div class="card-content">
                       <div class="ct-chart">
-                      <canvas id="compras">
-                      </canvas>
+                        <label for="fecha-inicio">Fecha de inicio:</label>
+                        <input type="month" id="fecha-inicio" name="fecha-inicio">
+                        <label for="fecha-fin">Fecha de fin:</label>
+                        <input type="month" id="fecha-fin" name="fecha-fin">
+                        <button id="filtrar">Filtrar</button>
+                    <button id="resetear">Resetear gráfico</button>
+                    <div id="miDiv"><canvas id="grafico"></canvas></div>
+                      <div><canvas id="compras"></canvas></div>
                       </div>
                     </div>
             </div>
@@ -112,10 +126,17 @@
                 <div class="card-header">
                     <h3 class="text-center">Ventas - Meses</h3>
                 </div>
-                    <div class="card-content">
+                    <div class="card-content">                  
+                    
                       <div class="ct-chart">
-                      <canvas id="ventas">
-                      </canvas>
+                      <label for="fecha-inicio2">Fecha de inicio:</label>
+                        <input type="month" id="fecha-inicio2" name="fecha-inicio2">
+                        <label for="fecha-fin2">Fecha de fin:</label>
+                        <input type="month" id="fecha-fin2" name="fecha-fin2">
+                        <button id="filtrar2">Filtrar</button>
+                    <button id="resetear2">Resetear gráfico</button>
+                    <div id="miDiv2"><canvas id="grafico2"></canvas></div> 
+                      <div><canvas id="ventas"></canvas></div>                    
                       </div>
                     </div>
             </div>
@@ -149,11 +170,11 @@
         <div class="col-md-12">
             <div class="card card-chart">
                 <div class="card-header">
-                    <h4 class="text-center">Ventas por categorias</h4>
+                    <h4 class="text-center">Productos mas vendidos</h4>
                 </div>
                     <div class="card-content">
                       <div class="ct-chart">
-                      <canvas id="ventas_categorias">
+                      <canvas id="productosmasvendidos">
                       </canvas>
                       </div>
                     </div>
@@ -213,7 +234,12 @@
     
    
 
-</div>            
+</div>     
+
+
+
+               
+
 @endsection
 @section('scripts')
 {!! Html::script('melody/js/data-table.js') !!}
@@ -223,98 +249,98 @@
     $(function(){
         var varCompra=document.getElementById('compras').getContext('2d');
     
-            var charCompra = new Chart(varCompra, {
-                type: 'line',
-                data: {
-                    labels: [<?php foreach (array_reverse($comprasmes) as $reg)
-                        { 
+            // var charCompra = new Chart(varCompra, {
+            //     type: 'line',
+            //     data: {
+            //         labels: [<?php foreach (array_reverse($comprasmes) as $reg)
+            //             { 
                     
-                    setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish'); 
-                    $mes_traducido=strftime('%B',strtotime($reg->mes));
+            //         setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish'); 
+            //         $mes_traducido=strftime('%B',strtotime($reg->mes));
             
-                    echo '"'. $mes_traducido.'",';} ?>],
-                    datasets: [{
-                        label: 'Compras $',
-                        data: [<?php foreach (array_reverse($comprasmes) as $reg)
-                            {echo ''. $reg->totalmes.',';} ?>],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1,
-                        fill: true,
-                    }]
-                },
+            //         echo '"'. $mes_traducido.'",';} ?>],
+            //         datasets: [{
+            //             label: 'Compras $',
+            //             data: [<?php foreach (array_reverse($comprasmes) as $reg)
+            //                 {echo ''. $reg->totalmes.',';} ?>],
+            //             backgroundColor: [
+            //                 'rgba(255, 99, 132, 0.2)',
+            //                 'rgba(54, 162, 235, 0.2)',
+            //                 'rgba(255, 206, 86, 0.2)',
+            //                 'rgba(75, 192, 192, 0.2)',
+            //                 'rgba(153, 102, 255, 0.2)',
+            //                 'rgba(255, 159, 64, 0.2)'
+            //             ],
+            //             borderColor: [
+            //                 'rgba(255,99,132,1)',
+            //                 'rgba(54, 162, 235, 1)',
+            //                 'rgba(255, 206, 86, 1)',
+            //                 'rgba(75, 192, 192, 1)',
+            //                 'rgba(153, 102, 255, 1)',
+            //                 'rgba(255, 159, 64, 1)'
+            //             ],
+            //             borderWidth: 1,
+            //             fill: true,
+            //         }]
+            //     },
                 
-                options: {
-                    scales: {
-                      yAxes: [{
-                        ticks: {
+            //     options: {
+            //         scales: {
+            //           yAxes: [{
+            //             ticks: {
                             
-                            beginAtZero:true
-                        }
-                      }]
-                    }
-                }
-            });
+            //                 beginAtZero:true
+            //             }
+            //           }]
+            //         }
+            //     }
+            // });
 
             var varVenta=document.getElementById('ventas').getContext('2d');
-            var charVenta = new Chart(varVenta, {
-                type: 'line',
-                data: {
-                    labels: [<?php foreach (array_reverse($ventasmes) as $reg)
-                {
-                    setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish'); 
-                    $mes_traducido=strftime('%B',strtotime($reg->mes));
+            // var charVenta = new Chart(varVenta, {
+            //     type: 'line',
+            //     data: {
+            //         labels: [<?php foreach (array_reverse($ventasmes) as $reg)
+            //     {
+            //         setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish'); 
+            //         $mes_traducido=strftime('%B',strtotime($reg->mes));
                     
-                    echo '"'. $mes_traducido.'",';} ?>],
-                    datasets: [{
-                        label: 'Ventas $',
-                        data: [<?php foreach (array_reverse($ventasmes) as $reg)
-                        {echo ''. $reg->totalmes.',';} ?>],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1,
-                        fill: true,
-                    }]
-                },
-                options: {
-                    scales: {
-                      yAxes: [{
-                        ticks: {
+            //         echo '"'. $mes_traducido.'",';} ?>],
+            //         datasets: [{
+            //             label: 'Ventas $',
+            //             data: [<?php foreach (array_reverse($ventasmes) as $reg)
+            //             {echo ''. $reg->totalmes.',';} ?>],
+            //             backgroundColor: [
+            //                 'rgba(255, 99, 132, 0.2)',
+            //                 'rgba(54, 162, 235, 0.2)',
+            //                 'rgba(255, 206, 86, 0.2)',
+            //                 'rgba(75, 192, 192, 0.2)',
+            //                 'rgba(153, 102, 255, 0.2)',
+            //                 'rgba(255, 159, 64, 0.2)'
+            //             ],
+            //             borderColor: [
+            //                 'rgba(255,99,132,1)',
+            //                 'rgba(54, 162, 235, 1)',
+            //                 'rgba(255, 206, 86, 1)',
+            //                 'rgba(75, 192, 192, 1)',
+            //                 'rgba(153, 102, 255, 1)',
+            //                 'rgba(255, 159, 64, 1)'
+            //             ],
+            //             borderWidth: 1,
+            //             fill: true,
+            //         }]
+            //     },
+            //     options: {
+            //         scales: {
+            //           yAxes: [{
+            //             ticks: {
                             
-                            beginAtZero:true
-                        }
-                      }]
-                    }  
-                }
-            });
+            //                 beginAtZero:true
+            //             }
+            //           }]
+            //         }  
+            //     }
+            // });
 
             // var varVenta=document.getElementById('ventas_diarias').getContext('2d');
             // var charVenta = new Chart(varVenta, {
@@ -368,54 +394,7 @@
             //     // }
             // });
 
-            var varVenta=document.getElementById('ventas_categorias').getContext('2d');
-            var charVenta = new Chart(varVenta, {
-                type: 'doughnut',
-                data: {
-                    labels: [<?php foreach ($productoscategorias as $productoscategoria)
-                {
-                    $name= $productoscategoria->name;
-                    //$cname= $productoscategoria->category_id;
-                    
-                    echo '"'. $name. '",';} ?>],
-                    datasets: [{
-                        label: 'Ventas',
-                        data: [<?php foreach ($productoscategorias as $reg)
-                        {echo ''. $reg->quantity.',';} ?>],
-                        backgroundColor: [
-                        'rgba(255, 99, 132, 0.5)',
-                        'rgba(54, 162, 235, 0.5)',
-                        'rgba(255, 206, 86, 0.5)',
-                        'rgba(75, 192, 192, 0.5)',
-                        'rgba(153, 102, 255, 0.5)',
-                        'rgba(255, 159, 64, 0.5)'
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                        borderWidth: 1,
-                        fill: true, 
-                    }]
-                },
-                options: {
-                cutoutPercentage: 10
-                }
-                // options: {
-                //     scales: {
-                //       yAxes: [{
-                //         ticks: {
-                            
-                //             beginAtZero:true
-                //         }
-                //       }]
-                //     }  
-                // }
-            });
+            
             
     });
 </script>
@@ -581,7 +560,255 @@ function resetDate() {
     const chartVersion = document.getElementById('chartVersion');
     chartVersion.innerText = Chart.version;
 
+    
     </script>
+<script>
+  var varVenta=document.getElementById('productosmasvendidos').getContext('2d');
+            var charVenta = new Chart(varVenta, {
+                type: 'doughnut',
+                data: {
+                    labels: [<?php foreach ($productosmasvendidos as $productosmasvendido)
+                {
+                    $name= $productosmasvendido->name;
+                    //$cname= $productoscategoria->category_id;
+                    
+                    echo '"'. $name. '",';} ?>],
+                    datasets: [{
+                        label: 'Ventas',
+                        data: [<?php foreach ($productosmasvendidos as $reg)
+                        {echo ''. $reg->quantity.',';} ?>],
+                        backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)',
+                        'rgba(255, 159, 64, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                        borderWidth: 1,
+                        fill: true, 
+                    }]
+                },
+                options: {
+                cutoutPercentage: 10
+                }
+                // options: {
+                //     scales: {
+                //       yAxes: [{
+                //         ticks: {
+                            
+                //             beginAtZero:true
+                //         }
+                //       }]
+                //     }  
+                // }
+            });
+
+</script>
+<script>
+		// Datos de ventas por mes
+		const datos = {
+			labels: [<?php foreach (array_reverse($comprasmes) as $reg)
+                        { 
+                    
+                    setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish'); 
+                    $mes_traducido=strftime('%B',strtotime($reg->mes));
+            
+                    echo '"'. $mes_traducido.'",';} ?>],
+			datasets: [{
+				label: 'Compras por mes',
+				data: [<?php foreach (array_reverse($comprasmes) as $reg)
+                            {echo ''. $reg->totalmes.',';} ?>],
+				backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1,
+                        fill: true,
+			}]
+		};
+  
+
+		// Configuración del gráfico
+		const configuracion = {
+			responsive: true,
+			maintainAspectRatio: false,
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			}
+		};
+
+		// Crear el gráfico
+		const grafico = new Chart(document.getElementById('grafico'), {
+			type: 'line',
+			data: datos,
+			options: configuracion
+		});
+
+		// Filtrar el gráfico por rango de meses
+		document.getElementById('filtrar').addEventListener('click', () => {
+			const fechaInicio = new Date(document.getElementById('fecha-inicio').value);
+			const fechaFin = new Date(document.getElementById('fecha-fin').value);
+      const anio = fechaInicio.getFullYear(); // Obtener el año de la fecha de inicio
+
+			// Obtener los índices de los meses que están dentro del rango
+			const indicesMeses = datos.labels.reduce((indices, mes, indice) => {
+				const fechaMes = new Date(`${anio}-${indice + 1}-01`);
+				if (fechaMes >= fechaInicio && fechaMes <= fechaFin) {
+					indices.push(indice);
+				}
+				return indices;
+			}, []);
+
+			// Crear las etiquetas y datos del gráfico a partir de los índices de los meses
+			const etiquetasFiltradas = indicesMeses.map(indice => datos.labels[indice]);
+			const datosFiltrados = indicesMeses.map(indice => datos.datasets[0].data[indice]);
+
+			// Actualizar el gráfico con las etiquetas y datos filtrados
+			grafico.data.labels = etiquetasFiltradas;
+			grafico.data.datasets[0].data = datosFiltrados;
+			grafico.update();
+		});
+
+                document.getElementById('resetear').addEventListener('click', () => {
+            // Restaurar los datos originales del gráfico
+            grafico.data.labels = [<?php foreach (array_reverse($comprasmes) as $reg)
+                                    { 
+                                
+                                setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish'); 
+                                $mes_traducido=strftime('%B',strtotime($reg->mes));
+                        
+                                echo '"'. $mes_traducido.'",';} ?>];
+            grafico.data.datasets[0].data = [<?php foreach (array_reverse($comprasmes) as $reg)
+                                        {echo ''. $reg->totalmes.',';} ?>];
+            
+            // Actualizar el gráfico con los datos originales
+            grafico.update();
+            });
+
+	</script>
+
+
+<script>
+		// Datos de ventas por mes
+		const datos2 = {
+			labels: [<?php foreach (array_reverse($ventasmes) as $reg)
+                {
+                    setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish'); 
+                    $mes_traducido=strftime('%B',strtotime($reg->mes));
+                    
+                    echo '"'. $mes_traducido.'",';} ?>],
+			datasets: [{
+				label: 'Ventas por mes',
+				data: [<?php foreach (array_reverse($ventasmes) as $reg)
+                        {echo ''. $reg->totalmes.',';} ?>],
+				backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1,
+                        fill: true,
+			}]
+		};
+  
+
+		// Configuración del gráfico
+		const configuracion2 = {
+			responsive: true,
+			maintainAspectRatio: false,
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			}
+		};
+
+		// Crear el gráfico
+		const grafico2 = new Chart(document.getElementById('grafico2'), {
+			type: 'line',
+			data: datos2,
+			options: configuracion2
+		});
+
+		// Filtrar el gráfico por rango de meses
+		document.getElementById('filtrar2').addEventListener('click', () => {
+			const fechaInicio2 = new Date(document.getElementById('fecha-inicio2').value);
+			const fechaFin2 = new Date(document.getElementById('fecha-fin2').value);
+      const anio2 = fechaInicio2.getFullYear(); // Obtener el año de la fecha de inicio
+
+			// Obtener los índices de los meses que están dentro del rango
+			const indicesMeses2 = datos2.labels.reduce((indices2, mes2, indice2) => {
+				const fechaMes2 = new Date(`${anio2}-${indice2 + 1}-01`);
+				if (fechaMes2 >= fechaInicio2 && fechaMes2 <= fechaFin2) {
+					indices2.push(indice2);
+				}
+				return indices2;
+			}, []);
+
+			// Crear las etiquetas y datos del gráfico a partir de los índices de los meses
+			const etiquetasFiltradas2 = indicesMeses2.map(indice2 => datos2.labels[indice2]);
+			const datosFiltrados2 = indicesMeses2.map(indice2 => datos2.datasets[0].data[indice2]);
+
+			// Actualizar el gráfico con las etiquetas y datos filtrados
+			grafico2.data.labels = etiquetasFiltradas2;
+			grafico2.data.datasets[0].data = datosFiltrados2;
+			grafico2.update();
+		});
+
+    document.getElementById('resetear2').addEventListener('click', () => {
+  // Restaurar los datos originales del gráfico
+  grafico2.data.labels = [<?php foreach (array_reverse($ventasmes) as $reg)
+                {
+                    setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish'); 
+                    $mes_traducido=strftime('%B',strtotime($reg->mes));
+                    
+                    echo '"'. $mes_traducido.'",';} ?>];
+  grafico2.data.datasets[0].data = [<?php foreach (array_reverse($ventasmes) as $reg)
+                        {echo ''. $reg->totalmes.',';} ?>];
+  
+  // Actualizar el gráfico con los datos originales
+  grafico2.update();
+});
+
+	</script>
 
 
 @endsection

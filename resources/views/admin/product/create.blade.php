@@ -82,6 +82,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="marca">Marca</label>
+                        <input type="text" name="marca" id="marca" class="form-control" aria-describedby="helpId" required>
+                    </div>
+
+                    <div class="form-group">
                         <label for="category_id">Categoría</label>
                         <select id="category_id" class="form-control" name="category_id">
                             @foreach ($categories as $category)

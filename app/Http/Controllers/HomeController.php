@@ -10,6 +10,7 @@ use App\Category;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PragmaRX\ChartJs\ChartJs;
 
 class HomeController extends Controller
 {
@@ -49,7 +50,7 @@ class HomeController extends Controller
         group by p.category_id ,p.name, p.id , p.stock order by sum(dv.quantity) desc limit 10');
 
 
-        $productoscategorias = DB::select('SELECT p.code as code, 
+        $productosmasvendidos = DB::select('SELECT p.code as code, 
         sum(dv.quantity) as quantity, p.name as name , p.id as id , p.category_id as category_id from products p 
         inner join sale_details dv on p.id=dv.product_id 
         inner join categories c on p.category_id = c.id 
@@ -58,6 +59,6 @@ class HomeController extends Controller
         group by c.id , p.category_id , p.code ,p.name, p.id order by sum(dv.quantity) desc limit 10');
         
         //dd($productoscategorias);
-        return view('home',compact('comprasmes','ventasmes','ventasdia','totales','productosvendidos','productoscategorias'));
+        return view('home',compact('comprasmes','ventasmes','ventasdia','totales','productosvendidos','productosmasvendidos', ));
     }
 }

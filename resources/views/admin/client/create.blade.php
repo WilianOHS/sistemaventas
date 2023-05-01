@@ -39,8 +39,30 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="address">Dirección</label>
-                        <input type="text" name="address" id="address" class="form-control" aria-describedby="helpId">
+                        <label for="">Dirección</label>
+                        <input type="text" name="ubicacion_texto" id="ubicacion_texto" class="form-control" aria-describedby="helpId">
+                        <label for="departamento">Departamento:</label>
+                        <select name="departamento" id="departamento" onchange="mostrarMunicipios()">
+                        <option value="">Seleccione un municipio</option>
+                        <option value="morazan">Morazán</option>
+                        <option value="san-miguel">San Miguel</option>
+                        <option value="la-union">La Unión</option>
+                        <option value="usulutan">Usulután</option>
+                        <option value="san-vicente">San Vicente</option>
+                        <option value="cabañas">Cabañas</option>
+                        <option value="la-paz">La Paz</option>
+                        <option value="san-salvador">San Salvador</option>
+                        <option value="cuscatlan">Cuscatlán</option>
+                        <option value="chalatenango">Chalatenango</option>
+                        <option value="la-libertad">La Libertad</option>
+                        <option value="sonsonate">Sonsonate</option>
+                        <option value="santa-ana">Santa Ana</option>
+                        <option value="ahuachapan">Ahuachapán</option>
+                        <!-- Otras opciones de departamentos -->
+                        </select>
+
+                        <label for="municipio">Municipio:</label>
+                        <select id="municipio" name="municipio"></select>
                     </div>
 
                     <div class="form-group">
@@ -95,5 +117,317 @@
     }
     })
     </script>
-    
+
+    <!-- Seleccion de municipios y departamentos -->
+
+    <script>
+  function mostrarMunicipios() {
+    const departamentoSeleccionado = document.getElementById("departamento").value;
+    const municipios = obtenerMunicipiosPorDepartamento(departamentoSeleccionado);
+
+    const municipioSelect = document.getElementById("municipio");
+    municipioSelect.innerHTML = "";
+
+    municipios.forEach((municipio) => {
+      const option = document.createElement("option");
+      option.text = municipio;
+      municipioSelect.add(option);
+    });
+  }
+
+  function obtenerMunicipiosPorDepartamento(departamento) {
+    // Aquí debes agregar la lógica para obtener los municipios del departamento seleccionado
+    // Puedes obtenerlos de un objeto JavaScript o una base de datos
+    switch (departamento) {
+      case "morazan":
+        return ["Arambala",
+                "Cacaopera",
+                "Chilanga",
+                "Corinto",
+                "Delicias de Concepción",
+                "El Divisadero",
+                "El Rosario",
+                "Gualococti",
+                "Guatajiagua",
+                "Joateca",
+                "Jocoaitique",
+                "Jocoro",
+                "Lolotique",
+                "Meanguera",
+                "Osicala",
+                "Perquín",
+                "San Carlos",
+                "San Fernando",
+                "San Francisco Gotera",
+                "San Isidro",
+                "San Simón",
+                "Sensembra",
+                "Sociedad",
+                "Torola",
+                "Yamabal"];
+      case "san-miguel":
+        return ["Carolina",
+                "Chapeltique",
+                "Chinameca",
+                "Chirilagua",
+                "Ciudad Barrios",
+                "Comacarán",
+                "El Tránsito",
+                "Lolotique",
+                "Moncagua",
+                "Nueva Guadalupe",
+                "Nuevo Edén de San Juan",
+                "Quelepa",
+                "San Antonio del Mosco",
+                "San Gerardo",
+                "San Jorge",
+                "San Luis de la Reina",
+                "San Miguel",
+                "San Rafael Oriente",
+                "Sesori",
+                "Uluazapa"
+              ];
+      case "la-union":
+        return ["Anamorós",
+                "Bolívar",
+                "Concepción de Oriente",
+                "Conchagua",
+                "El Carmen",
+                "El Sauce",
+                "Intipucá",
+                "La Unión",
+                "Lislique",
+                "Meanguera del Golfo",
+                "Nueva Esparta",
+                "Pasaquina",
+                "Polorós",
+                "San Alejo",
+                "San José",
+                "Santa Rosa de Lima",
+                "Yayantique",
+                "Yucuaiquín"];
+      case "usulutan":
+        return ["Alegría",
+                "Berlín",
+                "California",
+                "Concepción Batres",
+                "El Triunfo",
+                "Ereguayquín",
+                "Estanzuelas",
+                "Jiquilisco",
+                "Jucuapa",
+                "Jucuarán",
+                "Mercedes Umaña",
+                "Nueva Granada",
+                "Ozatlán",
+                "Puerto El Triunfo",
+                "San Agustín",
+                "San Buenaventura",
+                "San Dionisio",
+                "San Francisco Javier",
+                "Santa Elena",
+                "Santa María",
+                "Santiago de María",
+                "Tecapán",
+                "Usulután"];
+      case "san-vicente":
+        return ["Apastepeque",
+                "Guadalupe",
+                "San Cayetano Istepeque",
+                "San Esteban Catarina",
+                "San Ildefonso",
+                "San Lorenzo",
+                "San Sebastián",
+                "San Vicente",
+                "Santa Clara",
+                "Santo Domingo",
+                "Tecoluca",
+                "Tepetitán",
+                "Verapaz"];
+      case "cabañas":
+        return ["Cinquera",
+                "Dolores",
+                "Guacotecti",
+                "Ilobasco",
+                "Jutiapa",
+                "San Isidro",
+                "Sensuntepeque",
+                "Tejutepeque",
+                "Victoria"];
+      case "la-paz":
+        return ["Cuyultitán",
+                "El Rosario",
+                "Jerusalén",
+                "Mercedes La Ceiba",
+                "Olocuilta",
+                "Paraíso de Osorio",
+                "San Antonio Masahuat",
+                "San Emigdio",
+                "San Francisco Chinameca",
+                "San Juan Nonualco",
+                "San Juan Talpa",
+                "San Luis Talpa",
+                "San Miguel Tepezontes",
+                "San Pedro Masahuat",
+                "San Pedro Nonualco",
+                "San Rafael Obrajuelo",
+                "Santa María Ostuma",
+                "Santiago Nonualco",
+                "Tapalhuaca",
+                "Zacatecoluca"];
+      case "san-salvador":
+        return ["Aguilares",
+                "Apopa",
+                "Ayutuxtepeque",
+                "Cuscatancingo",
+                "Delgado",
+                "El Paisnal",
+                "Guazapa",
+                "Ilopango",
+                "Mejicanos",
+                "Nejapa",
+                "Panchimalco",
+                "Rosario de Mora",
+                "San Marcos",
+                "San Martín",
+                "Santiago Texacuangos",
+                "Santo Tomás",
+                "Soyapango",
+                "Tonacatepeque"];
+      case "cuscatlan":
+        return ["Candelaria",
+                "Cojutepeque",
+                "El Carmen",
+                "El Rosario",
+                "Monte San Juan",
+                "Oratorio de Concepción",
+                "San Bartolomé Perulapía",
+                "San Cristóbal",
+                "San José Guayabal",
+                "San Pedro Perulapán",
+                "San Rafael Cedros",
+                "San Ramón",
+                "Santa Cruz Analquito",
+                "Santa Cruz Michapa",
+                "Suchitoto",
+                "Tenancingo"];
+      case "chalatenango":
+        return ["Agua Caliente",
+                "Arcatao",
+                "Azacualpa",
+                "Chalatenango",
+                "Citalá",
+                "Comalapa",
+                "Concepción Quezaltepeque",
+                "Dulce Nombre de María",
+                "El Carrizal",
+                "El Paraíso",
+                "La Laguna",
+                "La Palma",
+                "La Reina",
+                "Las Vueltas",
+                "Nueva Concepción",
+                "Nueva Trinidad",
+                "Ojos de Agua",
+                "Potonico",
+                "San Antonio de la Cruz",
+                "San Antonio Los Ranchos",
+                "San Fernando",
+                "San Francisco Lempa",
+                "San Francisco Morazán",
+                "San Ignacio",
+                "San Isidro Labrador",
+                "San José Cancasque",
+                "San José Las Flores",
+                "San Luis del Carmen",
+                "San Miguel de Mercedes",
+                "San Rafael",
+                "Santa Rita",
+                "Tejutla"];
+      case "la-libertad":
+        return ["Antiguo Cuscatlán",
+                "Chiltiupán",
+                "Ciudad Arce",
+                "Colón",
+                "Comasagua",
+                "Huizúcar",
+                "Jayaque",
+                "Jicalapa",
+                "La Libertad",
+                "Nuevo Cuscatlán",
+                "Quezaltepeque",
+                "Sacacoyo",
+                "San José Villanueva",
+                "San Juan Opico",
+                "San Matías",
+                "San Pablo Tacachico",
+                "Talnique",
+                "Tamanique",
+                "Teotepeque",
+                "Tepecoyo",
+                "Zaragoza"];
+      case "sonsonate":
+        return ["Acajutla",
+                "Armenia",
+                "Caluco",
+                "Cuisnahuat",
+                "Izalco",
+                "Juayúa",
+                "Nahuizalco",
+                "Nahulingo",
+                "Salcoatitán",
+                "San Antonio del Monte",
+                "San Julián",
+                "Santa Catarina Masahuat",
+                "Santa Isabel Ishuatán",
+                "Santo Domingo de Guzmán",
+                "Sonsonate",
+                "Sonzacate"];
+      case "santa-ana":
+        return ["Candelaria de la Frontera",
+                "Chalchuapa",
+                "Coatepeque",
+                "El Congo",
+                "El Porvenir",
+                "Masahuat",
+                "Metapán",
+                "San Antonio Pajonal",
+                "San Sebastián Salitrillo",
+                "Santa Ana",
+                "Santa Rosa Guachipilín",
+                "Santiago de la Frontera",
+                "Texistepeque"];
+      case "ahuachapan":
+        return ["Ahuachapán",
+                "Apaneca",
+                "Atiquizaya",
+                "Concepción de Ataco",
+                "El Refugio",
+                "Guaymango",
+                "Jujutla",
+                "San Francisco Menéndez",
+                "San Lorenzo",
+                "San Pedro Puxtla",
+                "Tacuba",
+                "Turín"];
+      // Agregar más departamentos
+      default:
+        return [];
+    }
+  }
+</script>
+<script>
+    const myForm = document.getElementById("myForm");
+myForm.addEventListener("submit", concatenateAddress);
+
+function concatenateAddress(event) {
+  event.preventDefault(); // previene que el formulario se envíe por defecto
+  const street = document.getElementById("ubicacion_texto").value;
+  const municipality = document.getElementById("departamento").value;
+  const department = document.getElementById("municipio").value;
+  const address = street + ", " + municipality + ", " + department;
+  console.log(address);
+  // Aquí puedes enviar el valor de "address" al servidor para guardarlo en la base de datos
+}
+</script>
 @endsection

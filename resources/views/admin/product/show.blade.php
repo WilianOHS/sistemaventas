@@ -169,6 +169,11 @@
                                             {{$product->model}}
                                         </p>
                                         <hr>
+                                        <strong><i class="fas fa-square mr-1"></i> Marca</strong>
+                                        <p class="text-muted">
+                                            {{$product->marca}}
+                                        </p>
+                                        <hr>
                                     </div>
                                 </div>
                             </div>

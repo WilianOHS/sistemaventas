@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->double('weight', 15, 8);
             $table->integer('year');
             $table->string('model');
+            $table->string('marca');
 
             $table->enum('status',['ACTIVE','DEACTIVATED'])->default('ACTIVE');
 
