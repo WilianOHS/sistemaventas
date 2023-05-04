@@ -41,7 +41,7 @@
 
                     <div class="form-group">
                         <label for="nit_number">Numero de NIT</label>
-                        <input type="number" class="form-control" name="nit_number" id="nit_number" aria-describedby="helpId" required>
+                        <input type="text" class="form-control" name="nit_number" id="nit_number" aria-describedby="helpId"   onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="14" oninput="formatNIT(this)">
                     </div>
 
                     <div class="form-group">
@@ -71,4 +71,21 @@
 @endsection
 @section('scripts')
 {!! Html::script('melody/js/data-table.js') !!}
+<script>
+		function formatNIT(nitField) {
+			// Remover cualquier guión existente
+			let nit = nitField.value.replace(/-/g, '');
+
+			// Agregar guiones después de ciertos números
+			if (nit.length > 4) {
+				nit = nit.substring(0, 4) + '-' + nit.substring(4);
+			}
+			if (nit.length > 11) {
+				nit = nit.substring(0, 11) + '-' + nit.substring(11);
+			}
+
+			// Asignar el valor formateado al campo del NIT
+			nitField.value = nit;
+		}
+	</script>
 @endsection

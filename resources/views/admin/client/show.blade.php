@@ -52,22 +52,14 @@
                         </div>
                         <div class="col-lg-8 pl-lg-5">
                             <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="list-home" user="tabpanel"
-                                    aria-labelledby="list-home-list">
+                                <div class="tab-pane fade show active" id="list-home" user="tabpanel" aria-labelledby="list-home-list">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                    <h4>Información de cliente</h4>
-                                </div>
-                            </div>
+                                            <h4>Información de cliente</h4>
+                                        </div>
+                                    </div>
                             <div class="profile-feed">
                                 <div class="d-flex align-items-start profile-feed-item">
-
-                                                                <!-- 'name',
-                                        'dui',
-                                        'address',
-                                        'phone',
-                                        'email',
-                                                                 -->
 
                                     <div class="form-group col-md-6">
                                         <strong><i class="fas fa-user mr-1"></i> Nombre</strong>
@@ -114,7 +106,7 @@
                                         <div class="d-flex align-items-start profile-feed-item">
     
                                             <div class="table-responsive">
-                                                <table id="order-listing" class="table">
+                                                <table id="sales_listing" class="table">
                                                     <thead>
                                                         <tr>
                                                             <th>Id</th>
@@ -189,4 +181,22 @@
 @section('scripts')
 {!! Html::script('melody/js/profile-demo.js') !!}
 {!! Html::script('melody/js/data-table.js') !!}
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var table = $('#sales_listing').DataTable({
+            responsive: true,
+            order: [[ 0, "desc" ]],
+            language: {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            },
+            dom:
+			"<'row'<'col-sm-2'l><'col-sm-7 text-right'B><'col-sm-3'f>>" +
+			"<'row'<'col-sm-12'tr>>" +
+			"<'row'<'col-sm-5'i><'col-sm-7'p>>", 
+            buttons: []
+        });
+    });
+</script>
 @endsection

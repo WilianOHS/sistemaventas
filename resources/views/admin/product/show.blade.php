@@ -70,22 +70,6 @@
                             </a>
                           </span>
                         </p>
-                        <!-- <p class="clearfix">
-                          <span class="float-left">
-                            Facebook
-                          </span>
-                          <span class="float-right text-muted">
-                            <a href="#">David Grey</a>
-                          </span>
-                        </p> -->
-                        <!-- <p class="clearfix">
-                          <span class="float-left">
-                            Twitter
-                          </span>
-                          <span class="float-right text-muted">
-                            <a href="#">@davidgrey</a>
-                          </span>
-                        </p> -->
                       </div>
                             <!-- <div class="border-bottom py-4">
                                 <div class="list-group">
@@ -113,13 +97,6 @@
                             </div>
                             <div class="profile-feed">
                                 <div class="d-flex align-items-start profile-feed-item">
-                                    <!-- 
-                                    'code', 'name', 'stock', 'image', 'price', 'sale_price',
-                                    'presentation', 'weight', 'year', 'model', 'status', 'category_id',
-                                    'provider_id',  -->
-
-                                   
-
                                     <div class="form-group col-md-6">
                                         <strong><i class="fas fa-code mr-1"></i> Código</strong>
                                         <p class="text-muted">

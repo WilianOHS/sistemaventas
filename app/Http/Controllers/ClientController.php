@@ -35,8 +35,10 @@ class ClientController extends Controller
     }
     public function show(Client $client)
     {
-        $sales = Sale::get();
-        return view('admin.client.show',compact('client','sales'));
+        // $sales = Sale::get();
+        // return view('admin.client.show',compact('client','sales'));
+        $sales = Sale::where('client_id', $client->id)->get();
+        return view('admin.client.show', compact('client', 'sales'));
     }
     public function edit(Client $client)
     {

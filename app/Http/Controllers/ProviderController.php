@@ -33,7 +33,9 @@ class ProviderController extends Controller
     }
     public function show(Provider $provider)
     {
-        return view('admin.provider.show',compact('provider'));
+        //return view('admin.provider.show',compact('provider'));
+        $products = $provider->products;
+    return view('admin.provider.show', compact('provider', 'products'));
     }
     public function edit(Provider $provider)
     {
