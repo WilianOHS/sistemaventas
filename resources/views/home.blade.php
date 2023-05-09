@@ -169,15 +169,40 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card card-chart">
-                <div class="card-header">
+            <div class="card-header">
+  <h4 class="text-center">Productos mas vendidos</h4>
+</div>
+<div class="card-content">
+  <div class="ct-chart">
+    <label for="fecha_inicioP">Fecha de inicio:</label>
+    <input type="date" id="fecha_inicioP">
+
+    <label for="fecha_finP">Fecha de fin:</label>
+    <input type="date" id="fecha_finP">
+    <button onclick="filtrarP()">Filtrar</button>
+
+    <canvas id="productosmasvendidos"></canvas>
+  </div>
+</div>
+                <!-- <div class="card-header">
                     <h4 class="text-center">Productos mas vendidos</h4>
                 </div>
                     <div class="card-content">
                       <div class="ct-chart">
+                      <label for="fecha_inicioP">Fecha de inicio:</label>
+                      <input type="date" id="fecha_inicioP">
+
+                      <label for="fecha_finP">Fecha de fin:</label>
+                      <input type="date" id="fecha_finP">
+                      <button onclick="filtrarP()">Filtrar</button>
+
                       <canvas id="productosmasvendidos">
+                      
+
                       </canvas>
                       </div>
-                    </div>
+                    </div> -->
+
             </div>
         </div>
     </div>
@@ -562,9 +587,25 @@ function resetDate() {
 
     
     </script>
+
 <script>
-  var varVenta=document.getElementById('productosmasvendidos').getContext('2d');
-            var charVenta = new Chart(varVenta, {
+  function filtrarP() {
+  var fecha_inicioP = $("#fecha_inicioP").val();
+  var fecha_finP = $("#fecha_finP").val();
+  
+  $.ajax({
+    url: "{{ url('home.index') }}",
+    data: { fecha_inicioP: fecha_inicioP, fecha_finP: fecha_finP },
+    success: function(data) {
+      charVentaP.data.labels = data.labels;
+      charVentaP.data.datasets[0].data = data.data;
+      charVentaP.update();
+    }
+  });
+}
+
+  var varVentaP=document.getElementById('productosmasvendidos').getContext('2d');
+            var charVentaP = new Chart(varVentaP, {
                 type: 'doughnut',
                 data: {
                     labels: [<?php foreach ($productosmasvendidos as $productosmasvendido)
@@ -613,6 +654,74 @@ function resetDate() {
             });
 
 </script>
+
+
+<!-- <script>
+  function filtrarP() {
+  var fecha_inicioP = $("#fecha_inicioP").val();
+  var fecha_finP = $("#fecha_finP").val();
+  
+  $.ajax({
+    url: "ruta/para/filtrar",
+    data: { fecha_inicioP: fecha_inicioP, fecha_finP: fecha_finP },
+    success: function(data) {
+      charVentaP.data.labels = data.labels;
+      charVentaP.data.datasets[0].data = data.data;
+      charVentaP.update();
+    }
+  });
+}
+
+  var varVentaP=document.getElementById('productosmasvendidos').getContext('2d');
+            var charVentaP = new Chart(varVentaP, {
+                type: 'doughnut',
+                data: {
+                    labels: [<?php foreach ($productosmasvendidos as $productosmasvendido)
+                {
+                    $name= $productosmasvendido->name;
+                    //$cname= $productoscategoria->category_id;
+                    
+                    echo '"'. $name. '",';} ?>],
+                    datasets: [{
+                        label: 'Ventas',
+                        data: [<?php foreach ($productosmasvendidos as $reg)
+                        {echo ''. $reg->quantity.',';} ?>],
+                        backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)',
+                        'rgba(255, 159, 64, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                        borderWidth: 1,
+                        fill: true, 
+                    }]
+                },
+                options: {
+                cutoutPercentage: 10
+                }
+                // options: {
+                //     scales: {
+                //       yAxes: [{
+                //         ticks: {
+                            
+                //             beginAtZero:true
+                //         }
+                //       }]
+                //     }  
+                // }
+            });
+
+</script> -->
 <script>
 		// Datos de ventas por mes
 		const datos = {

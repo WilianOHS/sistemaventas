@@ -23,9 +23,10 @@
     <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
+              <a href="#" data-toggle="modal" data-target="#clientModal" id="addClientBtn">Agregar cliente</a>
                 {!! Form::open(['route'=>'sales.store','method'=>'POST']) !!}
                 <div class="card-body">
-                  
+
                     @include('admin.sale._form')
                     
                    
@@ -41,11 +42,84 @@
         </div>
     </div>
 </div>            
+
+
+<div class="modal fade" id="clientModal" tabindex="-1" role="dialog" aria-labelledby="clientModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="clientModalLabel">Registrar cliente</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+      {!! Form::open(['route'=>'sales.storeClient','method'=>'POST']) !!}
+          @csrf
+          <div class="form-group">
+            <label for="name">Nombre</label>
+            <input type="text" name="name" id="name" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="dui">DUI</label>
+            <input type="text" name="dui" id="dui" class="form-control"  onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="10">
+          </div>
+          <div class="form-group">
+            <label for="address">Dirección</label>
+            <input type="text" name="address" id="address" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="phone">Teléfono</label>
+            <input type="text" name="phone" id="phone" class="form-control" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="9">
+          </div> 
+         <div class="form-group">
+                        <label for="phone">Telefóno / Celular</label>
+                        <input type="text" name="phone" id="phone" class="form-control" aria-describedby="helpId" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="9">
+                    </div>
+          <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" name="email" id="email" class="form-control">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+                        @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+          {!! Form::close() !!}
+      </div>
+    </div>
+  </div>
+</div>  
+
+
+
+
 @endsection
 @section('scripts')
 {!! Html::script('melody/js/alerts.js') !!}
 {!! Html::script('melody/js/avgrund.js') !!}
 
+<script>
+  $('#clientModal').on('show.bs.modal', function (e) {
+    $('#addClientBtn').attr('disabled', true);
+  });
+
+  $('#clientModal').on('hidden.bs.modal', function (e) {
+    $('#addClientBtn').attr('disabled', false);
+  });
+</script>
 
 <script>
 $(document).ready(function () {
@@ -158,5 +232,41 @@ function eliminar(index) {
  }
  
 </script>
+<script>
+      const dui = document.querySelector('#dui')
+      dui.addEventListener('keypress', () => {
+      let inputLength = dui.value.length
 
+    // MAX LENGHT 10 dui
+    if (inputLength == 8) {
+        dui.value += '-'
+    }
+    })
+    </script>
+
+    <script>
+      const phone = document.querySelector('#phone')
+      phone.addEventListener('keypress', () => {
+      let inputLength = phone.value.length
+
+    // MAX LENGHT 10 dui
+    if (inputLength == 4) {
+        phone.value += '-'
+    }
+    })
+    </script>
+
+
+<script>
+function validarDescuento() {
+  var descuento = parseInt(document.getElementById("discount").value);
+  if (isNaN(descuento) || descuento < 0 || descuento > 100) {
+    document.getElementById("discount").setCustomValidity("El descuento debe ser un número entre 0 y 100");
+  } else {
+    document.getElementById("discount").setCustomValidity("");
+  }
+}
+
+
+</script>
 @endsection

@@ -120,7 +120,7 @@
                                         <hr> -->
                                         <strong><i class="fas fa-dollar-sign mr-1"></i> Precio de venta</strong>
                                         <p class="text-muted">
-                                            {{$product->sale_price}}
+                                           $ {{$product->sale_price}}
                                         </p>
                                         <hr>
                                     </div>
@@ -146,7 +146,7 @@
                                             {{$product->model}}
                                         </p>
                                         <hr>
-                                        <strong><i class="fas fa-square mr-1"></i> Marca</strong>
+                                        <strong><i class="fas fa-circle-notch"></i> Marca</strong>
                                         <p class="text-muted">
                                             {{$product->marca}}
                                         </p>

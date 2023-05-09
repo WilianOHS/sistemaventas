@@ -196,6 +196,7 @@
     $(document).ready(function() {
         var table = $('#product_listing').DataTable({
             responsive: true,
+            order: [[ 0, "desc" ]],
             language: {
                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
             },

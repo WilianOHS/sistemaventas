@@ -13,13 +13,17 @@
             <!--    <input type="number" class="form-control" name="iva" id="iva" aria-describedby="helpId" placeholder="13%"> -->
             <div class="form-group">
             <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-dark active"> Con IVA
+                    <!-- <label class="btn btn-dark active"> Con IVA
                         <input type="radio" name="iva" id="iva" autocomplete="off" value="13">
                     </label>
 
                     <label class="btn btn-dark">Sin IVA
                         <input type="radio" name="iva" id="iva" autocomplete="off" value="0">
-                    </label>
+                    </label> -->
+                    <select class="form-control" name="iva" id="iva">
+                        <option value="0">Sin IVA</option>
+                        <option value="13">Con IVA</option>
+                    </select>
                 </div>
         </div>
 

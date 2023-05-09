@@ -24,10 +24,6 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Registro de categorías</h4>    
-                    </div>
                     {!! Form::open(['route'=>'categories.store','method'=>'POST']) !!}
                     @include('admin.category._form')
                     <button type="submit" class="btn btn-primary mr-2">Registrar</button>

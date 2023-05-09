@@ -26,9 +26,9 @@ class StoreRequest extends FormRequest
         return [
             'name'=>'required|string|max:255',
             'email'=>'required|email|string|max:255|unique:providers',
-            'nit_number'=>'required|string|max:11|min:11|unique:providers',
+            'nit_number'=>'required|string|max:15|min:15|unique:providers',
             'address'=>'nullable|string|max:255',
-            'phone'=>'required|string|max:8|min:8|unique:providers',
+            'phone'=>'required|string|max:9|min:9|unique:providers',
         ];
     }
     public function messages()
@@ -46,8 +46,8 @@ class StoreRequest extends FormRequest
 
             'nit_number.required'=>'Este campo es requerido.',
             'nit_number.string'=>'El valor no es correcto.',
-            'nit_number.max'=>'Solo se permite 11 caracteres.',
-            'nit_number.min'=>'Se requiere 11 caracteres.',
+            'nit_number.max'=>'Solo se permite 15 caracteres.',
+            'nit_number.min'=>'Se requiere 15 caracteres.',
             'nit_number.unique'=>'Ya se encuentra registrado.',
 
             
@@ -56,8 +56,8 @@ class StoreRequest extends FormRequest
 
             'phone.required'=>'Este campo es requerido.',
             'phone.string'=>'El valor no es correcto.',
-            'phone.max'=>'Solo se permite 8 caracteres.',
-            'phone.min'=>'Se requiere 8 caracteres.',
+            'phone.max'=>'Solo se permite 9 caracteres.',
+            'phone.min'=>'Se requiere 9 caracteres.',
             'phone.unique'=>'Ya se encuentra registrado.',
         ];
     }

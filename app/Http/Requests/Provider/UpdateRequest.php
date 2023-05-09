@@ -29,11 +29,11 @@ class UpdateRequest extends FormRequest
             'email'=>'required|email|string|unique:providers,email,'.
             $this->route('provider')->id.'|max:255',
             
-            'nit_number'=>'required|string|min:11|unique:providers,nit_number,'.
-            $this->route('provider')->id.'|max:11|',
+            'nit_number'=>'required|string|min:15|unique:providers,nit_number,'.
+            $this->route('provider')->id.'|max:15|',
             'address'=>'nullable|string|max:255',
-            'phone'=>'required|string|min:8|unique:providers,phone,'.
-            $this->route('provider')->id.'|max:8|',
+            'phone'=>'required|string|min:9|unique:providers,phone,'.
+            $this->route('provider')->id.'|max:9|',
         ];
     }
     public function messages()
@@ -51,8 +51,8 @@ class UpdateRequest extends FormRequest
 
             'nit_number.required'=>'Este campo es requerido.',
             'nit_number.string'=>'El valor no es correcto.',
-            'nit_number.max'=>'Solo se permite 11 caracteres.',
-            'nit_number.min'=>'Se requiere 11 caracteres.',
+            'nit_number.max'=>'Solo se permite 15 caracteres.',
+            'nit_number.min'=>'Se requiere 15 caracteres.',
             'nit_number.unique'=>'Ya se encuentra registrado.',
 
             
@@ -61,8 +61,8 @@ class UpdateRequest extends FormRequest
 
             'phone.required'=>'Este campo es requerido.',
             'phone.string'=>'El valor no es correcto.',
-            'phone.max'=>'Solo se permite 8 caracteres.',
-            'phone.min'=>'Se requiere 8 caracteres.',
+            'phone.max'=>'Solo se permite 9 caracteres.',
+            'phone.min'=>'Se requiere 9 caracteres.',
             'phone.unique'=>'Ya se encuentra registrado.',
         ];
     }

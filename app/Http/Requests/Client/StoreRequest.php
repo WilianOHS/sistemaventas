@@ -25,7 +25,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'name'=>'string|required|max:255',
-            'dui'=>'string|required|unique:clients|min:10|max:10',
+            'dui'=>'string|nullable|unique:clients|min:10|max:10',
             'address'=>'string|max:255',
             'phone'=>'string|unique:clients|min:9|max:9',
             'email'=>'string|unique:clients|max:255|email:rfc,dns',
@@ -39,7 +39,7 @@ class StoreRequest extends FormRequest
             'name.max'=>'Solo se permite 50 caracteres.',
 
             'dui.string'=>'El valor no es correcto.',
-            'dui.required'=>'Este campo es requerido.',
+            'dui.nullable'=>'Este campo es requerido.',
             'dui.mmin'=>'Se requiere 10 cacteres.',
             'dui.max'=>'Solo se permite 10 caracteres.',
             'address.string'=>'El valor no es correcto.',

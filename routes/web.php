@@ -60,6 +60,9 @@ Route::get('change_status/sales/{sale}', 'SaleController@change_status')->name('
 
 Route::get('/get-filtered-data', 'HomeController@getFilteredData')->name('getFilteredData');
 
+Route::get('ruta/para/filtrar', [HomeController::class, 'filtrar']);
+
+Route::post('/sales/store-client', 'SaleController@storeClient')->name('sales.storeClient');
 
 Route::resource('users', UserController::class)->names('users');
 

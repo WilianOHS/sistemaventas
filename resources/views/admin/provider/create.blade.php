@@ -51,7 +51,7 @@
 
                     <div class="form-group">
                         <label for="phone">Numero de contacto</label>
-                        <input type="number" class="form-control" name="phone" id="phone" aria-describedby="helpId" required>
+                        <input type="text" class="form-control" name="phone" id="phone" aria-describedby="helpId" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="9">
                     </div>
 
 
@@ -73,19 +73,37 @@
 {!! Html::script('melody/js/data-table.js') !!}
 <script>
 		function formatNIT(nitField) {
-			// Remover cualquier guión existente
-			let nit = nitField.value.replace(/-/g, '');
+        // Remover cualquier guión existente
+        let nit = nitField.value.replace(/-/g, '');
 
-			// Agregar guiones después de ciertos números
-			if (nit.length > 4) {
-				nit = nit.substring(0, 4) + '-' + nit.substring(4);
-			}
-			if (nit.length > 11) {
-				nit = nit.substring(0, 11) + '-' + nit.substring(11);
-			}
+        // Agregar guiones después de ciertos números
+        if (nit.length > 4) {
+            nit = nit.substring(0, 4) + '-' + nit.substring(4);
+        }
+        if (nit.length > 10) {
+            nit = nit.substring(0, 10) + '-' + nit.substring(10);
+        }
+        if (nit.length > 13) {
+            nit = nit.substring(0, 13) + '-' + nit.substring(13);
+        }
+        if (nit.length > 15) {
+            nit = nit.substring(0, 15);
+        }
 
-			// Asignar el valor formateado al campo del NIT
-			nitField.value = nit;
-		}
-	</script>
+        // Asignar el valor formateado al campo del NIT
+        nitField.value = nit;
+        }
+</script>
+
+<script>
+      const phone = document.querySelector('#phone')
+      phone.addEventListener('keypress', () => {
+      let inputLength = phone.value.length
+
+    // MAX LENGHT 10 dui
+    if (inputLength == 4) {
+        phone.value += '-'
+    }
+    })
+    </script>
 @endsection

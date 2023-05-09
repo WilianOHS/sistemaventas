@@ -10,22 +10,11 @@
     </div>
     <div class="col">
     <label for="iva">Impuesto (IVA)</label>
-    <!-- <input type="number" class="form-control" name="iva" id="iva" aria-describedby="helpId" placeholder="13%">  -->
       <select class="form-control" name="iva" id="iva">
         <option value="0">Sin IVA</option>
         <option value="13">Con IVA</option>
       </select>
-      <!-- <div class="form-group">
-        <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-dark active">
-                <input type="radio" name="iva" id="iva" autocomplete="off" value="13"><label for="iva">Con IVA</label> 
-            </label>
-            
-            <label class="btn btn-dark">
-                <input type="radio" name="iva" id="iva" autocomplete="off" value="0"><label for="iva">Sin IVA</label> 
-            </label>
-        </div>
-    </div>   -->
+    
     </div>
 </div>
 
@@ -55,9 +44,13 @@
             <label for="price">Precio de venta</label>
                 <input type="number" class="form-control" name="price" id="price" aria-describedby="helpId" disabled>
             </div>
-            <div class="col">
+            <!-- <div class="col">
             <label for="discount">Porcentaje de descuento</label>
                 <input type="number" class="form-control" name="discount" id="discount" aria-describedby="helpId" value="0">
+            </div> -->
+            <div class="col">
+            <label for="discount">Porcentaje de descuento</label>
+            <input type="number" class="form-control" name="discount" id="discount" aria-describedby="helpId" value="0" min="0" max="100" step="1" oninput="validarDescuento()">
             </div>
         </div>
 
