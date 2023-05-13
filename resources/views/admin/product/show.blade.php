@@ -1,7 +1,15 @@
 @extends('layouts.admin')
 @section('title','información de producto')
 @section('styles')
-
+<style>
+    .img-xl {
+  max-width: 100%;
+  height: auto;
+  width: 200px; /* ajusta el valor a lo que necesites */
+  display: block;
+  margin: auto;
+}
+</style>
 @endsection
 @section('create')
 
@@ -32,14 +40,13 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-4">
-                            <div class="border-bottom text-center pb-4">
+                        <div class="border-bottom text-center pb-4">
+                        <img src="{{asset('image/'.$product->image)}}" alt="profile" class="img-lg mb-3 img-xl"/>
+                        <h3>{{$product->name}}</h3>
+                        <div class="d-flex justify-content-between">
+                        </div>
+                        </div>
 
-                            <img src="{{asset('image/'.$product->image)}}" alt="profile" class="img-lg mb-3"/>
-
-                                <h3>{{$product->name}}</h3>
-                                <div class="d-flex justify-content-between">
-                                </div>
-                            </div>
                         <div class="py-4">
                         <p class="clearfix">
                           <span class="float-left">
@@ -65,7 +72,7 @@
                           </span>
                             <!-- PRODUCTOS POR CATEGORIA -->
                           <span class="float-right text-muted">
-                            <a href="">
+                            <a href="{{route('categories.show',$product->category->id)}}">
                             {{$product->category->name}}
                             </a>
                           </span>

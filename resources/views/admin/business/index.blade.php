@@ -124,15 +124,27 @@
                             <input type="text" name="nit" id="nit" class="form-control" value="{{$business->nit}}" aria-describedby="helpId">
                           </div>
 
-                          <div class="card-body">
+                          <!-- <div class="card-body">
                             <h5 class="card-title d-flex">Logotipo de la empresa
                               <small class="ml-auto align-self-end">
                                 <a href="dropify.html" class="font-weight-light" target="_blank">Seleccionar Archivo</a>
                               </small>
                             </h5>
                             <input type="file" name="logotipo" id="logotipo" class="dropify" />
-                          </div>
-                    
+                          </div> -->
+
+                      <div class="card-body d-flex flex-column align-items-center">
+                      <h5 class="card-title d-flex">Logotipo de la empresa
+
+                      </h5>
+                      
+                      <input type="file" name="logotipo" id="logotipo" class="dropify" />
+                      <div class="d-flex flex-column align-items-center my-auto">
+                        @if ($business->logo)
+                          <img src="{{ asset('image/' . $business->logo) }}" alt="Logotipo de la empresa" style="width: 100px; height: 100px;" class="mx-auto">
+                        @endif
+                      </div>
+                    </div>
                           
                         </div>
                         <div class="modal-footer">

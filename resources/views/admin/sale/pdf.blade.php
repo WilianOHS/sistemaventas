@@ -1,147 +1,104 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Reporte de venta</title>
-<style>
-    body {
-        /*position: relative;*/
-        /*width: 16cm;  */
-        /*height: 29.7cm; */
-        /*margin: 0 auto; */
-        /*color: #555555;*/
-        /*background: #FFFFFF; */
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        /*font-family: SourceSansPro;*/
-    }
-    #datos {
-        float: left;
-        margin-top: 0%;
-        margin-left: 2%;
-        margin-right: 2%;
-        /*text-align: justify;*/
-    }
-    #encabezado {
-        text-align: center;
-        margin-left: 35%;
-        margin-right: 35%;
-        font-size: 15px;
-    }
-    #fact {
-        /*position: relative;*/
-        float: right;
-        margin-top: 2%;
-        margin-left: 2%;
-        margin-right: 2%;
-        font-size: 20px;
-        background: #D2691E;
-    }
-    section {
-        clear: left;
-    }
-    #cliente {
-        text-align: left;
-    }
-    #facliente {
-        width: 40%;
-        border-collapse: collapse;
-        border-spacing: 0;
-        margin-bottom: 15px;
-    }
-    #fac,
-    #fv,
-    #fa {
-        color: #FFFFFF;
-        font-size: 15px;
-    }
-    #facliente thead {
-        padding: 20px;
-        background: #D2691E;
-        text-align: left;
-        border-bottom: 1px solid #FFFFFF;
-    }
-    #facvendedor {
-        width: 100%;
-        border-collapse: collapse;
-        border-spacing: 0;
-        margin-bottom: 15px;
-    }
-    #facvendedor thead {
-        padding: 20px;
-        background: #D2691E;
-        text-align: center;
-        border-bottom: 1px solid #FFFFFF;
-    }
-    #facproducto {
-        width: 100%;
-        border-collapse: collapse;
-        border-spacing: 0;
-        margin-bottom: 15px;
-    }
-    #facproducto thead {
-        padding: 20px;
-        background: #D2691E;
-        text-align: center;
-        border-bottom: 1px solid #FFFFFF;
-    }
-</style>
-
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Reporte de venta</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			font-size: 14px;
+			color: #555555;
+			background: #FFFFFF;
+		}
+		header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin: 20px 0;
+		}
+		h1 {
+			font-size: 28px;
+			font-weight: bold;
+			color: #D2691E;
+			margin: 0;
+		}
+		section {
+			margin: 20px 0;
+		}
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			font-size: 14px;
+		}
+		th, td {
+			padding: 10px;
+			border: 1px solid #D2691E;
+			text-align: center;
+		}
+		th {
+			background-color: #D2691E;
+			color: white;
+			font-weight: normal;
+			font-size: 16px;
+		}
+		tfoot th {
+			background-color: #D2691E;
+			color: white;
+			font-weight: bold;
+			font-size: 16px;
+			text-align: right;
+		}
+		tfoot td {
+			background-color: #F7F7F7;
+			border: none;
+			font-weight: bold;
+			text-align: right;
+		}
+		footer {
+			text-align: center;
+			margin-top: 50px;
+			padding-top: 20px;
+			border-top: 1px solid #D2691E;
+		}
+		footer p {
+			font-size: 12px;
+			color: #555555;
+			margin: 0;
+		}
+	</style>
+</head>
 <body>
-    <header>
-        <!-- {{--  <div id="logo">
-            <img src="{{asset($company->logo)}}" alt="" id="imagen">
-        </div>  --}} -->
+	<header>
         <div>
-            <table id="datos">
-                <thead>
-                    <tr>
-                        <th id="">DATOS DEL VENDEDOR</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>
-                            <p id="proveedor">
-                                Nombre: {{$sale->user->name}}<br>
-                                
-                                Email: {{$sale->user->email}}
-                            </p>
-                        </th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div id="fact">
-            <!-- {{--  <p>
-                {{$sale->user->types_identification}}-VENTA
-                <br>
-                {{$sale->user->id}}
-            </p>  --}} -->
-            <p>
-                NUMERO DE VENTA
-                <br>
-                {{$sale->id}}
-            </p>
-        </div>
-    </header>
-    <br>
-    <br>
-    <section>
+			<h1>Reporte de venta</h1>
+			<p><strong>Número de venta:</strong> {{$sale->id}}</p>
+		</div>
+		<div>
+			<p><strong>DATOS DEL VENDEDOR</strong></p>
+			<p><strong>Nombre:</strong> {{$sale->user->name}}</p>
+			<!-- <p>Email: {{$sale->user->email}}</p> -->
+		</div>
         <div>
-            <table id="facproducto">
-                <thead>
-                    <tr id="fa">
-                        <th>CANTIDAD</th>
-                        <th>PRODUCTO</th>
-                        <th>PRECIO VENTA(USD)</th>
-                        <th>DESCUENTO(%)</th>
-                        <th>SUBTOTAL(USD)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($saleDetails as $saleDetail)
+			<p><strong>DATOS DEL CLIENTE</strong></p>
+			<p><strong>Nombre:</strong> {{$sale->client->name}}</p>
+			<!-- <p>Email: {{$sale->user->email}}</p> -->
+		</div>
+	</header>
+	<section>
+		<table>
+			<thead>
+				<tr>
+					<th>Cantidad</th>
+					<th>Producto</th>
+					<th>Precio de venta (USD)</th>
+					<th>Descuento (%)</th>
+					<th>Subtotal (USD)</th>
+				</tr>
+			</thead>
+			<tbody>
+            @foreach ($saleDetails as $saleDetail)
                     <tr>
                         <td>{{$saleDetail->quantity}}</td>
                         <td>{{$saleDetail->product->name}}</td>
@@ -151,51 +108,18 @@
                         </td>
                     </tr>
                     @endforeach
-                </tbody>
-                <tfoot>
-                    
-                    <tr>
-                        <th colspan="4">
-                            <p align="right">SUBTOTAL:</p>
-                        </th>
-                        <td>
-                            <p align="right">$ {{number_format($subtotal,2)}}</p>
-                        </td>
-                    </tr>
-                   
-                    <tr>
-                        <th colspan="4">
-                            <p align="right">TOTAL IMPUESTO ({{$sale->iva}}%):</p>
-                        </th>
-                        <td>
-                            <p align="right">$ {{number_format($subtotal*$sale->iva/100,2)}}</p>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th colspan="4">
-                            <p align="right">TOTAL PAGAR:</p>
-                        </th>
-                        <td>
-                            <p align="right">$ {{number_format($sale->total,2)}}</p>
-                        </td>
-                    </tr>
-
-                  
+			</tbody>
+			<tfoot>
+				<tr>
+					
                 </tfoot>
-            </table>
-        </div>
-    </section>
-    <br>
-    <br>
-    <footer>
-        <!--puedes poner un mensaje aqui-->
-        <div id="datos">
-            <p id="encabezado">
-                <!-- {{--  <b>{{$company->name}}</b><br>{{$company->description}}<br>Telefono:{{$company->telephone}}<br>Email:{{$company->email}}  --}} -->
-            </p>
-        </div>
-    </footer>
+				<td colspan="4">Total:</td>
+				<td>$ {{number_format($sale->total, 2)}}</td>
+			</tr>
+		</table>
+	</section>
+	<footer>
+		<p>Este reporte fue generado automáticamente por el sistema.</p>
+	</footer>
 </body>
-
 </html>

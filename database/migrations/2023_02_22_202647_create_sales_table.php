@@ -22,9 +22,11 @@ class CreateSalesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->dateTime('sale_date');
-            $table->decimal('iva');
             $table->decimal('total');
             $table->enum('status',['VALID','CANCELED'])->default('VALID');
+
+            $table->string('document_type')->nullable();
+            $table->string('document_number')->nullable();
 
 
             $table->timestamps();

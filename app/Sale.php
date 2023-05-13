@@ -10,9 +10,10 @@ class Sale extends Model
         'client_id',
         'user_id',
         'sale_date',
-        'iva',
         'total',
         'status',
+        'document_type',
+        'document_number',
     ];
     public function user(){
         return $this->belongsTo(User::class);
@@ -23,4 +24,9 @@ class Sale extends Model
     public function saleDetails(){
         return $this->hasMany(saleDetail::class);
     }
+    public function business()
+{
+    return $this->belongsTo(Business::class);
+}
+
 }

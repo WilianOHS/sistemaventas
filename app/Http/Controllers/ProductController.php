@@ -60,6 +60,7 @@ class ProductController extends Controller
     }
     public function update(UpdateRequest $request, Product $product)
     {
+        $image_name = $product->image;
         if ($request->hasFile('picture')) {
             $file = $request->file('picture');
             $image_name = time().'_'.$file->getClientOriginalName();
@@ -69,7 +70,7 @@ class ProductController extends Controller
             'image' =>$image_name,
         ]);
         return redirect()->route('products.index');
-    }
+    }    
     public function destroy(Product $product)
     {
         $product->delete();

@@ -8,14 +8,6 @@
             @endforeach
             </select>
     </div>
-    <div class="col">
-    <label for="iva">Impuesto (IVA)</label>
-      <select class="form-control" name="iva" id="iva">
-        <option value="0">Sin IVA</option>
-        <option value="13">Con IVA</option>
-      </select>
-    
-    </div>
 </div>
 
 <hr>
@@ -80,14 +72,6 @@
                     </th>
                     <th>
                         <p align="right"><span id="total">$ 0.00</span> </p>
-                    </th>
-                </tr>
-                <tr>
-                    <th colspan="4">
-                        <p align="right">TOTAL IMPUESTO (13%):</p>
-                    </th>
-                    <th>
-                        <p align="right"><span id="total_impuesto">$ 0.00</span></p>
                     </th>
                 </tr>
                 <tr>

@@ -48,7 +48,7 @@
                             <th scope="row">{{$category->id}}</th>
                             <td>
                                                               
-                                <a href="#">{{$category->name}}</a>
+                                <a href="{{route('categories.show',$category)}}">{{$category->name}}</a>
                             </td>    
                             <td>{{$category->description}}</td>      
                             <td style="width: 20%;">

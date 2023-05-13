@@ -1,6 +1,49 @@
 @extends('layouts.admin')
  @section('title','Registrar producto')
  @section('styles')
+ <style>
+.form-row {
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.custom-select {
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  color: #555;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.form-control {
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  color: #555;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+select:focus,
+input:focus {
+  outline: none;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+</style>
  @endsection
  @section('options')
 @endsection
@@ -26,10 +69,6 @@
                 <div class="card-body">
                   
                     {!! Form::open(['route'=>'products.store','method'=>'POST','files'=>true]) !!}
-                    
-                    <!-- 'code', 'name', 'stock', 'image', 'price', 'sale_price',
-        'presentation', 'weight', 'year', 'model', 'status', 'category_id',
-        'provider_id',  -->
                     <div class="form-group">
                         <label for="name">Nombre</label>
                         <input type="text" name="name" id="name" class="form-control" aria-describedby="helpId" required>
@@ -40,14 +79,7 @@
                         <input type="number" name="sale_price" id="sale_price" class="form-control" aria-describedby="helpId" step=".01" required>
                     </div>
 
-                    <div class="form-row">
-<!--                     <input type="text" name="presentation" id="presentation" class="form-control" aria-describedby="helpId" required> -->
-                        
-                        <!-- <select class="form-control" name="presentation" id="presentation">
-                        <option value="" disabled selected>Seleccione una presentación</option>
-                            <option value="Unidad">Unidad</option>
-                            <option value="Peso">Peso</option>
-                        </select> -->
+                    <!-- <div class="form-row">
                         <div class="col">
                         <label for="">Tipo de presentación</label>
                             <select name="presentation_option" id="m_menu" class="custom-select">
@@ -65,10 +97,26 @@
                             <input type="number" name="weight" id="weight" class="form-control" aria-describedby="helpId" required>
                         </div>
 
-                    </div>
+                    </div> -->
 
-                    <div class="form-group">
-                        
+                    <div class="form-row">
+                        <div class="col">
+                        <label for="">Tipo de presentación</label>
+                            <select name="presentation_option" id="m_menu" class="custom-select" style="height: 45px">
+                            <option value="" disabled selected>Seleccione una presentación</option>
+                            <option value="Unidad">Unidad</option>
+                            <option value="Peso">Peso</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                        <label for="presentation">Presentación</label>
+                            <select name="presentation" id="s_menu" class="custom-select" style="height: 45px"></select>
+                        </div>
+                        <div class="col">
+                            <label for="weight">Cantidad</label>
+                            <input type="number" name="weight" id="weight" class="form-control" aria-describedby="helpId" style="height: 45px" required>
+                        </div>
+
                     </div>
 
                     <div class="form-group">
@@ -104,12 +152,7 @@
                         </select>
                     </div>
 
-                    <!-- <div class="custom-file mb-4">
-                        <input type="file" class="custom-file-input" name="picture" id="picture" lang="es">
-                        <label class="custom-file-label" for="image">Seleccionar Archivo</label>
-                    </div> -->
-
-                    <div class="card-body">
+                  <div class="card-body">
                         <h4 class="card-title d-flex">Imagen de producto
                             <small class="ml-auto align-self-end">
                             <a href="dropify.html" class="font-weight-light" target="_blank">Seleccionar Archivo</a>

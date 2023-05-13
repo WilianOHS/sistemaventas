@@ -24,15 +24,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Edición de producto</h4>    
-                    </div>
                     {!! Form::model($product,['route'=>['products.update',$product],'method'=>'PUT','files'=> true]) !!}
-                    
-                    <!-- 'code', 'name', 'stock', 'image', 'price', 'sale_price',
-        'presentation', 'weight', 'year', 'model', 'status', 'category_id',
-        'provider_id',  -->
                     <div class="form-group">
                         <label for="name">Nombre</label>
                         <input type="text" name="name" id="name" value="{{$product->name}}" class="form-control" aria-describedby="helpId" required>
@@ -45,7 +37,7 @@
 
                     <div class="form-group">
                         <label for="sale_price">Precio de venta</label>
-                        <input type="number" name="sale_price" id="sale_price" value="{{$product->sale_price}}" class="form-control" aria-describedby="helpId" required>
+                        <input type="number" name="sale_price" id="sale_price" value="{{$product->sale_price}}" class="form-control" aria-describedby="helpId" step=".01" required>
                     </div>
 
                     <div class="form-group">
@@ -100,15 +92,14 @@
                     </div> -->
 
                     <div class="card-body">
-                        <h4 class="card-title d-flex">Imagen de producto
-                            <small class="ml-auto align-self-end">
-                            <a href="dropify.html" class="font-weight-light" target="_blank">Seleccionar Archivo</a>
-                            </small>
-                        </h4>
-                        <input type="file" name="picture" id="picture" class="dropify" />
-                    </div>
-
-
+                    <h4 class="card-title d-flex">Imagen de producto
+                        <small class="ml-auto align-self-end"></small>
+                    </h4>
+                    @if ($product->image)
+                        <img src="{{asset('image/'.$product->image)}}" alt="profile" class="img-lg mb-3"/>
+                    @endif
+                    <input type="file" name="picture" id="picture" class="dropify" />
+                </div>
 
                     <button type="submit" class="btn btn-primary mr-2">Editar</button>
                     <a href="{{route('products.index')}}" class="btn btn-light">

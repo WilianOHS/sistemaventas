@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Sale;
 use App\Client;
 use App\Product;
+use App\Business;
 use Illuminate\Http\Request;
 use App\Http\Requests\Sale\StoreRequest;
 use App\Http\Requests\Sale\UpdateRequest;
@@ -42,7 +43,8 @@ class SaleController extends Controller
     public function create()
     {
         $clients = Client::get();
-        $products = Product::get();
+        //$products = Product::get();
+        $products = Product::where('status', 'ACTIVE')->get();
         return view('admin.sale.create',compact('clients','products'));
     }
     public function store(StoreRequest $request)
@@ -84,18 +86,34 @@ class SaleController extends Controller
        // $sale->delete();
         //return redirect()->route('sales.index');
     }
-    public function pdf(Sale $sale)
-    {
-        $subtotal = 0;
-        $saleDetails = $sale->saleDetails;
-        foreach ($saleDetails as $saleDetail){
-            $subtotal += $saleDetail->quantity * $saleDetail->price - (($saleDetail->quantity * $saleDetail->price)*($saleDetail->discount/100));
-        }
+    // public function pdf(Sale $sale)
+    // {
+    //     $subtotal = 0;
+    //     $saleDetails = $sale->saleDetails;
+    //     foreach ($saleDetails as $saleDetail){
+    //         $subtotal += $saleDetail->quantity * $saleDetail->price - (($saleDetail->quantity * $saleDetail->price)*($saleDetail->discount/100));
+    //     }
         
-    $pdf = PDF::loadView('admin.sale.pdf', compact('sale', 'subtotal', 'saleDetails'));
+    // $pdf = PDF::loadView('admin.sale.pdf', compact('sale', 'subtotal', 'saleDetails'));
 
-    return $pdf->download('Reporte_de_venta_'.$sale->id.'.pdf');
+    // return $pdf->download('Reporte_de_venta_'.$sale->id.'.pdf');
+    // }
+    public function pdf(Sale $sale)
+{
+    $subtotal = 0;
+    $saleDetails = $sale->saleDetails;
+    foreach ($saleDetails as $saleDetail){
+        $subtotal += $saleDetail->quantity * $saleDetail->price - (($saleDetail->quantity * $saleDetail->price)*($saleDetail->discount/100));
     }
+    
+    // obtener el negocio relacionado con la venta actual
+    $business = $sale->business;
+    
+    $pdf = PDF::loadView('admin.sale.pdf', compact('business', 'sale', 'subtotal', 'saleDetails'));
+    return $pdf->download('Reporte_de_venta_'.$sale->id.'.pdf');
+    
+}
+
 
     public function print(Sale $sale){
         try {
@@ -134,5 +152,30 @@ class SaleController extends Controller
     public function exportar(){
         //return "hola mundo";
         return Excel::download(new SaleExport, 'ventas.xlsx');
+    }
+    public function storeClient(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'dui' => 'nullable|unique:clients',
+            'address' => 'nullable',
+            'phone' => 'nullable|unique:clients',
+            'email' => 'nullable|email|unique:clients',
+        ], [
+            'dui.unique' => 'Este DUI ya está registrado en la base de datos',
+            'phone.unique' => 'Este número de teléfono ya está registrado en la base de datos',
+            'email.unique' => 'Este correo electrónico ya está registrado en la base de datos',
+        ]);
+        $client = Client::create([
+            'name' => $request->input('name'),
+            'dui' => $request->input('dui'),
+            'address' => $request->input('address'),
+            'phone' => $request->input('phone'),
+            'email' => $request->input('email')
+        ]);
+        
+        //return view('clients.success', ['client' => $client]);
+        return redirect()->back()->with('success', 'Cliente registrado con éxito!');
+
     }
 }

@@ -21,6 +21,12 @@
               <span class="menu-title">Inicio</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('cashclosing.index')}}">
+            <i class="fa fa-archive menu-icon"></i>
+              <span class="menu-title">Cierre de Caja</span>
+            </a>
+          </li>
 
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#page-layouts2" aria-expanded="false" aria-controls="page-layouts2">

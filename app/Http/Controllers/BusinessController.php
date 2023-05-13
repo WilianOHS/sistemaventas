@@ -18,19 +18,32 @@ class BusinessController extends Controller
         $business = Business::where('id',1)->firstOrFail();
         return view('admin.business.index',compact('business'));
     }
+    // public function update(UpdateRequest $request, Business $business)
+    // {
+    //     if ($request->hasFile('logotipo')) {
+    //         $file = $request->file('logotipo');
+    //         $image_name = time().'_'.$file->getClientOriginalName();
+    //         $file->move(public_path("/image"),$image_name);
+    //     }
+    //     $business->update($request->all()+[
+    //         'logo' =>$image_name,
+    //     ]);
+
+
+
+    //     return redirect()->route('business.index');
+    // }
     public function update(UpdateRequest $request, Business $business)
-    {
-        if ($request->hasFile('logotipo')) {
-            $file = $request->file('logotipo');
-            $image_name = time().'_'.$file->getClientOriginalName();
-            $file->move(public_path("/image"),$image_name);
-        }
-        $business->update($request->all()+[
-            'logo' =>$image_name,
-        ]);
-
-
-
-        return redirect()->route('business.index');
+{
+    if ($request->hasFile('logotipo')) {
+        $file = $request->file('logotipo');
+        $image_name = time().'_'.$file->getClientOriginalName();
+        $file->move(public_path("/image"),$image_name);
+        $business->logo = $image_name;
     }
+    $business->update($request->except(['logotipo']));
+
+    return redirect()->route('business.index');
+}
+
 }

@@ -26,7 +26,7 @@
                 <div class="card-body">
                   
                 
-                    {!! Form::open(['route'=>'clients.store','method'=>'POST','files'=>true]) !!}
+                {!! Form::open(['route'=>'clients.store','method'=>'POST','files'=>true, 'onsubmit'=>'sumarValores()']) !!}
 
                     <div class="form-group">
                         <label for="name">Nombre</label>
@@ -40,10 +40,13 @@
 
                     <div class="form-group">
                         <label for="">Dirección</label>
-                        <input type="text" name="ubicacion_texto" id="ubicacion_texto" class="form-control" aria-describedby="helpId">
-                        <label for="departamento">Departamento:</label>
-                        <select name="departamento" id="departamento" onchange="mostrarMunicipios()">
-                        <option value="">Seleccione un municipio</option>
+                        <input type="text" name="address" id="address" class="form-control" aria-describedby="helpId">
+                    </div>
+
+                    <div class="form-group">
+                    <label for="departamento">Departamento:</label>
+                        <select name="departamento" id="departamento" onchange="mostrarMunicipios()" style="width: 20%;">
+                        <option value="" disabled selected>Seleccione un Departamento</option>
                         <option value="morazan">Morazán</option>
                         <option value="san-miguel">San Miguel</option>
                         <option value="la-union">La Unión</option>
@@ -62,7 +65,9 @@
                         </select>
 
                         <label for="municipio">Municipio:</label>
-                        <select id="municipio" name="municipio"></select>
+                        <select id="municipio" name="municipio" style="width: 35%;">                         
+                        <option value="" disabled selected>Seleccione un departamento para mostrar municipios</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -94,6 +99,63 @@
 @endsection
 @section('scripts')
 {!! Html::script('melody/js/data-table.js') !!}
+<script>
+function sumarValores() {
+  var direccion = document.getElementById("address").value;
+  var departamento = document.getElementById("departamento").value;
+  var municipio = document.getElementById("municipio").value;
+  
+  // Validar los valores ingresados por el usuario
+  if (direccion.trim() == "" || departamento == "" || municipio == "") {
+    alert("Debe ingresar una dirección completa y seleccionar un departamento y un municipio");
+    return;
+  }
+  
+  // Convertir el nombre del departamento y municipio a su versión con mayúsculas y sin caracteres especiales
+  departamento = convertirNombreDepartamento(departamento);
+  
+  var direccionCompleta = direccion + ", " + municipio + ", " + departamento;
+  
+  // Actualizar el valor del input de dirección con la dirección completa
+  document.getElementById("address").value = direccionCompleta;
+}
+
+function convertirNombreDepartamento(departamento) {
+  switch (departamento) {
+    case "morazan":
+      return "Morazán";
+    case "sanmiguel":
+      return "San Miguel";
+    case "la-union":
+      return "La Unión";
+    case "usulutan":
+      return "Usulután";
+    case "san-vicente":
+      return "San Vicente";
+    case "cabañas":
+      return "Cabañas";
+    case "la-paz":
+      return "La Paz";
+    case "san-salvador":
+      return "San Salvador";
+    case "cuscatlan":
+      return "Cuscatlán";
+    case "chalatenango":
+      return "Chalatenango";
+    case "la-libertad":
+      return "La Libertad";
+    case "sonsonate":
+      return "Sonsonate";
+    case "santa-ana":
+      return "Santa Ana";
+    case "ahuachapan":
+      return "Ahuachapán";
+    default:
+      return departamento;
+  }
+}
+
+</script>
     <script>
       const dui = document.querySelector('#dui')
       dui.addEventListener('keypress', () => {
@@ -416,18 +478,6 @@
     }
   }
 </script>
-<script>
-    const myForm = document.getElementById("myForm");
-myForm.addEventListener("submit", concatenateAddress);
 
-function concatenateAddress(event) {
-  event.preventDefault(); // previene que el formulario se envíe por defecto
-  const street = document.getElementById("ubicacion_texto").value;
-  const municipality = document.getElementById("departamento").value;
-  const department = document.getElementById("municipio").value;
-  const address = street + ", " + municipality + ", " + department;
-  console.log(address);
-  // Aquí puedes enviar el valor de "address" al servidor para guardarlo en la base de datos
-}
-</script>
+
 @endsection

@@ -23,7 +23,10 @@
     <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
-              <a href="#" data-toggle="modal" data-target="#clientModal" id="addClientBtn">Agregar cliente</a>
+              <!-- <a href="#" data-toggle="modal" data-target="#clientModal" id="addClientBtn">Agregar cliente</a> -->
+              <div class="card-footer text-muted">
+                        <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#clientModal">Registro rapido de cliente</button>
+              </div>
                 {!! Form::open(['route'=>'sales.store','method'=>'POST']) !!}
                 <div class="card-body">
 
@@ -66,10 +69,6 @@
             <label for="address">Dirección</label>
             <input type="text" name="address" id="address" class="form-control">
           </div>
-          <div class="form-group">
-            <label for="phone">Teléfono</label>
-            <input type="text" name="phone" id="phone" class="form-control" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="9">
-          </div> 
          <div class="form-group">
                         <label for="phone">Telefóno / Celular</label>
                         <input type="text" name="phone" id="phone" class="form-control" aria-describedby="helpId" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="9">
@@ -80,22 +79,9 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <!-- <button type="submit" class="btn btn-primary">Guardar</button> -->
+            <button type="submit" class="btn btn-success">Guardar</button>
           </div>
-                        @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                                @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
 
           {!! Form::close() !!}
       </div>
@@ -148,7 +134,7 @@ function agregar() {
     discount = $("#discount").val();
     price = $("#price").val();
     stock = $("#stock").val();
-    impuesto = $("#iva").val();
+    //impuesto = $("#iva").val();
     if (product_id != "" && quantity != "" && quantity > 0 && discount != "" && price != "") {
       if (parseInt(stock) >= parseInt(quantity)) {
           subtotal[cont] = (quantity * price) - (quantity * price * discount / 100);
@@ -180,9 +166,9 @@ function limpiar() {
 function totales() {
     $("#total").html("USD " + total.toFixed(2));
 
-    total_impuesto = total * impuesto / 100;
-    total_pagar = total + total_impuesto;
-    $("#total_impuesto").html("USD " + total_impuesto.toFixed(2));
+    //total_impuesto = total * impuesto / 100;
+    total_pagar = total;
+    //$("#total_impuesto").html("USD " + total_impuesto.toFixed(2));
     $("#total_pagar_html").html("USD " + total_pagar.toFixed(2));
     $("#total_pagar").val(total_pagar.toFixed(2));
 }
@@ -195,10 +181,10 @@ function evaluar() {
 }
 function eliminar(index) {
     total = total - subtotal[index];
-    total_impuesto = total * impuesto / 100;
-    total_pagar_html = total + total_impuesto;
+    //total_impuesto = total * impuesto / 100;
+    total_pagar_html = total;
     $("#total").html("USD" + total);
-    $("#total_impuesto").html("USD" + total_impuesto);
+    //$("#total_impuesto").html("USD" + total_impuesto);
     $("#total_pagar_html").html("USD" + total_pagar_html);
     $("#total_pagar").val(total_pagar_html.toFixed(2));
     $("#fila" + index).remove();

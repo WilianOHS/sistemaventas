@@ -32,16 +32,16 @@
                 <div class="card-body">
                 <div class="form-group row">
                         <div class="col-md-4 text-center">
-                            <label class="form-control-label"><strong>Cliente</strong></label>
-                            <p><a href="{{route('clients.show', $sale->client)}}">{{$sale->client->name}}</a></p>
+                            <label class="form-control-label" style="font-size: 18px"><strong>Cliente</strong></label>
+                            <p style="font-size: 18px"><a href="{{route('clients.show', $sale->client)}}">{{$sale->client->name}}</a></p>
                         </div>
                         <div class="col-md-4 text-center">
-                            <label class="form-control-label"><strong>Vendedor</strong></label>
-                            <p>{{$sale->user->name}}</p>
+                            <label class="form-control-label" style="font-size: 18px"><strong>Vendedor</strong></label>
+                            <p style="font-size: 18px">{{$sale->user->name}}</p>
                         </div>
                         <div class="col-md-4 text-center">
-                            <label class="form-control-label"><strong>Número Venta</strong></label>
-                            <p>{{$sale->id}}</p>
+                            <label class="form-control-label" style="font-size: 18px"><strong>Número Venta</strong></label>
+                            <p style="font-size: 18px">{{$sale->id}}</p>
                         </div>
                     </div>
                     <br /><br />
@@ -69,14 +69,6 @@
                                         </th>
                                     </tr>
 
-                                    <tr>
-                                        <th colspan="4">
-                                            <p align="right">TOTAL IMPUESTO ({{$sale->iva}}%):</p>
-                                        </th>
-                                        <th>
-                                            <p align="right">${{number_format($subtotal*$sale->iva/100,2)}}</p>
-                                        </th>
-                                    </tr>
                                     <tr>
                                         <th colspan="4">
                                             <p align="right">TOTAL:</p>
