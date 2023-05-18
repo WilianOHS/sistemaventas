@@ -6,13 +6,17 @@
                 <img src="{{asset('melody/images/faces/user.png')}}" alt="image"/>
               </div>
               <div class="profile-name">
-                <p class="name">
+              <div style="width: 1px; margin: 2px;">
+              <p class="name" style="word-break: break-all; overflow-wrap: break-word; font-size: 16px;">
+                {{ Auth::user()->username}}
+              </p>
+              <p style="word-wrap: break-word; font-size: 12px;">
                 {{ Auth::user()->name }}
-                </p>
-                <p>
-                {{ Auth::user()->username }}
-                </p>
-              </div>
+              </p>
+            </div>
+
+          </div>
+
             </div>
           </li>
           <li class="nav-item">
@@ -21,12 +25,24 @@
               <span class="menu-title">Inicio</span>
             </a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" href="{{route('cashclosing.index')}}">
-            <i class="fa fa-archive menu-icon"></i>
-              <span class="menu-title">Cierre de Caja</span>
-            </a>
-          </li>
+          <a class="nav-link" data-toggle="collapse" href="#page-layouts3" aria-expanded="false" aria-controls="page-layouts3">
+              <i class="fa fa-money menu-icon"></i>
+              <span class="menu-title">Caja</span>
+              <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="page-layouts3">
+              <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ route('cashopening.index') }}">Apertura de caja</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ route('cashclosing.index') }}">Cierre de caja</a>
+                  </li>
+              </ul>
+          </div>
+      </li>
 
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#page-layouts2" aria-expanded="false" aria-controls="page-layouts2">

@@ -30,7 +30,7 @@
 
                     <div class="form-group">
                         <label for="name">Nombre</label>
-                        <input type="text" name="name" id="name" class="form-control" aria-describedby="helpId" required>
+                        <input type="text" name="name" id="name" class="form-control" onkeyup="capitalize(this)" required>
                     </div>
 
                     <div class="form-group">
@@ -99,6 +99,24 @@
 @endsection
 @section('scripts')
 {!! Html::script('melody/js/data-table.js') !!}
+<script>
+function capitalize(textbox) {
+    // Separa el valor del cuadro de texto por palabras
+    var words = textbox.value.split(' ');
+
+    // Itera por cada palabra y cambia la primera letra a mayúscula si tiene tres o más letras
+    for (var i = 0; i < words.length; i++) {
+        if (words[i].length >= 3) {
+            words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+        }
+    }
+
+    // Une las palabras de nuevo y establece el valor del cuadro de texto
+    textbox.value = words.join(' ');
+}
+</script>
+
+
 <script>
 function sumarValores() {
   var direccion = document.getElementById("address").value;

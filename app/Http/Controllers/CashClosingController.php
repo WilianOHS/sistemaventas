@@ -10,7 +10,7 @@ class CashClosingController extends Controller
     // Método para mostrar el formulario de cierre de caja
     public function create()
     {
-        return view('cash_closing.form');
+        return view('admin.cash_closing.create');
     }
 
     // Método para procesar el formulario de cierre de caja

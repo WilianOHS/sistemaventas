@@ -14,6 +14,7 @@ class Sale extends Model
         'status',
         'document_type',
         'document_number',
+        'payment_method',
     ];
     public function user(){
         return $this->belongsTo(User::class);

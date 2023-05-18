@@ -96,6 +96,16 @@
 @section('scripts')
 {!! Html::script('melody/js/alerts.js') !!}
 {!! Html::script('melody/js/avgrund.js') !!}
+<script>
+    const select = document.querySelector('#document_type');
+    const hiddenInput = document.querySelector('#document_type_hidden');
+
+    select.addEventListener('change', (event) => {
+        const selectedOption = event.target.value;
+        const documentType = selectedOption === 'credito_fiscal' ? 'Crédito Fiscal' : selectedOption;
+        hiddenInput.value = documentType;
+    });
+</script>
 
 <script>
   $('#clientModal').on('show.bs.modal', function (e) {

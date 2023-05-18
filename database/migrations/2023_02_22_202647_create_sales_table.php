@@ -27,7 +27,7 @@ class CreateSalesTable extends Migration
 
             $table->string('document_type')->nullable();
             $table->string('document_number')->nullable();
-
+            $table->string('payment_method')->nullable();
 
             $table->timestamps();
         });

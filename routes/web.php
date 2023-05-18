@@ -73,6 +73,9 @@ Route::resource('roles', RoleController::class)->names('roles');
 // Route::post('cash_closing', [CashClosingController::class, 'store'])->name('cash_closing.store');
 // Route::get('cashclosing', [CashClosingController::class, 'index'])->name('cashclosing.index');
 Route::resource('cashclosing', CashClosingController::class)->names('cashclosing');
+Route::resource('cashopening', CashOpeningController::class)->names('cashopening');
+
+
 
 
 Auth::routes();

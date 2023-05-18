@@ -1,14 +1,45 @@
-<div class="form-row">
-    <div class="col-9">
-    <label for="client_id">Cliente</label>
-            <select id="client_id" class="form-control" name="client_id">
-            <option value="" disabled selected>Seleccione un cliente</option>
-            @foreach ($clients as $client)
-            <option value="{{$client->id}}">{{$client->name}}</option>
-            @endforeach
+        <div class="form-row">
+            <label for="client_id">Cliente</label>
+                    <select id="client_id" class="form-control" name="client_id">
+                    <option value="" disabled selected>Seleccione un cliente</option>
+                    @foreach ($clients as $client)
+                    <option value="{{$client->id}}">{{$client->name}}</option>
+                    @endforeach
+                    </select>
+        </div>
+
+<hr>
+
+        <div class="form-row">
+            <label for="document_type">Tipo de comprobante:</label>
+            <select id="document_type" class="form-control" name="document_type">
+                <option value="Ticket">Ticket</option>
+                <option value="Factura">Factura</option>
+                <option value="credito_fiscal">Crédito Fiscal</option>
             </select>
-    </div>
-</div>
+        </div>
+        <input type="hidden" name="document_type_hidden" id="document_type_hidden">
+
+
+<hr>
+
+
+        <div class="form-row">
+            <label for="payment_method">Método de Pago:</label>
+            <select id="payment_method" class="form-control"  name="payment_method">
+                <option value="Efectivo">Efectivo</option>
+                <option value="Tarjeta">Tarjeta</option>
+            </select>
+        </div>
+
+
+        <hr>
+
+        <div class="form-row">
+        <label for="document_number">Número de comprobante:</label>
+        <input type="number" class="form-control" name="document_number" id="document_number" aria-describedby="helpId">
+
+        </div>
 
 <hr>
 
