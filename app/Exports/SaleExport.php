@@ -22,6 +22,8 @@ class SaleExport implements FromCollection,WithHeadings,WithMapping,WithColumnWi
             'Cliente',
             'Producto',
             'Fecha',
+            'Tipo de comprobante',
+            'Número de comprobante',
             'Total',
             'Estado',
         ];
@@ -42,6 +44,8 @@ class SaleExport implements FromCollection,WithHeadings,WithMapping,WithColumnWi
             $sale->client->name,
             $productNames,
             $sale->sale_date,
+            $sale->document_type,
+            $sale->document_number,
             $sale->total,
             $sale->status,
         ];
@@ -52,9 +56,11 @@ class SaleExport implements FromCollection,WithHeadings,WithMapping,WithColumnWi
         return [
             'B' => 30, // Columna 'Cliente'
             'C' => 50, // Columna 'Producto'
-            'D' => 10, // Columna 'fecha'
-            'E' => 9, // Columna 'total'
-            'F' => 9, // Columna 'Estado'
+            'D' => 17, // Columna 'fecha'
+            'E' => 19, // Columna 'Tipo de comprobante'
+            'F' => 22, // Columna 'Numero de comprobante'
+            'G' => 9, // Columna 'total'
+            'H' => 9, // Columna 'Estado'
         ];
     }
 }

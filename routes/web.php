@@ -68,12 +68,8 @@ Route::resource('users', UserController::class)->names('users');
 
 Route::resource('roles', RoleController::class)->names('roles');
 
-
-// Route::get('cash_closing/create', [CashClosingController::class, 'create'])->name('cash_closing.create');
-// Route::post('cash_closing', [CashClosingController::class, 'store'])->name('cash_closing.store');
-// Route::get('cashclosing', [CashClosingController::class, 'index'])->name('cashclosing.index');
-Route::resource('cashclosing', CashClosingController::class)->names('cashclosing');
 Route::resource('cashopening', CashOpeningController::class)->names('cashopening');
+Route::resource('cashclosing', CashClosingController::class)->names('cashclosing');
 
 
 

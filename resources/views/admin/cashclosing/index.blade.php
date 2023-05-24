@@ -1,12 +1,11 @@
 @extends('layouts.admin')
-@section('title','Cierre de caja')
+@section('title', 'Cierre de Caja')
 @section('styles')
-
 <style type="text/css">
     .unstyled-button {
         border: none;
         padding: 0;
-        background:none;
+        background: none;
     }
 </style>
 @endsection
@@ -15,16 +14,15 @@
 @section('preference')
 @endsection
 @section('content')
-
 <div class="content-wrapper">
     <div class="page-header">
         <h3 class="page-title">
-            Cierre de caja
+            Cierre de Caja
         </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Panel administrador</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Cierre de caja</li>
+                <li class="breadcrumb-item active" aria-current="page">Cierre de Caja</li>
             </ol>
         </nav>
     </div>
@@ -32,44 +30,34 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
+
                     <div class="table-responsive">
-                        <table id="cashclosing_listing" class="table">
+                        <table id="cash_closing_listing" class="table">
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Fecha</th>
-                                    <th>Caja inicial</th>
-                                    <th>Ventas</th>
-                                    <th>Gastos</th>
-                                    <th>Caja final</th>
+                                    <th>Tipo</th>
+                                    <th>Usuario</th>
+                                    <th>Fecha de Cierre</th>
+                                    <th>Hora de Cierre</th>
+                                    <th>Dinero en Caja</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($cashclosings as $cashclosing)
+                                @foreach ($cashClosings as $cashClosing)
                                 <tr>
-                                    <th scope="row">{{$cashclosing->id}}</th>
-                                    <td>{{$cashclosing->closing_date}}</td>
-                                    <td>{{$cashclosing->initial_cash}}</td>
-                                    <td>{{$cashclosing->sales}}</td>
-                                    <td>{{$cashclosing->expenses}}</td>
-                                    <td>{{$cashclosing->final_cash}}</td>
+                                    <th scope="row">{{ $cashClosing->id }}</th>
+                                    <td>{{ $cashClosing->type }}</td>
+                                    <td>{{ $cashClosing->user->name }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($cashClosing->closings_date)->format('d-m-Y') }}</td>
+                                    <td>{{ $cashClosing->closings_hour }}</td>
+                                    <td>{{ $cashClosing->cash }}</td>
                                     <td style="width: 20%;">
-                                        {!! Form::open(['route'=>['cashclosings.destroy',
-                                        $cashclosing], 'method'=>'DELETE']) !!}
-                                        <a href="{{route('cashclosings.show',$cashclosing)}}" class="btn btn-outline-info"
-                                            title="Ver detalles">
-                                            <i class="far fa-eye"></i>
-                                        </a>
-                                        <a href="{{route('cashclosings.edit',$cashclosing)}}" class="btn btn-outline-success"
-                                            title="Editar">
-                                            <i class="far fa-edit"></i>
-                                        </a>
-                                        <button class="btn btn-outline-danger"
-                                            type="submit" title="Eliminar">
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-                                        {!! Form::close() !!}
+
+                                    <a href="{{route('cashclosing.show', $cashClosing)}}" class="btn btn-outline-info"
+                                         title="Ver detalles"><i class="far fa-eye"></i></a>
+
                                     </td>
                                 </tr>
                                 @endforeach
@@ -87,7 +75,7 @@
 <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.bootstrap4.min.js"></script>
 <script>
     $(document).ready(function() {
-        var table = $('#cashclosing_listing').DataTable({
+        var table = $('#cash_closing_listing').DataTable({
             responsive: true,
             order: [[ 0, "desc" ]],
             language: {
@@ -99,10 +87,10 @@
 			"<'row'<'col-sm-5'i><'col-sm-7'p>>", 
             buttons: [
                 {
-                    text: '<i class="fas fa-plus"></i> Nuevo cierre',
+                    text: '<i class="fas fa-plus"></i> Nuevo Cierre de Caja',
                     className: 'btn btn-info',
-                    action: function ( e, dt, node, conf ) {
-                        window.location.href = "{{route('cashclosing.create')}}"
+                    action: function (e, dt, node, conf) {
+                        window.location.href = "{{ route('cashclosing.create') }}"
                     }
                 }
             ]

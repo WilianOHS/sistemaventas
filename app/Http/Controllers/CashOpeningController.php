@@ -12,8 +12,9 @@ class CashOpeningController extends Controller
 {
     public function index()
     {
-        $currentDate = Carbon::now()->toDateString();
-    
+        // Obtener la fecha actual de El Salvador
+        $currentDate = Carbon::now('America/El_Salvador')->toDateString();
+     
         $cashOpening = CashOpening::where('date', $currentDate)->first();
     
         if (!$cashOpening) {
@@ -22,7 +23,9 @@ class CashOpeningController extends Controller
             ]);
         }
     
-        $totalSales = Sale::whereDate('sale_date', $cashOpening->date)->sum('total');
+        $totalSales = Sale::whereDate('sale_date', $cashOpening->date)
+                  ->where('status', 'valid')
+                  ->sum('total');
         
         $subtotal = $cashOpening->opening_balance + $totalSales + $cashOpening->income;
         $totalCash = $subtotal - $cashOpening->voucher;
@@ -33,7 +36,8 @@ class CashOpeningController extends Controller
 
     public function store(Request $request)
     {
-        $currentDate = Carbon::now()->toDateString();
+        // Obtener la fecha actual de El Salvador
+        $currentDate = Carbon::now('America/El_Salvador')->toDateString();
     
         $cashOpening = CashOpening::where('date', $currentDate)->first();
     
@@ -68,7 +72,9 @@ class CashOpeningController extends Controller
 
     public function closeCashRegister(Request $request, CashOpening $cashOpening)
     {
-        $currentDate = Carbon::now()->toDateString();
+          // Obtener la fecha actual de El Salvador
+          $currentDate = Carbon::now('America/El_Salvador')->toDateString();
+
         $closingBalance = $request->input('closing_balance');
 
         $cashClosure = CashClosure::where('opening_id', $cashOpening->id)->first();

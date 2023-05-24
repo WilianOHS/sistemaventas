@@ -64,9 +64,9 @@
                             </th>
                             <td>{{$sale->client->name}}</td>  
                             <td>{{\Carbon\Carbon::parse($sale->sale_date)->format('d M y h:i a')}}</td>
-                            <td>$ {{$sale->total}}</td>  
+                            <td>$ {{$sale->total}}</td>
+                            <td>{{$sale->document_type}}</td>  
                             @if ($sale->status == 'VALID')
-                            <td>{{$sale->document_type}}</td>
                             <td>
                             <a class="jsgrid-button btn btn-success" href="
                                 {{route('change.status.sales',$sale)}}"

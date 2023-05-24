@@ -61,15 +61,14 @@
                                 <label for="date" class="col-md-4 col-form-label text-md-right">Fecha:</label>
 
                                 <div class="col-md-6">
-                                    <input id="date" type="text" class="form-control" name="date" value="{{ $currentDate }}" readonly>
+                                    <input id="date" type="text" class="form-control" name="date" value="{{ Carbon\Carbon::parse($currentDate)->format('d-m-Y') }}" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Guardar
-                                    </button>
+                                    <button type="submit" class="btn btn-primary" id="saveBtn">Guardar</button>
+
                                 </div>
                             </div>
                         {!! Form::close() !!}
@@ -81,7 +80,7 @@
                         <table class="table">
                             <tr>
                                 <th>Fecha:</th>
-                                <td>{{ $cashOpening->date }}</td>
+                                <td>{{ Carbon\Carbon::parse($cashOpening->date)->format('d-m-Y') }}</td>
                             </tr>
                             <tr>
                                 <th>Monto de apertura:</th>
@@ -107,34 +106,35 @@
                                 <th>Total caja:</th>
                                 <td>$ {{ $totalCash }}</td>
                             </tr>
-                            </table>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
-<!-- Modal de confirmación -->
-<div class="modal fade" id="confirmChangeModal" tabindex="-1" role="dialog" aria-labelledby="confirmChangeModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmChangeModalLabel">Confirmar Cambio de Monto de Apertura</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>¿Estás seguro de que deseas cambiar el monto de apertura?</p>
-            </div>
-                    <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="confirmChangeBtn">Aceptar</button>
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="confirmChangeModal" tabindex="-1" role="dialog" aria-labelledby="confirmChangeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmChangeModalLabel">Confirmar Cambio de Monto de Apertura</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas cambiar el monto de apertura?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="confirmChangeBtn" data-dismiss="modal">Aceptar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
+
 @section('scripts')
 <script>
     document.getElementById('opening_balance').addEventListener('change', function() {
@@ -146,10 +146,7 @@
     });
 
     document.getElementById('confirmChangeBtn').addEventListener('click', function() {
-        // Acciones a realizar al confirmar el cambio del monto de apertura
-        // Por ejemplo, enviar el formulario
-        document.querySelector('form').submit();
+        document.getElementById('saveBtn').click();
     });
 </script>
-
 @endsection

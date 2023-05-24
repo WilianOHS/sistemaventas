@@ -16,19 +16,27 @@ class CreateCashClosingsTable extends Migration
         Schema::create('cash_closings', function (Blueprint $table) {
             $table->id();
             $table->string('type');
+            $table->integer('user_id');
+            $table->integer('cashopening_id');
             $table->dateTime('closings_date');
-            $table->integer('tickets');
-            $table->integer('invoices');
-            $table->integer('tax_credits');
-            $table->decimal('initial_balance', 8, 2);
-            $table->decimal('income', 8, 2);
-            $table->integer('vouchers');
-            $table->decimal('cash_payments', 8, 2);
-            $table->decimal('card_payments', 8, 2);
+            $table->string('closings_hour');
             $table->decimal('cash', 8, 2);
-            $table->decimal('difference', 8, 2);
+            $table->integer('start_ticket');
+            $table->integer('end_ticket');
+            $table->integer('start_invoice');
+            $table->integer('end_invoice');
+            $table->integer('start_tax_credit');
+            $table->integer('end_tax_credit');
+            $table->decimal('initial_balance', 10, 2);
+            $table->decimal('daily_sales', 10, 2);
+            $table->decimal('income', 10, 2);
+            $table->decimal('vouchers', 10, 2);
+            $table->decimal('cash_sales', 10, 2);
+            $table->decimal('card_sales', 10, 2);
             $table->timestamps();
         });
+        
+        
     }
 
     /**

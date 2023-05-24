@@ -2,56 +2,175 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\CashClosing;
+use App\Sale;
+use App\User;
+use App\CashOpening;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Http\Requests\CashClosing\StoreRequest;
+use App\Http\Requests\CashClosing\UpdateRequest;
 
 class CashClosingController extends Controller
 {
-    // Método para mostrar el formulario de cierre de caja
-    public function create()
-    {
-        return view('admin.cash_closing.create');
-    }
-
-    // Método para procesar el formulario de cierre de caja
-    public function store(Request $request)
-    {
-        // Validar datos del formulario
-        $validatedData = $request->validate([
-            'initial_balance' => 'required|numeric',
-            'income' => 'required|numeric',
-            'vouchers' => 'required|integer',
-            'cash_payments' => 'required|numeric',
-            'card_payments' => 'required|numeric',
-            'cash' => 'required|numeric',
-            'difference' => 'required|numeric',
-        ]);
-
-        // Crear registro de cierre de caja
-        $cashClosing = new \App\Models\CashClosing();
-        $cashClosing->initial_balance = $request->input('initial_balance');
-        $cashClosing->income = $request->input('income');
-        $cashClosing->vouchers = $request->input('vouchers');
-        $cashClosing->cash_payments = $request->input('cash_payments');
-        $cashClosing->card_payments = $request->input('card_payments');
-        $cashClosing->cash = $request->input('cash');
-        $cashClosing->difference = $request->input('difference');
-        $cashClosing->save();
-
-        // Redirigir a la página de cierre de caja con un mensaje de éxito
-        return redirect()->route('cash_closing.index')->with('success', 'El cierre de caja se ha registrado exitosamente.');
-    }
-
-    // Método para mostrar el historial de cierres de caja
     public function index()
     {
-        // Obtener todos los registros de cierre de caja
-        //$cashClosings = \App\Models\CashClosing::orderBy('created_at', 'desc')->paginate(10);
-        $cashclosings = CashClosing::get();
+        // Obtener todas las ventas
+        $sales = Sale::get();
 
-        // Mostrar la vista con el historial de cierres de caja
-        //return view('cash_closing.index', ['cashClosings' => $cashClosings]);
-        
-        return view('admin.cashclosing.index',compact('cashclosings'));
+        // Obtener todos los usuarios
+        $users = User::get();
+
+        // Obtener todos los registros de apertura de caja
+        $cashOpenings = CashOpening::get();
+
+        // Obtener todos los cierres de caja
+        $cashClosings = CashClosing::get();
+
+        return view('admin.cashclosing.index', compact('sales', 'users', 'cashOpenings', 'cashClosings'));
     }
+
+    public function create()
+    {
+        // Obtener la fecha actual en formato Y-m-d
+        $currentDate = Carbon::now('America/El_Salvador');
+        $closingsDate = $currentDate->format('Y-m-d');
+    
+        $totalSales = Sale::whereDate('created_at', $currentDate)
+                  ->where('status', 'valid')
+                  ->sum('total');
+    
+        // Obtener el registro de apertura de caja más reciente
+        $cashOpening = CashOpening::latest()->first();
+    
+        // Verificar si existe un registro de apertura de caja
+        if ($cashOpening) {
+            $voucher = $cashOpening->voucher;
+            $income = $cashOpening->income;
+        } else {
+            $voucher = 0;
+            $income = 0;
+        }
+    
+        // Obtener la hora actual en formato h:i A (con AM/PM)
+        $closingsHour = $currentDate->format('h:i A');
+    
+        // Obtener la primera factura del día o asignar 0 si no existe
+        $firstInvoice = Sale::where('document_type', 'Factura')
+            ->whereDate('created_at', $closingsDate)
+            ->orderBy('document_number', 'asc')
+            ->first() ?? 0;
+    
+        // Obtener el primer ticket del día o asignar 0 si no existe
+        $firstTicket = Sale::where('document_type', 'Ticket')
+            ->whereDate('created_at', $closingsDate)
+            ->orderBy('document_number', 'asc')
+            ->first() ?? 0;
+    
+        // Obtener el primer crédito fiscal del día o asignar 0 si no existe
+        $firstTaxCredit = Sale::where('document_type', 'Crédito Fiscal')
+            ->whereDate('created_at', $closingsDate)
+            ->orderBy('document_number', 'asc')
+            ->first() ?? 0;
+    
+        // Obtener la última factura del día o asignar 0 si no existe
+        $lastInvoice = Sale::where('document_type', 'Factura')
+            ->whereDate('created_at', $closingsDate)
+            ->orderBy('document_number', 'desc')
+            ->first() ?? 0;
+    
+        // Obtener el último ticket del día o asignar 0 si no existe
+        $lastTicket = Sale::where('document_type', 'Ticket')
+            ->whereDate('created_at', $closingsDate)
+            ->orderBy('document_number', 'desc')
+            ->first() ?? 0;
+    
+        // Obtener el último crédito fiscal del día o asignar 0 si no existe
+        $lastTaxCredit = Sale::where('document_type', 'Crédito Fiscal')
+            ->whereDate('created_at', $closingsDate)
+            ->orderBy('document_number', 'desc')
+            ->first() ?? 0;
+    
+        // Obtener la fecha actual en la zona horaria de El Salvador
+        $currentDate = Carbon::now('America/El_Salvador')->format('Y-m-d');
+    
+        // Obtener la suma de ventas en efectivo del día actual
+        $sumCashSales = Sale::where('payment_method', 'Efectivo')
+            ->whereDate('created_at', $currentDate)
+            ->sum('total');
+    
+        // Obtener la suma de ventas en tarjeta del día actual
+        $sumCardSales = Sale::where('payment_method', 'Tarjeta')
+            ->whereDate('created_at', $currentDate)
+            ->sum('total');
+    
+        // Obtener todas las ventas
+        $sales = Sale::get();
+    
+        // Obtener todos los usuarios
+        $users = User::get();
+    
+        return view('admin.cashclosing.create', compact(
+            'sales',
+            'users',
+            'cashOpening',
+            'closingsDate',
+            'closingsHour',
+            'firstInvoice',
+            'firstTicket',
+            'firstTaxCredit',
+            'lastInvoice',
+            'lastTicket',
+            'lastTaxCredit',
+            'sumCashSales',
+            'sumCardSales',
+            'totalSales',
+            'voucher',
+            'income',
+        ));
+    }
+    
+    
+
+    public function store(StoreRequest $request)
+    {
+        $currentDate = Carbon::now('America/El_Salvador')->format('Y-m-d');
+        $cashOpening = CashOpening::where('date', $currentDate)
+            ->first();
+    
+        // Crear el registro de cierre de caja
+        $cashClosing = CashClosing::create($request->all()+ [
+            'user_id'=>Auth::user()->id,
+            'cashopening_id' => $cashOpening->id, // Agregar el ID de CashOpening
+            'closings_date' => Carbon::now('America/El_Salvador'),
+        ]);
+    
+    
+        return redirect()->route('cashclosing.index');
+    }
+    
+    public function show(CashClosing $cashclosing)
+    {
+        $currentDate = Carbon::now('America/El_Salvador')->format('Y-m-d');
+        $totalSales = $cashclosing->daily_sales;
+        $cashOpening = $cashclosing->initial_balance;
+    
+        $subtotal = $cashclosing->initial_balance + $totalSales + $cashclosing->income;
+        $cashTotal = $subtotal - $cashclosing->vouchers;
+    
+        $totalCashSales = $cashclosing->cash_sales;
+    
+        $totalCardSales = $cashclosing->card_sales;
+    
+        $sale = $totalCashSales + $totalCardSales;
+    
+        $difference = $cashclosing->cash - $cashTotal;
+    
+        return view('admin.cashclosing.show', compact('cashclosing', 'cashOpening', 'totalSales', 'subtotal', 'cashTotal', 'totalCashSales', 'totalCardSales', 'sale', 'difference'));
+    }
+    
+    
+    
+    
 }
