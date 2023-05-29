@@ -1,8 +1,8 @@
 @extends('layouts.admin')
- @section('title','Registro de usuario')
- @section('styles')
- @endsection
- @section('options')
+@section('title', 'Registro de usuario')
+@section('styles')
+@endsection
+@section('options')
 @endsection
 @section('preference')
 @endsection
@@ -21,25 +21,28 @@
         </nav>
     </div>
     <div class="row">
-            <div class="col-lg-12 grid-margin stretch-card">
-              <div class="card">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
                 <div class="card-body">
-                  
                     <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Registro de usuario</h4>    
+                        <h4 class="card-title">Registro de usuario</h4>
                     </div>
                     {!! Form::open(['route'=>'users.store','method'=>'POST']) !!}
                     <div class="form-group">
-                    <label for="name">Nombre</label>
-                    <input type="text" name="name" id="name" class="form-control" placeholder="" aria-describedby="helpId">
+                        <label for="name">Nombre</label>
+                        <input type="text" name="name" id="name" class="form-control" placeholder="" aria-describedby="helpId">
                     </div>
                     <div class="form-group">
-                    <label for="username">Nombre de Usuario</label>
-                    <input type="text" name="username" id="username" class="form-control" placeholder="" aria-describedby="helpId">
+                        <label for="username">Nombre de Usuario</label>
+                        <input type="text" name="username" id="username" class="form-control" placeholder="" aria-describedby="helpId">
                     </div>
                     <div class="form-group">
-                    <label for="password">Contraseña</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="" aria-describedby="helpId">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="" aria-describedby="helpId">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="" aria-describedby="helpId">
                     </div>
                     @include('admin.user._form')
                     <button type="submit" class="btn btn-primary mr-2">Registrar</button>
@@ -48,13 +51,10 @@
                     </a>
                     {!! Form::close() !!}
                 </div>
-
-
-
             </div>
         </div>
     </div>
-</div>            
+</div>
 @endsection
 @section('scripts')
 {!! Html::script('melody/js/data-table.js') !!}

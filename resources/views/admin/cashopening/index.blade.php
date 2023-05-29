@@ -92,11 +92,11 @@
                             </tr>
                             <tr>
                                 <th>(+) Ventas totales:</th>
-                                <td>$ {{ $totalSales }}</td>
+                                <td>$ {{ number_format($totalSales, 2) }}</td>
                             </tr>
                             <tr>
                                 <th>Subtotal:</th>
-                                <td>$ {{ $subtotal }}</td>
+                                <td>$ {{ number_format($subtotal, 2) }}</td>
                             </tr>
                             <tr>
                                 <th>(-) Vales:</th>
@@ -104,7 +104,7 @@
                             </tr>
                             <tr>
                                 <th>Total caja:</th>
-                                <td>$ {{ $totalCash }}</td>
+                                <td>$ {{ number_format($totalCash, 2) }}</td>
                             </tr>
                         </table>
                     </div>

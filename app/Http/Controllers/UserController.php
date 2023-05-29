@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Sale;
+use App\Purchase;
 use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Support\Facades\Hash;
 
@@ -37,7 +39,10 @@ class UserController extends Controller
     }
     public function show(User $user)
     {
-        return view('admin.user.show',compact('user'));
+        $sales = Sale::where('user_id', $user->id)->get(); // Obtener las ventas del usuario actual
+        $purchases = Purchase::where('user_id', $user->id)->get(); // Obtener las compras del usuario actual
+    
+        return view('admin.user.show', compact('user', 'sales', 'purchases'));
     }
     public function edit(User $user)
     {

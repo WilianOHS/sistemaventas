@@ -21,6 +21,9 @@ class CreateBusinessesTable extends Migration
             $table->string('mail');
             $table->string('address');
             $table->string('nit');
+            $table->string('number');
+            $table->string('business_sector');
+            $table->string('message');
             $table->timestamps();
         });
     }

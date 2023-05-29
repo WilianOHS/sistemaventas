@@ -71,6 +71,10 @@ Route::resource('roles', RoleController::class)->names('roles');
 Route::resource('cashopening', CashOpeningController::class)->names('cashopening');
 Route::resource('cashclosing', CashClosingController::class)->names('cashclosing');
 
+Route::get('/forgot-password', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('/reset-password/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('/reset-password', 'Auth\ResetPasswordController@reset')->name('password.update');
 
 
 

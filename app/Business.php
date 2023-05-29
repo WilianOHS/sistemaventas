@@ -13,6 +13,9 @@ class Business extends Model
         'mail',
         'address',
         'nit',
+        'number',
+        'business_sector',
+        'message'
     ];
     
 }

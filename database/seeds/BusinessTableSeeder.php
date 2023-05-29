@@ -19,6 +19,9 @@ class BusinessTableSeeder extends Seeder
             'mail'=>'Ejemplo@gmail.com',
             'address'=>'Direccion de la empresa',
             'nit'=>'11111111111111',
+            'number'=>'0000-0000',
+            'business_sector'=>'Giro',
+            'message'=>'Mensaje',
         ]);
     }
 }

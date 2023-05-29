@@ -31,94 +31,72 @@
 <div class="content-wrapper">
     <div class="page-header">
         <h3 class="page-title">
-        Panel administrador
+            Panel administrador
         </h3>
     </div>
-
-    <!-- <h1>Filtrar gráfico por fechas</h1>
-  <form>
-    <label for="fecha-inicio">Fecha de inicio:</label>
-    <input type="date" id="fecha-inicio" name="fecha-inicio">
-    <label for="fecha-fin">Fecha de fin:</label>
-    <input type="date" id="fecha-fin" name="fecha-fin">
-    <button type="button" onclick="filtrar()">Filtrar</button>
-    <button type="button" onclick="restablecer()">Restablecer</button>
-  </form>
-  <canvas id="grafico"></canvas> -->
-
-
-    
-
     <div class="row">
-            <div class="col-lg-12 grid-margin stretch-card">
-              <div class="card">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
                 <div class="card-body">
-                  
-                    
+
                     @foreach ($totales as $total)
                     <div class="row">
-                      <div class="col-lg-6 col-xs-6">
-                        <div class="card text-white bg-success">
-                          <div class="card-body pb-0">
-                            <div class="float-right">
-                              <i class="fas fa-cart-arrow-down fa-4x"></i>
+                        <div class="col-lg-6 col-xs-6">
+                            <div class="card text-white bg-success">
+                                <div class="card-body pb-0">
+                                    <div class="float-right">
+                                        <i class="fas fa-cart-arrow-down fa-4x"></i>
+                                    </div>
+                                    <div class="text-value h4"><strong>USD {{$total->totalcompra}} (Día actual)</strong></div>
+                                    <div class="h4">Compras</div>
+                                </div>
+                                <div class="chart-wrapper mt-3 mx-3" style="height: 35px;">
+                                    <a href="{{route('purchases.index')}}" class="small-box-footer h4">Compras <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
                             </div>
-                            <div class="text-value h4"><strong>USD {{$total->totalcompra}} (Día actual)</strong>
+                        </div>
+
+                        <div class="col-lg-6 col-xs-6">
+                            <div class="card text-white bg-info">
+                                <div class="card-body pb-0">
+
+                                    <div class="float-right">
+                                        <i class="fas fa-shopping-cart fa-4x"></i>
+                                    </div>
+
+                                    <div class="text-value h4"><strong>USD {{$total->totalventa}} (Día actual)</strong></div>
+                                    <div class="h4">Ventas</div>
+                                </div>
+                                <div class="chart-wrapper mt-3 mx-3" style="height: 35px;">
+                                    <a href="{{route('sales.index')}}" class="small-box-footer h4">Ventas <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
                             </div>
-                            <div class="h4">Compras</div>
-                          </div>
-                          <div class="chart-wrapper mt-3 mx-3" style="height: 35px;">
-                            <a href="{{route('purchases.index')}}" class="small-box-footer h4">Compras <i class="fa fa-arrow-circle-right"></i></a>
-                          </div>
                         </div>
-                      </div>
-                    
-                  <div class="col-lg-6 col-xs-6">
-                    <div class="card text-white bg-info">
-                      <div class="card-body pb-0">
-
-                        <div class="float-right">
-                          <i class="fas fa-shopping-cart fa-4x"></i>
-                        </div>
-
-
-                        <div class="text-value h4"><strong>USD {{$total->totalventa}} (Día actual)</strong>
-                        </div>
-                        <div class="h4">Ventas</div>
-                      </div>
-                      <div class="chart-wrapper mt-3 mx-3" style="height: 35px;">
-                        <a href="{{route('sales.index')}}" class="small-box-footer h4">Ventas <i class="fa fa-arrow-circle-right"></i></a>
-                      </div>
                     </div>
-                  </div>
-                </div>
-                </div>
                     @endforeach
-                    
-
 
                 </div>
             </div>
         </div>
-    
-        <div class="row">
+    </div>
+
+    <div class="row">
         <div class="col-md-6">
             <div class="card card-chart">
                 <div class="card-header">
                     <h4 class="text-center">Compras - Meses</h4>
                 </div>
-                    <div class="card-content">
-                      <div class="ct-chart">
+                <div class="card-content">
+                    <div class="ct-chart">
                         <label for="fecha-inicio">Fecha de inicio:</label>
                         <input type="month" id="fecha-inicio" name="fecha-inicio">
                         <label for="fecha-fin">Fecha de fin:</label>
                         <input type="month" id="fecha-fin" name="fecha-fin">
                         <button id="filtrar">Filtrar</button>
-                    <button id="resetear">Resetear gráfico</button>
-                    <div id="miDiv"><canvas id="grafico"></canvas></div>
-                      <div><canvas id="compras"></canvas></div>
-                      </div>
+                        <button id="resetear">Resetear gráfico</button>
+                        <div id="miDiv"><canvas id="grafico"></canvas></div>
                     </div>
+                </div>
             </div>
         </div>
         <div class="col-md-6">
@@ -126,19 +104,17 @@
                 <div class="card-header">
                     <h3 class="text-center">Ventas - Meses</h3>
                 </div>
-                    <div class="card-content">                  
-                    
-                      <div class="ct-chart">
-                      <label for="fecha-inicio2">Fecha de inicio:</label>
+                <div class="card-content">
+                    <div class="ct-chart">
+                        <label for="fecha-inicio2">Fecha de inicio:</label>
                         <input type="month" id="fecha-inicio2" name="fecha-inicio2">
                         <label for="fecha-fin2">Fecha de fin:</label>
                         <input type="month" id="fecha-fin2" name="fecha-fin2">
                         <button id="filtrar2">Filtrar</button>
-                    <button id="resetear2">Resetear gráfico</button>
-                    <div id="miDiv2"><canvas id="grafico2"></canvas></div> 
-                      <div><canvas id="ventas"></canvas></div>                    
-                      </div>
+                        <button id="resetear2">Resetear gráfico</button>
+                        <div id="miDiv2"><canvas id="grafico2"></canvas></div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
@@ -149,19 +125,14 @@
                 <div class="card-header">
                     <h4 class="text-center">Ventas diarias</h4>
                 </div>
-                    <!-- <div class="card-content">
-                      <div class="ct-chart">
-                      <canvas id="ventas_diarias" height="100">
-                      </canvas>
-                      </div>
-                    </div> -->
-                    <div class="chartCard">
-      <div class="chartBox">
-        <canvas id="ventas_diarias" height="100"></canvas>
-        Fecha Inicio: <input id="start" type="date"> Fecha Fin: <input id="end" type="date"> <button onclick="filterDate()"><i class="fa fa-filter"></i>Filtrar</button>
-        <button onclick="resetDate()"><i class="fa fa-refresh"></i>Resetear</button>
-      </div>   
-    </div>
+                <div class="chartCard">
+                    <div class="chartBox">
+                        <canvas id="ventas_diarias" height="100"></canvas>
+                        Fecha Inicio: <input id="start" type="date"> Fecha Fin: <input id="end" type="date">
+                        <button onclick="filterDate()"><i class="fa fa-filter"></i>Filtrar</button>
+                        <button onclick="resetDate()"><i class="fa fa-refresh"></i>Resetear</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -169,102 +140,71 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card card-chart">
-            <div class="card-header">
-  <h4 class="text-center">Productos mas vendidos</h4>
-</div>
-<div class="card-content">
-  <div class="ct-chart">
-    <label for="fecha_inicioP">Fecha de inicio:</label>
-    <input type="date" id="fecha_inicioP">
-
-    <label for="fecha_finP">Fecha de fin:</label>
-    <input type="date" id="fecha_finP">
-    <button onclick="filtrarP()">Filtrar</button>
-
-    <canvas id="productosmasvendidos"></canvas>
-  </div>
-</div>
-                <!-- <div class="card-header">
+                <div class="card-header">
                     <h4 class="text-center">Productos mas vendidos</h4>
                 </div>
-                    <div class="card-content">
-                      <div class="ct-chart">
-                      <label for="fecha_inicioP">Fecha de inicio:</label>
-                      <input type="date" id="fecha_inicioP">
-
-                      <label for="fecha_finP">Fecha de fin:</label>
-                      <input type="date" id="fecha_finP">
-                      <button onclick="filtrarP()">Filtrar</button>
-
-                      <canvas id="productosmasvendidos">
-                      
-
-                      </canvas>
-                      </div>
-                    </div> -->
-
+                <div class="card-content">
+                    <div class="ct-chart">
+                        <label for="fecha_inicioP">Fecha de inicio:</label>
+                        <input type="date" id="fecha_inicioP">
+                        <label for="fecha_finP">Fecha de fin:</label>
+                        <input type="date" id="fecha_finP">
+                        <button onclick="filtrarP()">Filtrar</button>
+                        <canvas id="productosmasvendidos"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <div class="card-heading">
-                            <h4 class="card-title">Productos más vendidos </h4>
+                            <h4 class="card-title">Productos más vendidos</h4>
                         </div>
                     </div>
                     <div class="card-body scrollbar scroll_dark pt-0" style="max-height:350px;">
-                    <div class="datatable-wrapper table-responsive">
-                        <table class="table table-borderless table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th>Nombre</th>
-                                    <th>Código</th>
-                                    <th>Stock</th>
-                                    <th>Cantidad vendida</th>
-                                    <th>Ver detalles</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($productosvendidos as $productosvendido)
-                                <tr>
-                                    <td>{{$productosvendido->id}}</td>
-                                    <td>{{$productosvendido->name}}</td>
-                                    <td>{{$productosvendido->code}}</td>
-                                    <td><strong>{{$productosvendido->stock}}</strong> Unidades</td>
-                                    <td><strong>{{$productosvendido->quantity}}</strong> Unidades</td>
-                                    <td>
-                                        <a class="btn btn-primary" href="{{route('products.show',$productosvendido->id)}}">
-                                            <i class="far fa-eye"></i>
-                                            Ver detalles
-                                        </a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        <div class="datatable-wrapper table-responsive">
+                            <table class="table table-borderless table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th>Nombre</th>
+                                        <th>Código</th>
+                                        <th>Stock</th>
+                                        <th>Cantidad vendida</th>
+                                        <th>Ver detalles</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($productosvendidos as $productosvendido)
+                                    <tr>
+                                        <td>{{$productosvendido->id}}</td>
+                                        <td>{{$productosvendido->name}}</td>
+                                        <td>{{$productosvendido->code}}</td>
+                                        <td><strong>{{$productosvendido->stock}}</strong> Unidades</td>
+                                        <td><strong>{{$productosvendido->quantity}}</strong> Unidades</td>
+                                        <td>
+                                            <a class="btn btn-primary" href="{{route('products.show',$productosvendido->id)}}">
+                                                <i class="far fa-eye"></i>
+                                                Ver detalles
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    </div>
-                    
+
                 </div>
             </div>
         </div>
     </div>
-    
-
-    
-   
-
 </div>     
-
-
-
-               
-
 @endsection
 @section('scripts')
 {!! Html::script('melody/js/data-table.js') !!}

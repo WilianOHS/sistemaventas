@@ -14,16 +14,18 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         Role::create([
-            'name'=>'Admin',
-            'slug'=>'admin',
-            'special'=>'all-access',
+            'name' => 'Admin',
+            'slug' => 'admin',
+            'special' => 'all-access',
         ]);
 
         $user = User::create([
-            'name'=>'Admin',
-            'username'=>'Administrador',
-            'password'=>'$2y$10$CCxTjZnh63qEfajMa.iyQeOiw5ncj/Jc5gFgR5qpbZ3sJ4dWu2XUW',
+            'name' => 'Admin',
+            'username' => 'admin', 
+            'email' => 'admin@admin.com',
+            'password' => '$2y$10$CCxTjZnh63qEfajMa.iyQeOiw5ncj/Jc5gFgR5qpbZ3sJ4dWu2XUW',
         ]);
         $user->roles()->sync(1);
     }
 }
+

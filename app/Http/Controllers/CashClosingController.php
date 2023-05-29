@@ -37,9 +37,9 @@ class CashClosingController extends Controller
         $currentDate = Carbon::now('America/El_Salvador');
         $closingsDate = $currentDate->format('Y-m-d');
     
-        $totalSales = Sale::whereDate('created_at', $currentDate)
-                  ->where('status', 'valid')
-                  ->sum('total');
+        $totalSales = Sale::whereDate('sale_date', $closingsDate)
+        ->where('status', 'valid')
+        ->sum('total');
     
         // Obtener el registro de apertura de caja más reciente
         $cashOpening = CashOpening::latest()->first();
@@ -58,37 +58,37 @@ class CashClosingController extends Controller
     
         // Obtener la primera factura del día o asignar 0 si no existe
         $firstInvoice = Sale::where('document_type', 'Factura')
-            ->whereDate('created_at', $closingsDate)
+            ->whereDate('sale_date', $closingsDate)
             ->orderBy('document_number', 'asc')
             ->first() ?? 0;
     
         // Obtener el primer ticket del día o asignar 0 si no existe
         $firstTicket = Sale::where('document_type', 'Ticket')
-            ->whereDate('created_at', $closingsDate)
+            ->whereDate('sale_date', $closingsDate)
             ->orderBy('document_number', 'asc')
             ->first() ?? 0;
     
         // Obtener el primer crédito fiscal del día o asignar 0 si no existe
         $firstTaxCredit = Sale::where('document_type', 'Crédito Fiscal')
-            ->whereDate('created_at', $closingsDate)
+            ->whereDate('sale_date', $closingsDate)
             ->orderBy('document_number', 'asc')
             ->first() ?? 0;
     
         // Obtener la última factura del día o asignar 0 si no existe
         $lastInvoice = Sale::where('document_type', 'Factura')
-            ->whereDate('created_at', $closingsDate)
+            ->whereDate('sale_date', $closingsDate)
             ->orderBy('document_number', 'desc')
             ->first() ?? 0;
     
         // Obtener el último ticket del día o asignar 0 si no existe
         $lastTicket = Sale::where('document_type', 'Ticket')
-            ->whereDate('created_at', $closingsDate)
+            ->whereDate('sale_date', $closingsDate)
             ->orderBy('document_number', 'desc')
             ->first() ?? 0;
     
         // Obtener el último crédito fiscal del día o asignar 0 si no existe
         $lastTaxCredit = Sale::where('document_type', 'Crédito Fiscal')
-            ->whereDate('created_at', $closingsDate)
+            ->whereDate('sale_date', $closingsDate)
             ->orderBy('document_number', 'desc')
             ->first() ?? 0;
     
@@ -97,12 +97,12 @@ class CashClosingController extends Controller
     
         // Obtener la suma de ventas en efectivo del día actual
         $sumCashSales = Sale::where('payment_method', 'Efectivo')
-            ->whereDate('created_at', $currentDate)
+            ->whereDate('sale_date', $currentDate)
             ->sum('total');
     
         // Obtener la suma de ventas en tarjeta del día actual
         $sumCardSales = Sale::where('payment_method', 'Tarjeta')
-            ->whereDate('created_at', $currentDate)
+            ->whereDate('sale_date', $currentDate)
             ->sum('total');
     
         // Obtener todas las ventas

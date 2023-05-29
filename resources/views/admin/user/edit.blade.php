@@ -1,8 +1,8 @@
 @extends('layouts.admin')
- @section('title','Editar usuario')
- @section('styles')
- @endsection
- @section('options')
+@section('title', 'Editar usuario')
+@section('styles')
+@endsection
+@section('options')
 @endsection
 @section('preference')
 @endsection
@@ -21,30 +21,31 @@
         </nav>
     </div>
     <div class="row">
-            <div class="col-lg-12 grid-margin stretch-card">
-              <div class="card">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
                 <div class="card-body">
-                  
                     <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Editar usuario</h4>    
+                        <h4 class="card-title">Editar usuario</h4>
                     </div>
                     {!! Form::model($user,['route'=>['users.update',$user],'method'=>'PUT']) !!}
 
-                    
                     <div class="form-group">
-                    <label for="name">Nombre</label>
-                    <input type="text" name="name" id="name" value="{{$user->name}}" class="form-control" placeholder="" aria-describedby="helpId">
+                        <label for="name">Nombre</label>
+                        <input type="text" name="name" id="name" value="{{$user->name}}" class="form-control" placeholder="" aria-describedby="helpId">
                     </div>
                     <div class="form-group">
-                    <label for="username">Nombre de usuario</label>
-                    <input type="text" name="username" id="username" value="{{$user->username}}" class="form-control" placeholder="" aria-describedby="helpId">
+                        <label for="username">Nombre de usuario</label>
+                        <input type="text" name="username" id="username" value="{{$user->username}}" class="form-control" placeholder="" aria-describedby="helpId">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" name="email" id="email" value="{{$user->email}}" class="form-control" placeholder="" aria-describedby="helpId">
                     </div>
                     <!-- <div class="form-group">
-                    <label for="password">Contraseña</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="" aria-describedby="helpId">
-                    <small id="helpId" class="text-muted">Rellenar solo si desea cambiar la contraseña.</small>
+                        <label for="password">Contraseña</label>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="" aria-describedby="helpId">
+                        <small id="helpId" class="text-muted">Rellenar solo si desea cambiar la contraseña.</small>
                     </div> -->
-
 
                     @include('admin.user._form')
                     <button type="submit" class="btn btn-primary mr-2">Actualizar</button>
@@ -53,13 +54,10 @@
                     </a>
                     {!! Form::close() !!}
                 </div>
-
-
-
             </div>
         </div>
     </div>
-</div>            
+</div>
 @endsection
 @section('scripts')
 {!! Html::script('melody/js/data-table.js') !!}

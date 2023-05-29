@@ -7,41 +7,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\User;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-    }
-    public function username()
-    {
-        return 'username';
     }
 
     public function logout(Request $request)
@@ -54,4 +30,40 @@ class LoginController extends Controller
 
         return redirect('login');
     }
+
+    public function username()
+    {
+        $loginValue = request()->input('login');
+        $field = filter_var($loginValue, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        request()->merge([$field => $loginValue]);
+
+        return $field;
+    }
+
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        $errors = [$this->username() => trans('auth.failed')];
+
+        // Verificar si el usuario o correo electrónico existe en la base de datos
+        $userExists = $this->isEmailExists($request->input('login'));
+
+        if (!$userExists) {
+            $errors[$this->username()] = 'Usuario o correo electrónico incorrecto.';
+        } else {
+            $errors['password'] = 'Contraseña incorrecta.';
+        }
+
+        return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->withErrors($errors);
+    }
+
+    protected function isEmailExists($login)
+    {
+        return filter_var($login, FILTER_VALIDATE_EMAIL)
+            ? User::where('email', $login)->exists()
+            : User::where('username', $login)->exists();
+    }
 }
+

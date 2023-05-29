@@ -98,8 +98,10 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
+            'email' => 'auth.emails.password',
         ],
     ],
+    
 
     /*
     |--------------------------------------------------------------------------

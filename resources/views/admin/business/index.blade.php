@@ -61,12 +61,22 @@
                             {{$business->address}}
                         </p>
                         <hr>
-                        </div>
-                        <div class="form-group col-md-6">
                         <strong><i class="fas fa-address-card mr-1"></i>NIT</strong>
                         <p class="text-muted">{{$business->nit}}</p>
+                        <hr>
                         <strong><i class="fas fa-envelope mr-1"></i>Correo electrónico</strong>
                         <p class="text-muted">{{$business->mail}}</p>
+                        <hr>
+                        </div>
+                        <div class="form-group col-md-6">    
+                        <strong><i class="fas fa-mobile-alt mr-1"></i>Número de contacto</strong>
+                        <p class="text-muted">{{$business->number}}</p>
+                        <hr>
+                        <strong><i class="fas fa-industry mr-1"></i>Giro de la empresa</strong>
+                        <p class="text-muted">{{$business->business_sector}}</p>
+                        <hr>
+                        <strong><i class="fas fa-comment-alt mr-1"></i>Mensaje de despedida</strong>
+                        <p class="text-muted">{{$business->message}}</p>
                         <hr>
                         <div class="row">
                           <div class="col-md-6">
@@ -122,6 +132,22 @@
                           <div class="form-group">
                             <label for="nit">Número de NIT</label>
                             <input type="text" name="nit" id="nit" class="form-control" value="{{$business->nit}}" aria-describedby="helpId">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="number">Número de Teléfono</label>
+                            <input type="text" name="number" id="number" class="form-control" value="{{$business->number}}" aria-describedby="helpId">
+                          </div>
+
+
+                          <div class="form-group">
+                            <label for="business_sector">Giro</label>
+                            <input type="text" name="business_sector" id="business_sector" class="form-control" value="{{$business->business_sector}}" aria-describedby="helpId">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <input type="text" name="message" id="message" class="form-control" value="{{$business->message}}" aria-describedby="helpId">
                           </div>
 
                       <div class="card-body d-flex flex-column align-items-center">

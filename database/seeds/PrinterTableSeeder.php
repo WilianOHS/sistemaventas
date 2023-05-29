@@ -13,7 +13,7 @@ class PrinterTableSeeder extends Seeder
     public function run()
     {
         Printer::create([
-            'name'=>'Epson TM-T20II',
+            'name'=>'Epson TM-T20',
         ]);
     }
 }

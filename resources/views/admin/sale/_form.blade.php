@@ -10,36 +10,38 @@
 
 <hr>
 
-        <div class="form-row">
-            <label for="document_type">Tipo de comprobante:</label>
-            <select id="document_type" class="form-control" name="document_type">
-                <option value="Ticket">Ticket</option>
-                <option value="Factura">Factura</option>
-                <option value="credito_fiscal">Crédito Fiscal</option>
-            </select>
-        </div>
-        <input type="hidden" name="document_type_hidden" id="document_type_hidden">
 
+<div class="row">
+  <div class="col">
+    <div class="form-row">
+      <label for="payment_method">Método de Pago:</label>
+      <select id="payment_method" class="form-control" name="payment_method">
+        <option value="Efectivo">Efectivo</option>
+        <option value="Tarjeta">Tarjeta</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="col">
+    <div class="form-row">
+      <label for="document_type">Tipo de comprobante:</label>
+      <select id="document_type" class="form-control" name="document_type">
+        <option value="Ticket">Ticket</option>
+        <option value="Factura">Factura</option>
+        <option value="credito_fiscal">Crédito Fiscal</option>
+      </select>
+    </div>
+    <input type="hidden" name="document_type_hidden" id="document_type_hidden">
+  </div>
+  
+  <div class="col">
+    <div class="form-row">
+      <label for="document_number">Número de comprobante:</label>
+      <input type="number" class="form-control" name="document_number" id="document_number" aria-describedby="helpId">
+    </div>
+  </div>
+</div>
 
-<hr>
-
-
-        <div class="form-row">
-            <label for="payment_method">Método de Pago:</label>
-            <select id="payment_method" class="form-control"  name="payment_method">
-                <option value="Efectivo">Efectivo</option>
-                <option value="Tarjeta">Tarjeta</option>
-            </select>
-        </div>
-
-
-        <hr>
-
-        <div class="form-row">
-        <label for="document_number">Número de comprobante:</label>
-        <input type="number" class="form-control" name="document_number" id="document_number" aria-describedby="helpId">
-
-        </div>
 
 <hr>
 
