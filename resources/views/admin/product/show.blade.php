@@ -78,17 +78,6 @@
                           </span>
                         </p>
                       </div>
-                            <!-- <div class="border-bottom py-4">
-                                <div class="list-group">
-                                    <button type="button" class="list-group-item list-group-item-action active">
-                                        Sobre producto
-                                    </button>
-                                    <button type="button"
-                                        class="list-group-item list-group-item-action">Productos</button>
-                                    <button type="button" class="list-group-item list-group-item-action">Registrar
-                                        producto</button>
-                                </div>
-                            </div> -->
                             
                             @if ($product->status == 'ACTIVE')
                             <button class="btn btn-success btn-block">{{$product->status}}</button>
@@ -120,11 +109,6 @@
                                             {{$product->stock}}
                                         </p>
                                         <hr>
-                                        <!-- <strong><i class="fas fa-money-bill mr-1"></i> Precio de compra</strong>
-                                        <p class="text-muted">
-                                            {{$product->price}}
-                                        </p>
-                                        <hr> -->
                                         <strong><i class="fas fa-dollar-sign mr-1"></i> Precio de venta</strong>
                                         <p class="text-muted">
                                            $ {{$product->sale_price}}
@@ -156,6 +140,12 @@
                                         <strong><i class="fas fa-circle-notch"></i> Marca</strong>
                                         <p class="text-muted">
                                             {{$product->marca}}
+                                        </p>
+                                        <hr>
+                                        
+                                        <strong><i class="fas fa-envelope mr-1"></i> Código de barras</strong>
+                                        <p class="text-muted">
+                                            {!! DNS1D::getBarcodeHTML($product->code, 'EAN13'); !!}
                                         </p>
                                         <hr>
                                     </div>

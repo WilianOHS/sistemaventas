@@ -86,18 +86,7 @@ class SaleController extends Controller
        // $sale->delete();
         //return redirect()->route('sales.index');
     }
-    // public function pdf(Sale $sale)
-    // {
-    //     $subtotal = 0;
-    //     $saleDetails = $sale->saleDetails;
-    //     foreach ($saleDetails as $saleDetail){
-    //         $subtotal += $saleDetail->quantity * $saleDetail->price - (($saleDetail->quantity * $saleDetail->price)*($saleDetail->discount/100));
-    //     }
-        
-    // $pdf = PDF::loadView('admin.sale.pdf', compact('sale', 'subtotal', 'saleDetails'));
 
-    // return $pdf->download('Reporte_de_venta_'.$sale->id.'.pdf');
-    // }
     public function pdf(Sale $sale)
 {
     $subtotal = 0;
@@ -114,6 +103,47 @@ class SaleController extends Controller
     
 }
 
+public function ticket(Sale $sale)
+{
+    $subtotal = 0;
+    $saleDetails = $sale->saleDetails;
+    foreach ($saleDetails as $saleDetail){
+        $subtotal += $saleDetail->quantity * $saleDetail->price - (($saleDetail->quantity * $saleDetail->price)*($saleDetail->discount/100));
+    }
+    
+    // Obtener los datos del negocio relacionado con la venta actual
+    $business = Business::first(); // Puedes ajustar la consulta según tus necesidades
+    
+    // Convertir la fecha a un objeto Carbon
+    $saleDate = Carbon::parse($sale->sale_date);
+    
+    // try {
+    //     $printer_name = "Epson TM-T20"; // Reemplaza con el nombre de tu impresora
+    //     $connector = new WindowsPrintConnector($printer_name);
+    //     $printer = new Printer($connector);
+        
+    //     // Establecer los ajustes del formato de impresión
+    //     $printer->setJustification(Printer::JUSTIFY_CENTER);
+        
+    //     // Imprimir el contenido del ticket
+    //     $printer->text("Fecha: " . $saleDate->format('d/m/Y h:i A') . "\n");
+    //     $printer->text($business->name . "\n");
+    //     $printer->text($business->address . "\n");
+    //     $printer->text("Tel: " . $business->number . "\n");
+        
+    //     // ... Más contenido del ticket ...
+        
+    //     $printer->cut();
+    //     $printer->close();
+        
+        return view('admin.sale.ticket', compact('sale', 'saleDetails', 'subtotal', 'business', 'saleDate'));
+    // } catch (\Throwable $th) {
+    //     return redirect()->back();
+    // }
+}
+
+
+
 
     public function print(Sale $sale){
         try {
@@ -123,7 +153,7 @@ class SaleController extends Controller
             $subtotal += $saleDetail->quantity * $saleDetail->price - (($saleDetail->quantity * $saleDetail->price)*($saleDetail->discount/100));
             }
 
-            $printer_name = "TM20";
+            $printer_name = "Epson TM-T20";
 
             $connector = new WindowsPrintConnector($printer_name);
             $printer = new Printer($connector);

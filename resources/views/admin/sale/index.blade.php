@@ -92,6 +92,8 @@
                             title="Imprimir boleta"><i class="fas fa-print"></i></a>
                             <a href="{{route('sales.show', $sale)}}" class="btn btn-outline-info"
                             title="Ver detalles"><i class="far fa-eye"></i></a>
+                            <a href="{{route('sales.ticket', $sale)}}" class="btn btn-outline-danger"
+                            title="ticket"><i class="far fa-eye"></i></a>
                                    
                             </td>
                         </tr>                   

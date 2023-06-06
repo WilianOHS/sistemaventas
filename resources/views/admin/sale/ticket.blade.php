@@ -20,7 +20,8 @@
         }
         .info {
             margin-top: 10px;
-            font-size: 12px;
+            font-size: 14px;
+            text-align: center;
         }
         .info p {
             margin: 0;
@@ -43,15 +44,25 @@
             font-size: 14px;
             text-align: right;
         }
+        .message {
+            margin-top: 10px;
+            font-size: 14px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <div class="ticket">
         <div class="logo">
-            <img src="ruta_del_logo.png" alt="Logo">
+            <img src="{{ asset('image/'.$business->logo) }}" alt="Logo">
         </div>
         <div class="info">
-            <p>Fecha: {{ $sale->sale_date }}</p>
+            <p>{{$business->name}}</p>
+            <p>{{$business->address}}</p>
+            <p>Tel: {{$business->number}}</p>
+        </div>
+        <div class="info">
+            <p>Fecha: {{ $saleDate->format('d/m/Y h:i A') }}</p>
             <p>Número de ticket: {{$sale->document_number}}</p>
             <p>Cliente: {{$sale->client->name}}</p>
             <p>Vendedor: {{$sale->user->name}}</p>
@@ -60,19 +71,21 @@
             <table>
                 <thead>
                     <tr>
+                        <th>Cant.</th>
                         <th>Producto</th>
-                        <th>Precio Venta (USD)</th>
-                        <th>Descuento(USD)</th>
-                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Desc.</th>
+                        <th>Total</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($saleDetails as $saleDetail)
                     <tr>
+                        <td>{{$saleDetail->quantity}}</td>
                         <td>{{$saleDetail->product->name}}</td>
                         <td>$ {{$saleDetail->price}}</td>
                         <td>{{$saleDetail->discount}} %</td>
-                        <td>{{$saleDetail->quantity}}</td>
+                        <td>${{number_format($saleDetail->quantity*$saleDetail->price - $saleDetail->quantity*$saleDetail->price*$saleDetail->discount/100,2)}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -80,6 +93,9 @@
         </div>
         <div class="total">
             Total: ${{number_format($sale->total,2)}}
+        </div>
+        <div class="message">
+            {{$business->message}}
         </div>
     </div>
 </body>

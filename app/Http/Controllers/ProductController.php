@@ -40,14 +40,16 @@ class ProductController extends Controller
             $image_name = time().'_'.$file->getClientOriginalName();
             $file->move(public_path("/image"),$image_name);
         }
-        
-        $product = Product::create($request->all()+[
-            'image' =>$image_name,
-        ]);
-        $product->update(['code'=> $product->id]);
 
+        $product = Product::create($request->all()+[
+            'image' => $image_name,
+        ]);
+        if($request->code == ""){
+            $product->update(['code'=>$product->id]);
+        }
         return redirect()->route('products.index');
     }
+    
     public function show(Product $product)
     {
         return view('admin.product.show',compact('product'));
@@ -86,4 +88,33 @@ class ProductController extends Controller
             return redirect()->back();
         }
     }
+    public function get_products_by_barcode(Request $request){
+        if ($request->ajax()) {
+            $products = Product::where('code', $request->code)->firstOrFail();
+            return response()->json($products);
+        }
+    }
+    public function get_products_by_id(Request $request){
+        if ($request->ajax()) {
+            $products = Product::findOrFail($request->product_id);
+            return response()->json($products);
+        }
+    }
+    public function getProductByBarcode(Request $request)
+{
+    if ($request->ajax()) {
+        $product = Product::where('code', $request->code)->first();
+
+        if ($product) {
+            return response()->json([
+                'id' => $product->id,
+                'stock' => $product->stock,
+                'sale_price' => $product->sale_price
+            ]);
+        } else {
+            return response()->json(null);
+        }
+    }
+}
+
 }

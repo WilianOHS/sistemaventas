@@ -1,6 +1,7 @@
 @extends('layouts.admin')
  @section('title','Registro de venta')
  @section('styles')
+ {!! Html::style('bootstrap-select-1.13.14/dist/css/bootstrap-select.min.css') !!}
  @endsection
  @section('options')
 @endsection
@@ -96,6 +97,8 @@
 @section('scripts')
 {!! Html::script('melody/js/alerts.js') !!}
 {!! Html::script('melody/js/avgrund.js') !!}
+{!! Html::script('bootstrap-select-1.13.14/dist/js/bootstrap-select.min.js') !!}
+
 <script>
     const select = document.querySelector('#document_type');
     const hiddenInput = document.querySelector('#document_type_hidden');
@@ -135,6 +138,82 @@ function mostrarValores() {
   $("#price").val(datosProducto[2]);
   $("#stock").val(datosProducto[1]);
 }
+
+// var product_id = $('#product_id');
+	
+//   product_id.change(function(){
+//           $.ajax({
+//               url: "{{route('get_products_by_id')}}",
+//               method: 'GET',
+//               data:{
+//                   product_id: product_id.val(),
+//               },
+//               success: function(data){
+//                   $("#price").val(data.sale_price);
+//                   $("#stock").val(data.stock);
+//                   $("#code").val(data.code);
+//           }
+//       });
+//   });
+  
+  
+//   $(obtener_registro());
+//   function obtener_registro(code){
+//       $.ajax({
+//           url: "{{route('get_products_by_barcode')}}",
+//           type: 'GET',
+//           data:{
+//               code: code
+//           },
+//           dataType: 'json',
+//           success:function(data){
+//               console.log(data);
+//               $("#price").val(data.sale_price);
+//               $("#stock").val(data.stock);
+//               $("#product_id").val(data.id);
+//           }
+//       });
+//   }
+//   $(document).on('keyup', '#code', function(){
+//     var valorResultado = $(this).val();
+//     if(valorResultado!=""){
+//         obtener_registro(valorResultado); // Pasar el valor del campo de código
+//     }else{
+//         obtener_registro(); // No se pasa ningún valor
+//     }
+// });
+function obtener_registro(code) {
+    $.ajax({
+        url: "{{route('get_product_by_barcode')}}",
+        type: 'GET',
+        data: {
+            code: code
+        },
+        dataType: 'json',
+        success: function(data) {
+            if (data) {
+                $("#product_id").val(data.id + "_" + data.stock + "_" + data.sale_price).change();
+            } else {
+                $("#product_id").val("").change();
+            }
+        },
+        error: function() {
+            $("#product_id").val("").change();
+        }
+    });
+}
+
+$(document).on('keyup', '#code', function() {
+    var code = $(this).val();
+    if (code !== "") {
+        obtener_registro(code);
+    } else {
+        $("#product_id").val("").change();
+    }
+});
+
+
+
 function agregar() {
     datosProducto = document.getElementById('product_id').value.split('_');
 

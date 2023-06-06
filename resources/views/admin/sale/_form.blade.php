@@ -41,13 +41,16 @@
     </div>
   </div>
 </div>
-
-
+    <hr>
+    <div class="form-group">
+    <label for="code">Código de barras</label>
+    <input type="text" name="code" id="code" class="form-control" placeholder="" aria-describedby="helpId">
+    </div>
 <hr>
 
         <div class="form-row">
         <label for="product_id">Producto</label>
-            <select id="product_id" class="form-control" name="product_id">
+            <select class="form-control" data-live-search="true" id="product_id" name="product_id">
             <option value="" disabled selected>Seleccione un producto</option>
             @foreach ($products as $product)
             <option value="{{$product->id}}_{{$product->stock}}_{{$product->sale_price}}">{{$product->name}}</option>

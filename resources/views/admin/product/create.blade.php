@@ -79,26 +79,6 @@ input:focus {
                         <input type="number" name="sale_price" id="sale_price" class="form-control" aria-describedby="helpId" step=".01" required>
                     </div>
 
-                    <!-- <div class="form-row">
-                        <div class="col">
-                        <label for="">Tipo de presentación</label>
-                            <select name="presentation_option" id="m_menu" class="custom-select">
-                            <option value="" disabled selected>Seleccione una presentación</option>
-                            <option value="Unidad">Unidad</option>
-                            <option value="Peso">Peso</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                        <label for="presentation">Presentación</label>
-                            <select name="presentation" id="s_menu" class="custom-select"></select>
-                        </div>
-                        <div class="col">
-                            <label for="weight">Cantidad</label>
-                            <input type="number" name="weight" id="weight" class="form-control" aria-describedby="helpId" required>
-                        </div>
-
-                    </div> -->
-
                     <div class="form-row">
                         <div class="col">
                         <label for="">Tipo de presentación</label>
@@ -132,6 +112,11 @@ input:focus {
                     <div class="form-group">
                         <label for="marca">Marca</label>
                         <input type="text" name="marca" id="marca" class="form-control" aria-describedby="helpId" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="code">Código de barra</label>
+                        <input type="text" name="code" id="code" class="form-control" aria-describedby="helpId">
                     </div>
 
                     <div class="form-group">

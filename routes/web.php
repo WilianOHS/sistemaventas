@@ -42,6 +42,8 @@ Route::get('sales/pdf/{sale}', 'SaleController@pdf')->name('sales.pdf');
 
 Route::get('sales/print/{sale}', 'SaleController@print')->name('sales.print');
 
+Route::get('sales/ticket/{sale}', 'SaleController@ticket')->name('sales.ticket');
+
 Route::get('exportar/', 'SaleController@exportar')->name('sales.exportar');
 
 Route::resource('business', BusinessController::class)->names('business')->only([
@@ -76,6 +78,10 @@ Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendResetLinkEmai
 Route::get('/reset-password/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('/reset-password', 'Auth\ResetPasswordController@reset')->name('password.update');
 
+Route::get('get_products_by_barcode', 'ProductController@get_products_by_barcode')->name('get_products_by_barcode');
+
+Route::get('get_products_by_id', 'ProductController@get_products_by_id')->name('get_products_by_id');
+Route::get('get-by-barcode', 'ProductController@getProductByBarcode')->name('get_product_by_barcode');
 
 
 Auth::routes();
