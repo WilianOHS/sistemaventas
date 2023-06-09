@@ -117,29 +117,29 @@ public function ticket(Sale $sale)
     // Convertir la fecha a un objeto Carbon
     $saleDate = Carbon::parse($sale->sale_date);
     
-    // try {
-    //     $printer_name = "Epson TM-T20"; // Reemplaza con el nombre de tu impresora
-    //     $connector = new WindowsPrintConnector($printer_name);
-    //     $printer = new Printer($connector);
+     try {
+        $printer_name = $sale->printer->name;
+         $connector = new WindowsPrintConnector($printer_name);
+         $printer = new Printer($connector);
         
-    //     // Establecer los ajustes del formato de impresión
-    //     $printer->setJustification(Printer::JUSTIFY_CENTER);
+         // Establecer los ajustes del formato de impresión
+         $printer->setJustification(Printer::JUSTIFY_CENTER);
         
-    //     // Imprimir el contenido del ticket
-    //     $printer->text("Fecha: " . $saleDate->format('d/m/Y h:i A') . "\n");
-    //     $printer->text($business->name . "\n");
-    //     $printer->text($business->address . "\n");
-    //     $printer->text("Tel: " . $business->number . "\n");
+         // Imprimir el contenido del ticket
+         $printer->text("Fecha: " . $saleDate->format('d/m/Y h:i A') . "\n");
+         $printer->text($business->name . "\n");
+         $printer->text($business->address . "\n");
+         $printer->text("Tel: " . $business->number . "\n");
         
     //     // ... Más contenido del ticket ...
         
-    //     $printer->cut();
-    //     $printer->close();
+         $printer->cut();
+         $printer->close();
         
         return view('admin.sale.ticket', compact('sale', 'saleDetails', 'subtotal', 'business', 'saleDate'));
-    // } catch (\Throwable $th) {
-    //     return redirect()->back();
-    // }
+     } catch (\Throwable $th) {
+         return redirect()->back();
+     }
 }
 
 

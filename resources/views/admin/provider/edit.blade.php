@@ -43,17 +43,27 @@
 
                     <div class="form-group">
                         <label for="nit_number">Numero de NIT</label>
-                        <input type="number" class="form-control" name="nit_number" id="nit_number" value="{{$provider->nit_number}}" aria-describedby="helpId" required>
+                        <input type="text" class="form-control" name="nit_number" id="nit_number" value="{{$provider->nit_number}}" aria-describedby="helpId" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="14" oninput="formatNIT(this)">
                     </div>
 
                     <div class="form-group">
-                        <label for="address">Dirección</label>
+                        <label for="address">Dirección 1</label>
                         <input type="text" class="form-control" name="address" id="address" value="{{$provider->address}}" aria-describedby="helpId" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="phone">Numero de contacto</label>
-                        <input type="number" class="form-control" name="phone" id="phone" value="{{$provider->phone}}" aria-describedby="helpId" required>
+                        <label for="second_address">Dirección 2</label>
+                        <input type="text" class="form-control" name="second_address" id="second_address" value="{{$provider->second_address}}" aria-describedby="helpId" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Numero de contacto 1</label>
+                        <input type="text" class="form-control phone-input" name="phone" id="phone" value="{{$provider->phone}}" aria-describedby="helpId" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="9">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="second_phone">Numero de contacto 2</label>
+                        <input type="text" class="form-control phone-input" name="second_phone" id="second_phone"  value="{{$provider->second_phone}}" aria-describedby="helpId" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="9">
                     </div>
 
 
@@ -73,4 +83,40 @@
 @endsection
 @section('scripts')
 {!! Html::script('melody/js/data-table.js') !!}
+<script>
+    const phoneInputs = document.querySelectorAll('.phone-input');
+    phoneInputs.forEach((phone) => {
+        phone.addEventListener('keypress', () => {
+            let inputLength = phone.value.length;
+
+            // MAX LENGTH 10 dui
+            if (inputLength == 4) {
+                phone.value += '-';
+            }
+        });
+    });
+</script>
+<script>
+		function formatNIT(nitField) {
+        // Remover cualquier guión existente
+        let nit = nitField.value.replace(/-/g, '');
+
+        // Agregar guiones después de ciertos números
+        if (nit.length > 4) {
+            nit = nit.substring(0, 4) + '-' + nit.substring(4);
+        }
+        if (nit.length > 10) {
+            nit = nit.substring(0, 10) + '-' + nit.substring(10);
+        }
+        if (nit.length > 13) {
+            nit = nit.substring(0, 13) + '-' + nit.substring(13);
+        }
+        if (nit.length > 15) {
+            nit = nit.substring(0, 15);
+        }
+
+        // Asignar el valor formateado al campo del NIT
+        nitField.value = nit;
+        }
+</script>
 @endsection

@@ -20,7 +20,9 @@ class CreateProvidersTable extends Migration
             $table->string('email');
             $table->string('nit_number');
             $table->string('address')->nullable();
+            $table->string('second_address')->nullable();
             $table->string('phone');
+            $table->string('second_phone');
 
 
             $table->timestamps();

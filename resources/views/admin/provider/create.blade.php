@@ -45,15 +45,24 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="address">Dirección</label>
+                        <label for="address">Dirección 1</label>
                         <input type="text" class="form-control" name="address" id="address" aria-describedby="helpId" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="phone">Numero de contacto</label>
-                        <input type="text" class="form-control" name="phone" id="phone" aria-describedby="helpId" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="9">
+                        <label for="second_address">Dirección 2</label>
+                        <input type="text" class="form-control" name="second_address" id="second_address" aria-describedby="helpId" required>
                     </div>
 
+                    <div class="form-group">
+                        <label for="phone">Numero de contacto 1</label>
+                        <input type="text" class="form-control phone-input" name="phone" id="phone" aria-describedby="helpId" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="9">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="second_phone">Numero de contacto 2</label>
+                        <input type="text" class="form-control phone-input" name="second_phone" id="second_phone" aria-describedby="helpId" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="9">
+                    </div>
 
                     <button type="submit" class="btn btn-primary mr-2">Registrar</button>
                     <a href="{{route('providers.index')}}" class="btn btn-light">
@@ -96,14 +105,16 @@
 </script>
 
 <script>
-      const phone = document.querySelector('#phone')
-      phone.addEventListener('keypress', () => {
-      let inputLength = phone.value.length
+    const phoneInputs = document.querySelectorAll('.phone-input');
+    phoneInputs.forEach((phone) => {
+        phone.addEventListener('keypress', () => {
+            let inputLength = phone.value.length;
 
-    // MAX LENGHT 10 dui
-    if (inputLength == 4) {
-        phone.value += '-'
-    }
-    })
-    </script>
+            // MAX LENGTH 10 dui
+            if (inputLength == 4) {
+                phone.value += '-';
+            }
+        });
+    });
+</script>
 @endsection

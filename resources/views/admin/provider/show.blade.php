@@ -71,23 +71,35 @@
                                             {{$provider->nit_number}}
                                         </p>
                                         <hr>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <strong>
-                                            <i class="fas fa-mobile mr-1"></i>
-                                            Teléfono</strong>
-                                        <p class="text-muted">
-                                            {{$provider->phone}}
-                                        </p>
-                                        <hr>
                                         <strong><i class="fas fa-envelope mr-1"></i> Correo</strong>
                                         <p class="text-muted">
                                             {{$provider->email}}
                                         </p>
                                         <hr>
-                                        <strong><i class="fas fa-map-marked-alt mr-1"></i> Dirección</strong>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <strong>
+                                            <i class="fas fa-mobile mr-1"></i>
+                                            Teléfono 1</strong>
+                                        <p class="text-muted">
+                                            {{$provider->phone}}
+                                        </p>
+                                        <hr>
+                                        <strong>
+                                            <i class="fas fa-mobile mr-1"></i>
+                                            Teléfono 2</strong>
+                                        <p class="text-muted">
+                                            {{$provider->second_phone}}
+                                        </p>
+                                        <hr>
+                                        <strong><i class="fas fa-map-marked-alt mr-1"></i> Dirección 1</strong>
                                         <p class="text-muted">
                                             {{$provider->address}}
+                                        </p>
+                                        <hr>
+                                        <strong><i class="fas fa-map-marked-alt mr-1"></i> Dirección 2</strong>
+                                        <p class="text-muted">
+                                            {{$provider->second_address}}
                                         </p>
                                         <hr>
                                     </div>

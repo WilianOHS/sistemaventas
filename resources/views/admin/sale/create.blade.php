@@ -122,10 +122,18 @@
 
 <script>
 $(document).ready(function () {
-$("#agregar").click(function () {
+  $("#agregar").click(function () {
     agregar();
   });
+
+  $("#cash").on("input", function () {
+    var cash = parseFloat($(this).val());
+    $("#efectivo_recibido").text("$ " + cash.toFixed(2));
+    $("#cash_hidden").val(cash.toFixed(2));
+    calcularCambio();
+  });
 });
+
 
 
 var cont = 1;
@@ -139,49 +147,6 @@ function mostrarValores() {
   $("#stock").val(datosProducto[1]);
 }
 
-// var product_id = $('#product_id');
-	
-//   product_id.change(function(){
-//           $.ajax({
-//               url: "{{route('get_products_by_id')}}",
-//               method: 'GET',
-//               data:{
-//                   product_id: product_id.val(),
-//               },
-//               success: function(data){
-//                   $("#price").val(data.sale_price);
-//                   $("#stock").val(data.stock);
-//                   $("#code").val(data.code);
-//           }
-//       });
-//   });
-  
-  
-//   $(obtener_registro());
-//   function obtener_registro(code){
-//       $.ajax({
-//           url: "{{route('get_products_by_barcode')}}",
-//           type: 'GET',
-//           data:{
-//               code: code
-//           },
-//           dataType: 'json',
-//           success:function(data){
-//               console.log(data);
-//               $("#price").val(data.sale_price);
-//               $("#stock").val(data.stock);
-//               $("#product_id").val(data.id);
-//           }
-//       });
-//   }
-//   $(document).on('keyup', '#code', function(){
-//     var valorResultado = $(this).val();
-//     if(valorResultado!=""){
-//         obtener_registro(valorResultado); // Pasar el valor del campo de código
-//     }else{
-//         obtener_registro(); // No se pasa ningún valor
-//     }
-// });
 function obtener_registro(code) {
     $.ajax({
         url: "{{route('get_product_by_barcode')}}",
@@ -280,6 +245,13 @@ function eliminar(index) {
     evaluar();
 }
     
+function calcularCambio() {
+  var cash = parseFloat($("#cash").val());
+  var total_pagar = parseFloat($("#total_pagar").val());
+  var cambio = cash - total_pagar;
+
+  $("#cambio").text("$ " + cambio.toFixed(2));
+}
 </script>
 
 <script type="text/javascript">

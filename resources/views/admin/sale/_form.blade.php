@@ -1,14 +1,4 @@
-        <div class="form-row">
-            <label for="client_id">Cliente</label>
-                    <select id="client_id" class="form-control" name="client_id">
-                    <option value="" disabled selected>Seleccione un cliente</option>
-                    @foreach ($clients as $client)
-                    <option value="{{$client->id}}">{{$client->name}}</option>
-                    @endforeach
-                    </select>
-        </div>
 
-<hr>
 
 
 <div class="row">
@@ -42,6 +32,17 @@
   </div>
 </div>
     <hr>
+    <div class="form-row">
+            <label for="client_id">Cliente</label>
+                    <select id="client_id" class="form-control" name="client_id">
+                    <option value="" disabled selected>Seleccione un cliente</option>
+                    @foreach ($clients as $client)
+                    <option value="{{$client->id}}">{{$client->name}}</option>
+                    @endforeach
+                    </select>
+        </div>
+
+<hr>
     <div class="form-group">
     <label for="code">Código de barras</label>
     <input type="text" name="code" id="code" class="form-control" placeholder="" aria-describedby="helpId">
@@ -72,14 +73,11 @@
             <label for="price">Precio de venta</label>
                 <input type="number" class="form-control" name="price" id="price" aria-describedby="helpId" disabled>
             </div>
-            <!-- <div class="col">
-            <label for="discount">Porcentaje de descuento</label>
-                <input type="number" class="form-control" name="discount" id="discount" aria-describedby="helpId" value="0">
-            </div> -->
             <div class="col">
             <label for="discount">Porcentaje de descuento</label>
             <input type="number" class="form-control" name="discount" id="discount" aria-describedby="helpId" value="0" min="0" max="100" step="1" oninput="validarDescuento()">
             </div>
+
         </div>
 
 <hr>
@@ -103,7 +101,7 @@
             </thead>
             <tfoot>
                 <tr>
-                    <th colspan="4">
+                    <th colspan="5">
                         <p align="right">TOTAL:</p>
                     </th>
                     <th>
@@ -111,7 +109,7 @@
                     </th>
                 </tr>
                 <tr>
-                    <th colspan="4">
+                    <th colspan="5">
                         <p align="right">TOTAL PAGAR:</p>
                     </th>
                     <th>
@@ -119,6 +117,40 @@
                                 name="total" id="total_pagar"></p>
                     </th>
                 </tr>
+                <tr>
+  <th colspan="5">
+    <p align="right">EFECTIVO RECIBIDO:</p>
+  </th>
+  <th>
+    <p align="right">
+      <span align="right" id="efectivo_recibido">$ 0.00</span>
+      <input type="hidden" name="efectivo_recibido" id="cash_hidden" />
+    </p>
+  </th>
+</tr>
+<tr>
+  <th colspan="5">
+    <p align="right">CAMBIO:</p>
+  </th>
+  <th>
+    <p align="right">
+      <span align="right" id="cambio">$ 0.00</span>
+      <input type="hidden" name="cambio" id="cambio_hidden" />
+    </p>
+  </th>
+</tr>
+
+
+            <tr>
+  <th colspan="5">
+    <p align="right"><label for="cash">Efectivo recibido</label></p>
+  </th>
+  <th>
+    <p align="right">
+      <input type="number" class="form-control" name="cash" id="cash" aria-describedby="helpId" value="0" >
+    </p>
+  </th>
+</tr>
             </tfoot>
             <tbody>
             </tbody>

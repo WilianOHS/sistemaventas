@@ -21,6 +21,7 @@ class CreateSalesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
+            $table->decimal('cash');
             $table->dateTime('sale_date');
             $table->decimal('total');
             $table->enum('status',['VALID','CANCELED'])->default('VALID');
