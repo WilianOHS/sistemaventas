@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\Category;
 use App\Provider;
+use App\Business;
 use Illuminate\Http\Request;
 use App\Http\Requests\Product\StoreRequest;
 use App\Http\Requests\Product\UpdateRequest;
@@ -34,21 +35,27 @@ class ProductController extends Controller
         return view('admin.product.create',compact('categories','providers'));
     }
     public function store(StoreRequest $request)
-    {
-        if ($request->hasFile('picture')) {
-            $file = $request->file('picture');
-            $image_name = time().'_'.$file->getClientOriginalName();
-            $file->move(public_path("/image"),$image_name);
-        }
-
-        $product = Product::create($request->all()+[
-            'image' => $image_name,
-        ]);
-        if($request->code == ""){
-            $product->update(['code'=>$product->id]);
-        }
-        return redirect()->route('products.index');
+{
+    if ($request->hasFile('picture')) {
+        $file = $request->file('picture');
+        $image_name = time().'_'.$file->getClientOriginalName();
+        $file->move(public_path("/image"), $image_name);
+    } else {
+        $business = Business::first(); // Obtener el primer registro de la tabla businesses
+        $image_name = $business->logo; // Obtener el nombre del logo desde el campo logo de la tabla businesses
     }
+
+    $product = Product::create($request->all()+[
+        'image' => $image_name,
+    ]);
+
+    if($request->code == ""){
+        $product->update(['code'=>$product->id]);
+    }
+
+    return redirect()->route('products.index');
+}
+    
     
     public function show(Product $product)
     {

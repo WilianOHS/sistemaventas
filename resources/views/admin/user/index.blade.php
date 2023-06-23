@@ -38,7 +38,8 @@
                         <tr>
                           <th>Id</th>
                           <th>Nombre</th>
-                          <th>Nombre de Usuario</th>
+                          <th>Nombre de Usuario</th>                          
+                          <th>Correo Electrónico</th>
                           <th>Acciones</th>
                         </tr>
                       </thead>
@@ -49,7 +50,8 @@
                             <td>
                                 <a href="{{route('users.show',$user)}}">{{$user->name}}</a>                                
                             </td>    
-                            <td>{{$user->username}}</td>      
+                            <td>{{$user->username}}</td>
+                            <td>{{$user->email}}</td>       
                             <td style="width: 20%;">
                                 {!! Form::open(['route'=>['users.destroy',
                                 $user], 'method'=>'DELETE']) !!}

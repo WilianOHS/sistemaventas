@@ -7,13 +7,13 @@
 @section('preference')
 @endsection
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card mt-4"> 
-                    <div class="card-header">Apertura de caja</div>
 
-                    <div class="card-body">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card mt-4"> 
+        <div class="card-header">Apertura de caja</div>
+        <div class="card-body">
                         {!! Form::open(['route'=>'cashopening.store','method'=>'POST']) !!}
                             @csrf
 
@@ -73,10 +73,12 @@
                             </div>
                         {!! Form::close() !!}
                     </div>
-                </div>
-                <div class="card mt-4">
-                    <div class="card-header">Resumen de apertura de caja</div>
-                    <div class="card-body">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card mt-4">
+        <div class="card-header">Resumen de apertura de caja</div>
+        <div class="card-body">
                         <table class="table">
                             <tr>
                                 <th>Fecha:</th>
@@ -108,10 +110,12 @@
                             </tr>
                         </table>
                     </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
+</div>
+
+
     
     <!-- Modal de confirmación -->
     <div class="modal fade" id="confirmChangeModal" tabindex="-1" role="dialog" aria-labelledby="confirmChangeModalLabel" aria-hidden="true">

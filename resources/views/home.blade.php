@@ -90,6 +90,7 @@
                     <div class="ct-chart">
                         <label for="fecha-inicio">Fecha de inicio:</label>
                         <input type="month" id="fecha-inicio" name="fecha-inicio">
+                        <br>
                         <label for="fecha-fin">Fecha de fin:</label>
                         <input type="month" id="fecha-fin" name="fecha-fin">
                         <button id="filtrar">Filtrar</button>
@@ -108,6 +109,7 @@
                     <div class="ct-chart">
                         <label for="fecha-inicio2">Fecha de inicio:</label>
                         <input type="month" id="fecha-inicio2" name="fecha-inicio2">
+                        <br>
                         <label for="fecha-fin2">Fecha de fin:</label>
                         <input type="month" id="fecha-fin2" name="fecha-fin2">
                         <button id="filtrar2">Filtrar</button>

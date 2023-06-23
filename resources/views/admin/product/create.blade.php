@@ -74,6 +74,11 @@ input:focus {
                         <input type="text" name="name" id="name" class="form-control" aria-describedby="helpId" required>
                     </div>
 
+
+                    <div class="form-group">
+                        <label for="code">Código de barra</label>
+                        <input type="text" name="code" id="code" class="form-control" aria-describedby="helpId">
+                    </div>
                     <div class="form-group">
                         <label for="sale_price">Precio de venta</label>
                         <input type="number" name="sale_price" id="sale_price" class="form-control" aria-describedby="helpId" step=".01" required>
@@ -96,10 +101,11 @@ input:focus {
                             <label for="weight">Cantidad</label>
                             <input type="number" name="weight" id="weight" class="form-control" aria-describedby="helpId" style="height: 45px" required>
                         </div>
+                        
 
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-row">
                         <label for="year">Año</label>
                         <input type="number" name="year" id="year" class="form-control" aria-describedby="helpId" required>
                     </div>
@@ -112,11 +118,6 @@ input:focus {
                     <div class="form-group">
                         <label for="marca">Marca</label>
                         <input type="text" name="marca" id="marca" class="form-control" aria-describedby="helpId" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="code">Código de barra</label>
-                        <input type="text" name="code" id="code" class="form-control" aria-describedby="helpId">
                     </div>
 
                     <div class="form-group">

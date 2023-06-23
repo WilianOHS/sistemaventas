@@ -41,7 +41,11 @@
                     <div class="row">
                         <div class="col-lg-4">
                         <div class="border-bottom text-center pb-4">
-                        <img src="{{asset('image/'.$product->image)}}" alt="profile" class="img-lg mb-3 img-xl"/>
+                        @if($product->image)
+                            <img src="{{ asset('image/'.$product->image) }}" alt="Imagen del producto"class="img-lg mb-3 img-xl">
+                        @else
+                            <img src="{{ asset('image/'.$business->logo) }}" alt="Logo de la empresa"class="img-lg mb-3 img-xl">
+                        @endif
                         <h3>{{$product->name}}</h3>
                         <div class="d-flex justify-content-between">
                         </div>
@@ -50,7 +54,7 @@
                         <div class="py-4">
                         <p class="clearfix">
                           <span class="float-left">
-                            Status
+                            Estado
                           </span>
                           <span class="float-right text-muted">
                           {{$product->status}}
@@ -94,10 +98,11 @@
                             <div class="profile-feed">
                                 <div class="d-flex align-items-start profile-feed-item">
                                     <div class="form-group col-md-6">
-                                        <strong><i class="fas fa-code mr-1"></i> Código</strong>
+                                    <strong><i class="fas fa-barcode mr-1"></i> Código de barras</strong>
                                         <p class="text-muted">
-                                            {{$product->code}}
+                                        {{$product->code}}
                                         </p>
+
                                         <hr>
                                         <strong><i class="fab fa-product-hunt mr-1"></i> Nombre de producto</strong>
                                         <p class="text-muted">
@@ -143,7 +148,7 @@
                                         </p>
                                         <hr>
                                         
-                                        <strong><i class="fas fa-envelope mr-1"></i> Código de barras</strong>
+                                        <strong><i class="fas fa-barcode mr-1"></i> Código de barras</strong>
                                         <p class="text-muted">
                                             {!! DNS1D::getBarcodeHTML($product->code, 'EAN13'); !!}
                                         </p>

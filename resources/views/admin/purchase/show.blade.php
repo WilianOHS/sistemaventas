@@ -34,12 +34,12 @@
 
                 <div class="form-group row">
                         <div class="col-md-6 text-center">
-                            <label class="form-control-label" for="nombre"><strong>Proveedor</strong></label>
-                            <p>{{$purchase->provider->name}}</p>
+                            <label class="form-control-label" style="font-size: 18px" for="nombre"><strong>Proveedor</strong></label>
+                            <p style="font-size: 18px">{{$purchase->provider->name}}</p>
                         </div>
                         <div class="col-md-6 text-center">
-                            <label class="form-control-label" for="num_compra"><strong>Número Compra</strong></label>
-                            <p>{{$purchase->id}}</p>
+                            <label class="form-control-label" style="font-size: 18px" for="num_compra"><strong>Número Compra</strong></label>
+                            <p style="font-size: 18px">{{$purchase->id}}</p>
                         </div>
                     </div>
                     <br /><br />
@@ -62,14 +62,6 @@
                                         </th>
                                         <th>
                                             <p align="right">${{number_format($subtotal,2)}}</p>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="3">
-                                            <p align="right">TOTAL IMPUESTO ({{$purchase->iva}}%):</p>
-                                        </th>
-                                        <th>
-                                            <p align="right">${{number_format($subtotal*$purchase->iva/100,2)}}</p>
                                         </th>
                                     </tr>
                                     <tr>

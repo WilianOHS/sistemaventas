@@ -57,7 +57,12 @@
 
                     <div class="form-group">
                         <label for="model">Modelo</label>
-                        <input type="text" name="model" id="model"  value="{{$product->model}}" class="form-control" aria-describedby="helpId" required>
+                        <input type="text" name="model" id="model" value="{{$product->model}}" class="form-control" aria-describedby="helpId" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="marca">Marca</label>
+                        <input type="text" name="marca" id="marca" value="{{$product->marca}}" class="form-control" aria-describedby="helpId" required>
                     </div>
 
                     <div class="form-group">

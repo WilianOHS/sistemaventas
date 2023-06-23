@@ -15,7 +15,7 @@
   <div class="col">
     <div class="form-row">
       <label for="document_type">Tipo de comprobante:</label>
-      <select id="document_type" class="form-control" name="document_type">
+      <select id="document_type" class="form-control" name="document_type" required>
         <option value="Ticket">Ticket</option>
         <option value="Factura">Factura</option>
         <option value="credito_fiscal">Crédito Fiscal</option>
@@ -33,20 +33,21 @@
 </div>
     <hr>
     <div class="form-row">
-            <label for="client_id">Cliente</label>
-                    <select id="client_id" class="form-control" name="client_id">
-                    <option value="" disabled selected>Seleccione un cliente</option>
-                    @foreach ($clients as $client)
-                    <option value="{{$client->id}}">{{$client->name}}</option>
-                    @endforeach
-                    </select>
-        </div>
+  <label for="client_id">Cliente</label>
+  <select id="client_id" class="form-control" name="client_id" required>
+    <option value="" disabled selected>Seleccione un cliente</option>
+    @foreach ($clients as $client)
+      <option value="{{$client->id}}">{{$client->name}}</option>
+    @endforeach
+  </select>
+</div>
+
 
 <hr>
-    <div class="form-group">
-    <label for="code">Código de barras</label>
-    <input type="text" name="code" id="code" class="form-control" placeholder="" aria-describedby="helpId">
-    </div>
+<div class="form-group">
+  <label for="code">Código de barras</label>
+  <input type="text" name="code" id="code" class="form-control" placeholder="" aria-describedby="helpId" onkeydown="handleKeyDown(event)">
+</div>
 <hr>
 
         <div class="form-row">

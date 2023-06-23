@@ -36,7 +36,7 @@
 
                     <div class="form-group">
                         <label for="email">Correo electrónico</label>
-                        <input type="email" class="form-control" name="email" id="email" aria-describedby="emailhelpId" placeholder="ejemplo@gmail.com" required>
+                        <input type="email" class="form-control" name="email" id="email" aria-describedby="emailhelpId" placeholder="ejemplo@gmail.com">
                     </div>
 
                     <div class="form-group">
@@ -46,12 +46,12 @@
 
                     <div class="form-group">
                         <label for="address">Dirección 1</label>
-                        <input type="text" class="form-control" name="address" id="address" aria-describedby="helpId" required>
+                        <input type="text" class="form-control" name="address" id="address" aria-describedby="helpId">
                     </div>
 
                     <div class="form-group">
                         <label for="second_address">Dirección 2</label>
-                        <input type="text" class="form-control" name="second_address" id="second_address" aria-describedby="helpId" required>
+                        <input type="text" class="form-control" name="second_address" id="second_address" aria-describedby="helpId">
                     </div>
 
                     <div class="form-group">

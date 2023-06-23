@@ -264,5 +264,10 @@ class PermissionsTableSeeder extends Seeder
             'slug'=>'sales.exportar',
             'description'=>'Puede descargar todos los reportes de las ventas en excel.',
         ]);
+        Permission::create([
+            'name' => 'Acceder al inicio',
+            'slug' => 'home.index',
+            'description' => 'Acceder a la página de inicio',
+        ]);        
     }
 }

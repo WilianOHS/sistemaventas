@@ -44,31 +44,35 @@
                     </div>
 
                     <div class="form-group">
-                    <label for="departamento">Departamento:</label>
-                        <select name="departamento" id="departamento" onchange="mostrarMunicipios()" style="width: 20%;">
-                        <option value="" disabled selected>Seleccione un Departamento</option>
-                        <option value="morazan">Morazán</option>
-                        <option value="san-miguel">San Miguel</option>
-                        <option value="la-union">La Unión</option>
-                        <option value="usulutan">Usulután</option>
-                        <option value="san-vicente">San Vicente</option>
-                        <option value="cabañas">Cabañas</option>
-                        <option value="la-paz">La Paz</option>
-                        <option value="san-salvador">San Salvador</option>
-                        <option value="cuscatlan">Cuscatlán</option>
-                        <option value="chalatenango">Chalatenango</option>
-                        <option value="la-libertad">La Libertad</option>
-                        <option value="sonsonate">Sonsonate</option>
-                        <option value="santa-ana">Santa Ana</option>
-                        <option value="ahuachapan">Ahuachapán</option>
-                        <!-- Otras opciones de departamentos -->
-                        </select>
-
-                        <label for="municipio">Municipio:</label>
-                        <select id="municipio" name="municipio" style="width: 35%;">                         
-                        <option value="" disabled selected>Seleccione un departamento para mostrar municipios</option>
-                        </select>
-                    </div>
+                      <div class="row">
+                          <div class="col-md-6">
+                              <label for="departamento">Departamento:</label>
+                              <select class="form-control" name="departamento" id="departamento" onchange="mostrarMunicipios()">
+                                  <option value="" disabled selected>Seleccione un Departamento</option>
+                                  <option value="morazan">Morazán</option>
+                                  <option value="san-miguel">San Miguel</option>
+                                  <option value="la-union">La Unión</option>
+                                  <option value="usulutan">Usulután</option>
+                                  <option value="san-vicente">San Vicente</option>
+                                  <option value="cabañas">Cabañas</option>
+                                  <option value="la-paz">La Paz</option>
+                                  <option value="san-salvador">San Salvador</option>
+                                  <option value="cuscatlan">Cuscatlán</option>
+                                  <option value="chalatenango">Chalatenango</option>
+                                  <option value="la-libertad">La Libertad</option>
+                                  <option value="sonsonate">Sonsonate</option>
+                                  <option value="santa-ana">Santa Ana</option>
+                                  <option value="ahuachapan">Ahuachapán</option>
+                                  </select>
+                          </div>
+                          <div class="col-md-6">
+                              <label for="municipio">Municipio:</label>
+                              <select class="form-control" id="municipio" name="municipio">
+                                  <option value="" disabled selected>Seleccione un departamento para mostrar municipios</option>
+                              </select>
+                          </div>
+                      </div>
+                  </div>
 
                     <div class="form-group">
                         <label for="phone">Telefóno / Celular</label>

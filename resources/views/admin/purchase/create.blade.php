@@ -69,7 +69,6 @@ function agregar() {
     producto = $("#product_id option:selected").text();
     quantity = $("#quantity").val();
     price = $("#price").val();
-    impuesto = $("#iva").val();
 
     if (product_id != "" && quantity != "" && quantity > 0 && price != "") {
       subtotal[cont] = quantity * price;
@@ -96,9 +95,7 @@ function agregar() {
 
       function totales() {
         $("#total").html("USD " + total.toFixed(2));
-        total_impuesto = total * impuesto / 100;
-        total_pagar = total + total_impuesto;
-        $("#total_impuesto").html("USD " + total_impuesto.toFixed(2));
+        total_pagar = total;
         $("#total_pagar_html").html("USD " + total_pagar.toFixed(2));
         $("#total_pagar").val(total_pagar.toFixed(2));
       }
@@ -112,10 +109,8 @@ function agregar() {
     
     function eliminar(index) {
         total = total - subtotal[index];
-        total_impuesto = total * impuesto / 100;
-        total_pagar_html = total + total_impuesto;
+        total_pagar_html = total;
         $("#total").html("USD" + total);
-        $("#total_impuesto").html("USD" + total_impuesto);
         $("#total_pagar_html").html("USD" + total_pagar_html);
         $("#total_pagar").val(total_pagar_html.toFixed(2));
         $("#fila" + index).remove();

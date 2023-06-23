@@ -43,10 +43,16 @@ class SaleController extends Controller
     public function create()
     {
         $clients = Client::get();
-        //$products = Product::get();
         $products = Product::where('status', 'ACTIVE')->get();
-        return view('admin.sale.create',compact('clients','products'));
+        $latestDocumentNumbers = Sale::orderBy('id', 'desc')->groupBy('document_type')->pluck('document_number', 'document_type');
+    
+        // Crea una instancia de Sale para pasarla a la vista
+        $sale = new Sale();
+    
+        return view('admin.sale.create', compact('clients', 'products', 'latestDocumentNumbers', 'sale'));
     }
+    
+    
     public function store(StoreRequest $request)
     {
         $sale = Sale::create($request->all()+[
@@ -118,23 +124,23 @@ public function ticket(Sale $sale)
     $saleDate = Carbon::parse($sale->sale_date);
     
      try {
-        $printer_name = $sale->printer->name;
-         $connector = new WindowsPrintConnector($printer_name);
-         $printer = new Printer($connector);
+    //     $printer_name = $sale->printer->name;
+    //      $connector = new WindowsPrintConnector($printer_name);
+    //      $printer = new Printer($connector);
         
-         // Establecer los ajustes del formato de impresión
-         $printer->setJustification(Printer::JUSTIFY_CENTER);
+    //      // Establecer los ajustes del formato de impresión
+    //      $printer->setJustification(Printer::JUSTIFY_CENTER);
         
-         // Imprimir el contenido del ticket
-         $printer->text("Fecha: " . $saleDate->format('d/m/Y h:i A') . "\n");
-         $printer->text($business->name . "\n");
-         $printer->text($business->address . "\n");
-         $printer->text("Tel: " . $business->number . "\n");
+    //      // Imprimir el contenido del ticket
+    //      $printer->text("Fecha: " . $saleDate->format('d/m/Y h:i A') . "\n");
+    //      $printer->text($business->name . "\n");
+    //      $printer->text($business->address . "\n");
+    //      $printer->text("Tel: " . $business->number . "\n");
         
-    //     // ... Más contenido del ticket ...
+    // //     // ... Más contenido del ticket ...
         
-         $printer->cut();
-         $printer->close();
+    //      $printer->cut();
+    //      $printer->close();
         
         return view('admin.sale.ticket', compact('sale', 'saleDetails', 'subtotal', 'business', 'saleDate'));
      } catch (\Throwable $th) {
@@ -208,4 +214,17 @@ public function ticket(Sale $sale)
         return redirect()->back()->with('success', 'Cliente registrado con éxito!');
 
     }
+
+    public function getLatestDocumentNumber(Request $request)
+    {
+        $documentType = $request->input('document_type');
+    
+        // Obtener el último document_number según el document_type seleccionado
+        $latestDocumentNumber = Sale::where('document_type', $documentType)
+            ->orderBy('id', 'desc')
+            ->value('document_number');
+    
+        return response()->json(['latestDocumentNumber' => $latestDocumentNumber]);
+    }
+    
 }

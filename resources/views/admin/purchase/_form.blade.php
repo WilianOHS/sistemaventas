@@ -9,25 +9,6 @@
         </div>
 
         <div class="form-group">
-            <label for="iva">Impuesto (IVA)</label>
-            <!--    <input type="number" class="form-control" name="iva" id="iva" aria-describedby="helpId" placeholder="13%"> -->
-            <div class="form-group">
-            <div class="btn-group" data-toggle="buttons">
-                    <!-- <label class="btn btn-dark active"> Con IVA
-                        <input type="radio" name="iva" id="iva" autocomplete="off" value="13">
-                    </label>
-
-                    <label class="btn btn-dark">Sin IVA
-                        <input type="radio" name="iva" id="iva" autocomplete="off" value="0">
-                    </label> -->
-                    <select class="form-control" name="iva" id="iva">
-                        <option value="0">Sin IVA</option>
-                        <option value="13">Con IVA</option>
-                    </select>
-                </div>
-        </div>
-
-        <div class="form-group">
         <label for="product_id">Producto</label>
             <select id="product_id" class="form-control" name="product_id">
             <option value="" disabled selected>Seleccione un producto</option>
@@ -44,7 +25,7 @@
 
         <div class="form-group">
             <label for="price">Precio de compra</label>
-                <input type="number" class="form-control" name="price" id="price" aria-describedby="helpId">
+                <input type="number" class="form-control" name="price" id="price" step=".01"  aria-describedby="helpId">
         </div>
 
         <div class="form-group">
@@ -71,14 +52,6 @@
                     </th>
                     <th>
                         <p align="right"><span id="total">USD 0.00</span> </p>
-                    </th>
-                </tr>
-                <tr>
-                    <th colspan="4">
-                        <p align="right">TOTAL IMPUESTO (13%):</p>
-                    </th>
-                    <th>
-                        <p align="right"><span id="total_impuesto">USD 0.00</span></p>
                     </th>
                 </tr>
                 <tr>

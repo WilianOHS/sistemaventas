@@ -83,6 +83,8 @@ Route::get('get_products_by_barcode', 'ProductController@get_products_by_barcode
 Route::get('get_products_by_id', 'ProductController@get_products_by_id')->name('get_products_by_id');
 Route::get('get-by-barcode', 'ProductController@getProductByBarcode')->name('get_product_by_barcode');
 
+Route::get('/get-latest-document-number', 'SaleController@getLatestDocumentNumber');
+
 
 Auth::routes();
 

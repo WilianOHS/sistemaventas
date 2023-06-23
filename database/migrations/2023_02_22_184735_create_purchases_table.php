@@ -22,7 +22,6 @@ class CreatePurchasesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->dateTime('purchase_date');
-            $table->decimal('iva');
             $table->decimal('total');
             $table->enum('status',['VALID','CANCELED'])->default('VALID');
             $table->string('picture')->nullable();
