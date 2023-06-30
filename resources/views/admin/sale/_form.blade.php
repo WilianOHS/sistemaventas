@@ -13,23 +13,23 @@
   </div>
   
   <div class="col">
-    <div class="form-row">
-      <label for="document_type">Tipo de comprobante:</label>
-      <select id="document_type" class="form-control" name="document_type" required>
-        <option value="Ticket">Ticket</option>
-        <option value="Factura">Factura</option>
-        <option value="credito_fiscal">Crédito Fiscal</option>
-      </select>
-    </div>
-    <input type="hidden" name="document_type_hidden" id="document_type_hidden">
+  <div class="form-row">
+    <label for="document_type">Tipo de comprobante:</label>
+    <select id="document_type" class="form-control" name="document_type" required>
+      <option value="Ticket">Ticket</option>
+      <option value="Factura">Factura</option>
+      <option value="credito_fiscal">Crédito Fiscal</option>
+    </select>
   </div>
-  
-  <div class="col">
-    <div class="form-row">
-      <label for="document_number">Número de comprobante:</label>
-      <input type="number" class="form-control" name="document_number" id="document_number" aria-describedby="helpId">
-    </div>
+</div>
+
+<div class="col">
+  <div class="form-row">
+    <label for="document_number">Número de comprobante:</label>
+    <input type="text" class="form-control" name="document_number" id="document_number" aria-describedby="helpId" required>
   </div>
+</div>
+
 </div>
     <hr>
     <div class="form-row">

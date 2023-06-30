@@ -19,6 +19,8 @@ use Mike42\Escpos\EscposImage;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use App\Exports\SaleExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
+
 
 class SaleController extends Controller
 {
@@ -44,13 +46,17 @@ class SaleController extends Controller
     {
         $clients = Client::get();
         $products = Product::where('status', 'ACTIVE')->get();
-        $latestDocumentNumbers = Sale::orderBy('id', 'desc')->groupBy('document_type')->pluck('document_number', 'document_type');
-    
-        // Crea una instancia de Sale para pasarla a la vista
-        $sale = new Sale();
-    
-        return view('admin.sale.create', compact('clients', 'products', 'latestDocumentNumbers', 'sale'));
+        
+        $latestDocumentNumbers = Sale::select('document_type', DB::raw('MAX(CAST(document_number AS UNSIGNED)) AS max_document_number'))
+        ->groupBy('document_type')
+        ->pluck('max_document_number', 'document_type');
+
+        return view('admin.sale.create', compact('clients', 'products', 'latestDocumentNumbers'));
     }
+    
+    
+    
+    
     
     
     public function store(StoreRequest $request)

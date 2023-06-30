@@ -255,7 +255,6 @@ function calcularCambio() {
 </script>
 
 <script type="text/javascript">
- 
         function xajax_changeColorImageAttribute(prod_option_value) {
           var i, pos;
           var sel = document.getElementById('cmbooption_1');
@@ -317,24 +316,26 @@ function validarDescuento() {
 
 </script>
 <script>
-  // Obtener el campo document_type y document_number por su id
-  var documentTypeField = document.getElementById('document_type');
-  var documentNumberField = document.getElementById('document_number');
+  // Obtener los elementos del DOM
+  const documentTypeSelect = document.getElementById('document_type');
+  const documentNumberInput = document.getElementById('document_number');
 
-  // Agregar un evento change al campo document_type
-  documentTypeField.addEventListener('change', function() {
-    var selectedOption = this.value; // Obtener el valor de la opción seleccionada
+  // Función para obtener y establecer el número de comprobante
+  function setDocumentNumber() {
+    const selectedOption = documentTypeSelect.value;
+    const latestDocumentNumbers = {!! json_encode($latestDocumentNumbers) !!};
+    const latestDocumentNumber = latestDocumentNumbers[selectedOption] || '0';
+    const nextDocumentNumber = parseInt(latestDocumentNumber) + 1;
 
-    // Realizar una llamada AJAX para obtener el último document_number
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/get-latest-document-number?document_type=' + selectedOption, true);
-    xhr.onload = function() {
-      if (xhr.status === 200) {
-        var response = JSON.parse(xhr.responseText);
-        documentNumberField.value = response.latestDocumentNumber; // Actualizar el valor del campo document_number
-      }
-    };
-    xhr.send();
+    documentNumberInput.value = nextDocumentNumber.toString();
+  }
+
+  // Ejecutar la función al cargar la página
+  setDocumentNumber();
+
+  // Manejar el evento de cambio en el campo "Tipo de comprobante"
+  documentTypeSelect.addEventListener('change', () => {
+    setDocumentNumber();
   });
 </script>
 
