@@ -45,27 +45,28 @@
                             <tbody>
                             <tr>
                                 <th></th>
-                                <td>Desde</td>
-                                <td>Hasta</td>
+                                <td style="padding-right: 10px;">Desde</td>
+                                <td style="padding-left: 10px;">Hasta</td>
                               </tr>
                               <tr>
                                 <th>Tickets</th>
-                                <td> {{ $cashclosing->start_ticket }}</td>
-                                <td> {{ $cashclosing->end_ticket }}</td>
+                                <td style="padding-right: 10px;">{{ $cashclosing->start_ticket }}</td>
+                                <td style="padding-left: 10px;">{{ $cashclosing->end_ticket }}</td>
                               </tr>
                               <tr>
                                 <th>Facturas</th>
-                                <td> {{ $cashclosing->start_invoice }}</td>
-                                <td> {{ $cashclosing->end_invoice }}</td>
+                                <td style="padding-right: 10px;">{{ $cashclosing->start_invoice }}</td>
+                                <td style="padding-left: 10px;">{{ $cashclosing->end_invoice }}</td>
                               </tr>
                               <tr>
                                 <th>Fiscales</th>
-                                <td> {{ $cashclosing->start_tax_credit }}</td>
-                                <td> {{ $cashclosing->end_tax_credit }}</td>
+                                <td style="padding-right: 10px;">{{ $cashclosing->start_tax_credit }}</td>
+                                <td style="padding-left: 10px;">{{ $cashclosing->end_tax_credit }}</td>
                               </tr>
                               <tr>
-                              <td colspan="2"><br></td>
-                            </tr>
+                                <td colspan="2"><br></td>
+                              </tr>
+
                               <tr>
                                 <th>Saldo Inicial $:</th>
                                 <td>{{ $cashclosing->initial_balance }}</td>
