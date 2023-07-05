@@ -90,6 +90,24 @@
                                         </th>
                                     </tr>
 
+                                    <tr>
+                                        <th colspan="4">
+                                            <p align="right">EFECTIVO RECIBIDO:</p>
+                                        </th>
+                                        <th>
+                                            <p align="right">${{$sale->cash}}</p>
+                                        </th>
+                                    </tr>
+
+                                    <tr>
+                                        <th colspan="4">
+                                            <p align="right">CAMBIO:</p>
+                                        </th>
+                                        <th>
+                                            <p align="right">${{number_format($sale->cash - $sale->total, 2)}}</p>
+                                        </th>
+                                    </tr>
+
                                 </tfoot>
                                 <tbody>
                                     @foreach($saleDetails as $saleDetail)

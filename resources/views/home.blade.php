@@ -147,18 +147,13 @@
                 </div>
                 <div class="card-content">
                     <div class="ct-chart">
-                        <label for="fecha_inicioP">Fecha de inicio:</label>
-                        <input type="date" id="fecha_inicioP">
-                        <label for="fecha_finP">Fecha de fin:</label>
-                        <input type="date" id="fecha_finP">
-                        <button onclick="filtrarP()">Filtrar</button>
                         <canvas id="productosmasvendidos"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+<hr>
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">

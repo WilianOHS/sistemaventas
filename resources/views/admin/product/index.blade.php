@@ -37,7 +37,9 @@
                           <th>Id</th>
                           <th>Nombre</th>
                           <th>Stock</th>
+                          @can('change.status.products') 
                           <th>Estado</th>
+                          @endcan
                           <th>Categoría</th>
                           <th>Acciones</th>
                         </tr>
@@ -47,9 +49,14 @@
                         <tr>
                             <th scope="row">{{$product->id}}</th>
                             <td>
-                                <a href="{{route('products.show',$product)}}">{{$product->name}}</a>                                
+                                @can('product.show')
+                                <a href="{{route('products.show',$product)}}">{{$product->name}}</a>  
+                                @else
+                                    <span>{{$product->name}}</span>
+                                @endcan                               
                             </td>    
-                            <td>{{$product->stock}}</td>     
+                            <td>{{$product->stock}}</td> 
+                            @can('change.status.products') 
                             @if ($product->status == 'ACTIVE')
                             <td>
                             <a class="jsgrid-button btn btn-success" href="
@@ -67,6 +74,7 @@
                                 </a>  
                             </td>
                             @endif
+                            @endcan
 
                            
 
@@ -74,18 +82,19 @@
                             <td style="width: 20%;">
                                 {!! Form::open(['route'=>['products.destroy',
                                 $product], 'method'=>'DELETE']) !!}
-
+                                @can('product.edit') 
                                 <a class="btn btn-outline-info" href="
                                 {{route('products.edit',$product)}}"
                                 title="editar">
                                     <i class="far fa-edit"></i>
                                 </a>
-
+                                @endcan
+                                @can('product.destroy') 
                                 <button class="btn btn-outline-danger" 
                                 type="submit" title="Eliminar">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
-
+                                @endcan
                                 {!! Form::close() !!}
 
                             </td>
@@ -119,14 +128,17 @@
 			"<'row'<'col-sm-12'tr>>" +
 			"<'row'<'col-sm-5'i><'col-sm-7'p>>", 
             buttons: [
+                @can('product.create')
                 {
                     text: '<i class="fas fa-plus"></i> Nuevo Producto',
                     className: 'btn btn-info',
                     action: function ( e, dt, node, conf ) {
-                        window.location.href = "{{route('products.create')}}"
+                        window.location.href = "{{ route('products.create') }}"
                     }
                 }
+                @endcan
             ]
+
         });
     });
 </script>

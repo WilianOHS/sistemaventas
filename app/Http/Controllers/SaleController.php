@@ -54,11 +54,6 @@ class SaleController extends Controller
         return view('admin.sale.create', compact('clients', 'products', 'latestDocumentNumbers'));
     }
     
-    
-    
-    
-    
-    
     public function store(StoreRequest $request)
     {
         $sale = Sale::create($request->all()+[

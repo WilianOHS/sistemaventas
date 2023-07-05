@@ -39,7 +39,9 @@
                           <th>Id</th>
                           <th>Fecha</th>
                           <th>Total</th>
+                          @can('change.status.purchases')
                           <th>Estado</th>
+                          @endcan
                           <th style="width: 50px;">Acciones</th>
                         </tr>
                       </thead>
@@ -47,12 +49,17 @@
                         @foreach ($purchases as $purchase)
                         <tr>
                             <th scope="row">
+                            @can('purchases.show')
                               <a href="{{route('purchases.show',$purchase)}}">{{$purchase->id}}</a>
+                              @else
+                                    <span>{{$purchase->id}}</span>
+                              @endcan
                             </th>  
                             <td>
                             {{\Carbon\Carbon::parse($purchase->purchase_date)->format('d M y h:i a')}}
                             </td>
                             <td>{{$purchase->total}}</td>  
+                            @can('change.status.purchases')
                             @if ($purchase->status == 'VALID')
                             <td>
                             <a class="jsgrid-button btn btn-success" href="
@@ -69,21 +76,15 @@
                                 Desactivado <i class="fas fa-times"></i>
                                 </a>  
                             </td>
-                            @endif       
+                            @endif  
+                            @endcan     
                             <td style="width: 20%;">
-
-
-                                <!-- <button class="jsgrid-button jsgrid-delete-button unstyled-button" 
-                                type="submit" title="Eliminar">
-                                    <i class="far fa-trash-alt"></i>
-                                </button> -->
-
-                                <a href="{{route('purchases.pdf',$purchase)}}" class="btn btn-outline-danger"><i class="fas fa-file-pdf"></i></a>
-                                <!-- <a href="#" class="jsgrid-button jsgrid-edit-button"><i class="fas fa-print"></i></a> -->
-                                <a href="{{route('purchases.show',$purchase)}}" class="btn btn-outline-info"><i class="fas fa-eye"></i></a>
-                                
-        
-
+                            @can('purchases.pdf')
+                            <a href="{{route('purchases.pdf',$purchase)}}" class="btn btn-outline-danger"><i class="fas fa-file-pdf"></i></a>
+                            @endcan  
+                            @can('purchases.show')
+                            <a href="{{route('purchases.show',$purchase)}}" class="btn btn-outline-info"><i class="fas fa-eye"></i></a>
+                            @endcan  
                             </td>
                         </tr>                   
                         @endforeach
@@ -115,6 +116,7 @@
 			"<'row'<'col-sm-12'tr>>" +
 			"<'row'<'col-sm-5'i><'col-sm-7'p>>", 
             buttons: [
+                @can('purchases.create')
                 {
                     text: '<i class="fas fa-plus"></i> Nuevo',
                     className: 'btn btn-info',
@@ -122,6 +124,7 @@
                         window.location.href = "{{route('purchases.create')}}"
                     }
                 }
+                @endcan
             ]
         });
     });

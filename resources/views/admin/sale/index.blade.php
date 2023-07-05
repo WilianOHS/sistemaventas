@@ -52,7 +52,9 @@
                           <th>Fecha</th>
                           <th>Total</th>
                           <th>Tipo de documento</th>
+                          @can('change.status.sales')
                           <th>Estado</th>
+                          @endcan
                           <th style="width: 50px;">Acciones</th>
                         </tr>
                       </thead>
@@ -60,12 +62,17 @@
                         @foreach ($sales as $sale)
                         <tr>
                             <th scope="row">
+                              @can('sales.show')
                               <a href="{{route('sales.show',$sale)}}">{{$sale->id}}</a>
+                              @else
+                                    <span>{{$sale->id}}</span>
+                              @endcan
                             </th>
                             <td>{{$sale->client->name}}</td>  
                             <td>{{\Carbon\Carbon::parse($sale->sale_date)->format('d M y h:i a')}}</td>
                             <td>$ {{$sale->total}}</td>
                             <td>{{$sale->document_type}}</td>  
+                            @can('change.status.sales')
                             @if ($sale->status == 'VALID')
                             <td>
                             <a class="jsgrid-button btn btn-success" href="
@@ -83,18 +90,24 @@
                                 </a>  
                             </td>
                             @endif
-                                  
+                            @endcan   
                             <td style="width: 20%;">
-
+                            @can('sales.pdf')
                             <a href="{{route('sales.pdf', $sale)}}" class="btn btn-outline-danger"
                             title="Generar PDF"><i class="far fa-file-pdf"></i></a>
+                            @endcan
+                            @can('sales.print')
                             <!-- <a href="{{route('sales.print', $sale)}}" class="btn btn-outline-warning"
                             title="Imprimir boleta"><i class="fas fa-print"></i></a> -->
+                            @endcan
+                            @can('sales.show')
                             <a href="{{route('sales.show', $sale)}}" class="btn btn-outline-info"
                             title="Ver detalles"><i class="far fa-eye"></i></a>
+                            @endcan
+                            @can('sales.print')
                             <a href="{{route('sales.ticket', $sale)}}" class="btn btn-outline-danger"
                             title="Imprmit Ticket"><i class="fas fa-print"></i></a>
-                                   
+                            @endcan    
                             </td>
                         </tr>                   
                         @endforeach
@@ -126,13 +139,16 @@
 			"<'row'<'col-sm-12'tr>>" +
 			"<'row'<'col-sm-5'i><'col-sm-7'p>>", 
             buttons: [
+              @can('sales.create')
                 {
                     text: '<i class="fas fa-plus"></i> Nueva Venta',
                     className: 'btn btn-info',
                     action: function ( e, dt, node, conf ) {
                         window.location.href = "{{route('sales.create')}}"
                     }
-                },
+                }
+                @endcan,
+                @can('sales.exportar')
                 {
                     text: '<i class="fas fa-file-excel"></i> Excel',
                     className: 'btn btn-success',
@@ -140,6 +156,7 @@
                         window.location.href = "{{route('sales.exportar')}}"
                     }
                 }
+                @endcan
             ]
         });
     });

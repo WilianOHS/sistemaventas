@@ -91,7 +91,9 @@
                     </div>
                     
                       <div class="card-footer text-muted">
+                      @can('business.edit')
                         <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#exampleModal-2">Actualizar datos</button>
+                      @endcan
                       </div>
                 </div>
             </div>

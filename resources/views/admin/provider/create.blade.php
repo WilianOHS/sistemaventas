@@ -56,7 +56,7 @@
 
                     <div class="form-group">
                         <label for="phone">Numero de contacto 1</label>
-                        <input type="text" class="form-control phone-input" name="phone" id="phone" aria-describedby="helpId" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="9">
+                        <input type="text" class="form-control phone-input" name="phone" id="phone" aria-describedby="helpId" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="9" required>
                     </div>
 
                     <div class="form-group">

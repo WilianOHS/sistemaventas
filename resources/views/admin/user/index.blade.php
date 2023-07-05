@@ -48,25 +48,30 @@
                         <tr>
                             <th scope="row">{{$user->id}}</th>
                             <td>
-                                <a href="{{route('users.show',$user)}}">{{$user->name}}</a>                                
-                            </td>    
+                                @can('users.show')
+                                    <a href="{{route('users.show',$user)}}">{{$user->name}}</a>
+                                @else
+                                    <span>{{$user->name}}</span>
+                                @endcan
+                            </td>
                             <td>{{$user->username}}</td>
                             <td>{{$user->email}}</td>       
                             <td style="width: 20%;">
                                 {!! Form::open(['route'=>['users.destroy',
                                 $user], 'method'=>'DELETE']) !!}
-
+                                @can('users.edit')
                                 <a class="btn btn-outline-info" href="
                                 {{route('users.edit',$user)}}"
                                 title="editar">
                                     <i class="far fa-edit"></i>
                                 </a>
-
+                                @endcan
+                                @can('users.destroy')
                                 <button class="btn btn-outline-danger" 
                                 type="submit" title="Eliminar">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
-
+                                @endcan
                                 {!! Form::close() !!}
 
                             </td>
@@ -99,6 +104,7 @@
 			"<'row'<'col-sm-12'tr>>" +
 			"<'row'<'col-sm-5'i><'col-sm-7'p>>", 
             buttons: [
+                @can('users.create')
                 {
                     text: '<i class="fas fa-plus"></i> Nuevo Usuario',
                     className: 'btn btn-info',
@@ -106,6 +112,7 @@
                         window.location.href = "{{route('users.create')}}"
                     }
                 }
+                @endcan
             ]
         });
     });

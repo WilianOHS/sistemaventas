@@ -52,17 +52,17 @@
 
                     <div class="form-group">
                         <label for="year">Año</label>
-                        <input type="number" name="year" id="year" value="{{$product->year}}" class="form-control" aria-describedby="helpId" required>
+                        <input type="number" name="year" id="year" value="{{$product->year}}" class="form-control" aria-describedby="helpId">
                     </div>
 
                     <div class="form-group">
                         <label for="model">Modelo</label>
-                        <input type="text" name="model" id="model" value="{{$product->model}}" class="form-control" aria-describedby="helpId" required>
+                        <input type="text" name="model" id="model" value="{{$product->model}}" class="form-control" aria-describedby="helpId">
                     </div>
 
                     <div class="form-group">
                         <label for="marca">Marca</label>
-                        <input type="text" name="marca" id="marca" value="{{$product->marca}}" class="form-control" aria-describedby="helpId" required>
+                        <input type="text" name="marca" id="marca" value="{{$product->marca}}" class="form-control" aria-describedby="helpId">
                     </div>
 
                     <div class="form-group">

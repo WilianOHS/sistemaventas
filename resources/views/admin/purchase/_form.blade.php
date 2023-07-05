@@ -9,6 +9,11 @@
         </div>
 
         <div class="form-group">
+        <label for="code">Código de barras</label>
+        <input type="text" name="code" id="code" class="form-control" placeholder="" aria-describedby="helpId" onkeydown="handleKeyDown(event)">
+        </div>
+
+        <div class="form-group">
         <label for="product_id">Producto</label>
             <select id="product_id" class="form-control" name="product_id">
             <option value="" disabled selected>Seleccione un producto</option>

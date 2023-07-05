@@ -63,6 +63,37 @@ subtotal = [];
 
 $("#guardar").hide();
 
+function obtener_registro(code) {
+    $.ajax({
+        url: "{{ route('get_product_by_barcode') }}",
+        type: 'GET',
+        data: {
+            code: code
+        },
+        dataType: 'json',
+        success: function(data) {
+            if (data) {
+                $("#product_id").val(data.id).change();
+            } else {
+                $("#product_id").val("").change();
+            }
+        },
+        error: function() {
+            $("#product_id").val("").change();
+        }
+    });
+}
+
+
+$(document).on('keyup', '#code', function() {
+    var code = $(this).val();
+    if (code !== "") {
+        obtener_registro(code);
+    } else {
+        $("#product_id").val("").change();
+    }
+});
+
 function agregar() {
 
     product_id = $("#product_id").val();
@@ -117,5 +148,12 @@ function agregar() {
         evaluar();
     }
     
+</script>
+<script>
+function handleKeyDown(event) {
+  if (event.keyCode === 13) { // 13 es el código de tecla Enter
+    event.preventDefault(); // Evita la acción predeterminada de la tecla Enter
+  }
+}
 </script>
 @endsection

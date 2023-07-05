@@ -107,17 +107,17 @@ input:focus {
 
                     <div class="form-row">
                         <label for="year">Año</label>
-                        <input type="number" name="year" id="year" class="form-control" aria-describedby="helpId" required>
+                        <input type="number" name="year" id="year" class="form-control" aria-describedby="helpId">
                     </div>
 
                     <div class="form-group">
                         <label for="model">Modelo</label>
-                        <input type="text" name="model" id="model" class="form-control" aria-describedby="helpId" required>
+                        <input type="text" name="model" id="model" class="form-control" aria-describedby="helpId">
                     </div>
 
                     <div class="form-group">
                         <label for="marca">Marca</label>
-                        <input type="text" name="marca" id="marca" class="form-control" aria-describedby="helpId" required>
+                        <input type="text" name="marca" id="marca" class="form-control" aria-describedby="helpId">
                     </div>
 
                     <div class="form-group">

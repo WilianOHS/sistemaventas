@@ -30,12 +30,6 @@
                     <table id="clients_listing" class="table">
                       <thead>
                         <tr>
-<!-- 
-                            'name',
-                            'dui',
-                            'address',
-                            'phone',
-                            'email', -->
                           <th>Id</th>
                           <th>Nombre</th>
                           <th>DUI</th>
@@ -49,7 +43,11 @@
                         <tr>
                             <th scope="row">{{$client->id}}</th>
                             <td>
-                                <a href="{{route('clients.show',$client)}}">{{$client->name}}</a>                                
+                                @can('clients.show')
+                                <a href="{{route('clients.show',$client)}}">{{$client->name}}</a> 
+                                @else
+                                    <span>{{$client->name}}</span>
+                                @endcan                                
                             </td>    
                             <td>{{$client->dui}}</td>      
                             <td>{{$client->phone}}</td>
@@ -57,18 +55,19 @@
                             <td style="width: 20%;">
                                 {!! Form::open(['route'=>['clients.destroy',
                                 $client], 'method'=>'DELETE']) !!}
-
+                                @can('clients.edit')
                                 <a class="btn btn-outline-info" href="
                                 {{route('clients.edit',$client)}}"
                                 title="Editar">
                                     <i class="far fa-edit"></i>
                                 </a>
-
+                                @can('clients.destroy')
+                                @endcan
                                 <button class="btn btn-outline-danger" 
                                 type="submit" title="Eliminar">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
-
+                                @endcan
                                 {!! Form::close() !!}
 
                             </td>
@@ -103,6 +102,7 @@
 			"<'row'<'col-sm-12'tr>>" +
 			"<'row'<'col-sm-5'i><'col-sm-7'p>>", 
             buttons: [
+                @can('clients.create')
                 {
                     text: '<i class="fas fa-plus"></i> Nuevo',
                     className: 'btn btn-info',
@@ -110,6 +110,7 @@
                         window.location.href = "{{route('clients.create')}}"
                     }
                 }
+                @endcan
             ]
         });
     });

@@ -47,21 +47,27 @@
                         <tr>
                             <th scope="row">{{$category->id}}</th>
                             <td>
-                                                              
+                                @can('categories.show')
                                 <a href="{{route('categories.show',$category)}}">{{$category->name}}</a>
+                                @else
+                                    <span>{{$category->name}}</span>
+                                @endcan  
+                                                              
                             </td>    
                             <td>{{$category->description}}</td>      
                             <td style="width: 20%;">
                                 {!! Form::open(['route'=>['categories.destroy',
                                 $category], 'method'=>'DELETE']) !!}
-
+                                @can('categories.edit')
                                 <a href="{{route('categories.edit',$category)}}" class="btn btn-outline-info"
                                  title="Editar"><i class="far fa-edit"></i></a>
-
+                                 @endcan
+                                 @can('categories.show')
                                  <button class="btn btn-outline-danger" 
                                 type="submit" title="Eliminar">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
+                                @endcan
                                    
                             </td>
 
@@ -98,6 +104,7 @@
 			"<'row'<'col-sm-12'tr>>" +
 			"<'row'<'col-sm-5'i><'col-sm-7'p>>", 
             buttons: [
+                @can('categories.create')
                 {
                     text: '<i class="fas fa-plus"></i> Nueva Categoría',
                     className: 'btn btn-info',
@@ -105,6 +112,7 @@
                         window.location.href = "{{route('categories.create')}}"
                     }
                 }
+                @endcan
             ]
         });
     });

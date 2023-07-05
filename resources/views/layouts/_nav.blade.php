@@ -19,12 +19,15 @@
 
             </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('home')}}">
-              <i class="fa fa-home menu-icon"></i>
-              <span class="menu-title">Inicio</span>
-            </a>
-          </li>
+          @can('home.index')
+              <li class="nav-item">
+                  <a class="nav-link" href="{{ route('home') }}">
+                      <i class="fa fa-home menu-icon"></i>
+                      <span class="menu-title">Inicio</span>
+                  </a>
+              </li>
+          @endcan
+
 
           <li class="nav-item">
           <a class="nav-link" data-toggle="collapse" href="#page-layouts3" aria-expanded="false" aria-controls="page-layouts3">
@@ -52,18 +55,24 @@
             </a>
             <div class="collapse" id="page-layouts2">
               <ul class="nav flex-column sub-menu">
+              @can('categories.index')
                 <li class="nav-item"> <a class="nav-link" href="{{route('categories.index')}}">Categorías</a></li>
+                @endcan
+                @can('product.index')
                 <li class="nav-item"> <a class="nav-link" href="{{route('products.index')}}">Productos</a></li>
+                @endcan
               </ul>
             </div>
           </li>
 
+          @can('clients.index')
           <li class="nav-item">
             <a class="nav-link" href="{{route('clients.index')}}">
               <i class="fa fa-users menu-icon"></i>
               <span class="menu-title">Clientes</span>
             </a>
           </li> 
+          @endcan
 
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#page-layouts1" aria-expanded="false" aria-controls="page-layouts1">
@@ -73,34 +82,49 @@
             </a>
             <div class="collapse" id="page-layouts1">
               <ul class="nav flex-column sub-menu">
+              @can('providers.index')
                 <li class="nav-item"> <a class="nav-link" href="{{route('providers.index')}}">Proveedores</a></li>
+                @endcan
+                @can('purchases.index')
                 <li class="nav-item"> <a class="nav-link" href="{{route('purchases.index')}}">Compras</a></li>
+                @endcan
               </ul>
             </div>
           </li>
 
+          @can('sales.index')
           <li class="nav-item">
             <a class="nav-link" href="{{route('sales.index')}}">
               <i class="fa fa-plus-circle menu-icon"></i>
               <span class="menu-title">Ventas</span>
             </a>
           </li> 
+          @endcan
 
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false" aria-controls="page-layouts">
-            <i class="fa fa-cogs menu-icon"></i>
-              <span class="menu-title">Configuración</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="page-layouts">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{route('business.index')}}">Empresa</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{route('printers.index')}}">Impresora</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{route('users.index')}}">Usuarios</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{route('roles.index')}}">Roles</a></li>
-              </ul>
-            </div>
+              <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false" aria-controls="page-layouts">
+                  <i class="fa fa-cogs menu-icon"></i>
+                  <span class="menu-title">Configuración</span>
+                  <i class="menu-arrow"></i>
+              </a>
+              <div class="collapse" id="page-layouts">
+                  <ul class="nav flex-column sub-menu">
+                      @can('printers.index')
+                          <li class="nav-item"> <a class="nav-link" href="{{ route('printers.index') }}">Impresora</a></li>
+                      @endcan
+                      @can('business.index')
+                          <li class="nav-item"> <a class="nav-link" href="{{ route('business.index') }}">Empresa</a></li>
+                      @endcan
+                      @can('users.index')
+                          <li class="nav-item"> <a class="nav-link" href="{{ route('users.index') }}">Usuarios</a></li>
+                      @endcan
+                      @can('roles.index')
+                          <li class="nav-item"> <a class="nav-link" href="{{ route('roles.index') }}">Roles</a></li>
+                      @endcan
+                  </ul>
+              </div>
           </li>
+
 
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#sidebar-layouts" aria-expanded="false" aria-controls="sidebar-layouts">
@@ -110,8 +134,12 @@
             </a>
             <div class="collapse" id="sidebar-layouts">
               <ul class="nav flex-column sub-menu">
+              @can('reports.day')
                 <li class="nav-item"> <a class="nav-link" href="{{route('reports.day')}}">Reportes por día</a></li>
+                @endcan
+                @can('reports.date')
                 <li class="nav-item"> <a class="nav-link" href="{{route('reports.date')}}">Reportes por fecha</a></li>
+                @endcan
               </ul>
             </div>
           </li>

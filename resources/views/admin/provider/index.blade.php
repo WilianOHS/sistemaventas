@@ -48,25 +48,30 @@
                         <tr>
                             <th scope="row">{{$provider->id}}</th>
                             <td>
-                                <a href="{{route('providers.show',$provider)}}">{{$provider->name}}</a>                                
+                                @can('providers.show')
+                                <a href="{{route('providers.show',$provider)}}">{{$provider->name}}</a> 
+                                @else
+                                    <span>{{$provider->name}}</span>
+                                @endcan                               
                             </td>    
                             <td>{{$provider->email}}</td>      
                             <td>{{$provider->phone}}</td>
                             <td style="width: 20%;">
                                 {!! Form::open(['route'=>['providers.destroy',
                                 $provider], 'method'=>'DELETE']) !!}
-
+                                @can('providers.edit')
                                 <a class="btn btn-outline-info" href="
                                 {{route('providers.edit',$provider)}}"
                                 title="Editar">
                                     <i class="far fa-edit"></i>
                                 </a>
-
+                                @can('providers.destroy')
+                                @endcan
                                 <button class="btn btn-outline-danger" 
                                 type="submit" title="Eliminar">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
-
+                                @endcan
                                 {!! Form::close() !!}
 
                             </td>
@@ -101,6 +106,7 @@
 			"<'row'<'col-sm-12'tr>>" +
 			"<'row'<'col-sm-5'i><'col-sm-7'p>>", 
             buttons: [
+                @can('providers.create')
                 {
                     text: '<i class="fas fa-plus"></i> Nuevo',
                     className: 'btn btn-info',
@@ -108,6 +114,7 @@
                         window.location.href = "{{route('providers.create')}}"
                     }
                 }
+                @endcan
             ]
         });
     });

@@ -38,7 +38,9 @@
                                 <i class="fas fa-ellipsis-v"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right">
-                            <a href="{{route('roles.create')}}" class="dropdown-item">Agregar</a>
+                          @can('roles.create')
+                          <a href="{{route('roles.create')}}" class="dropdown-item">Agregar</a>
+                          @endcan
                           </div>
                         </div>
                     </div>
@@ -58,24 +60,29 @@
                         <tr>
                             <th scope="row">{{$role->id}}</th>
                             <td>
-                                <a href="{{route('roles.show',$role)}}">{{$role->name}}</a>                                
+                              @can('roles.show')
+                              <a href="{{route('roles.show',$role)}}">{{$role->name}}</a> 
+                                @else
+                                    <span>{{$role->name}}</span>
+                                @endcan                    
                             </td>    
                             <td>{{$role->description}}</td>      
                             <td style="width:50px">
                                 {!! Form::open(['route'=>['roles.destroy',
                                 $role], 'method'=>'DELETE']) !!}
-
+                                @can('roles.edit')
                                 <a class="jsgrid-button jsgrid-edit-button" href="
                                 {{route('roles.edit',$role)}}"
                                 title="editar">
                                     <i class="far fa-edit"></i>
                                 </a>
-
+                                  @endcan
+                                  @can('roles.destroy')
                                 <button class="jsgrid-button jsgrid-delete-button unstyled-button" 
                                 type="submit" title="Eliminar">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
-
+                                @endcan
                                 {!! Form::close() !!}
 
                             </td>
