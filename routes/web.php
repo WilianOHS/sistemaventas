@@ -72,6 +72,8 @@ Route::resource('roles', RoleController::class)->names('roles');
 
 Route::resource('cashopening', CashOpeningController::class)->names('cashopening');
 Route::resource('cashclosing', CashClosingController::class)->names('cashclosing');
+Route::resource('cashclosingz', CashClosingzController::class)->names('cashclosingz');
+
 
 Route::get('/forgot-password', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');

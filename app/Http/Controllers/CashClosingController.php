@@ -69,7 +69,7 @@ class CashClosingController extends Controller
             ->first() ?? 0;
     
         // Obtener el primer crédito fiscal del día o asignar 0 si no existe
-        $firstTaxCredit = Sale::where('document_type', 'Crédito Fiscal')
+        $firstTaxCredit = Sale::where('document_type', 'credito_fiscal')
             ->whereDate('sale_date', $closingsDate)
             ->orderBy('document_number', 'asc')
             ->first() ?? 0;
@@ -87,7 +87,7 @@ class CashClosingController extends Controller
             ->first() ?? 0;
     
         // Obtener el último crédito fiscal del día o asignar 0 si no existe
-        $lastTaxCredit = Sale::where('document_type', 'Crédito Fiscal')
+        $lastTaxCredit = Sale::where('document_type', 'credito_fiscal')
             ->whereDate('sale_date', $closingsDate)
             ->orderBy('document_number', 'desc')
             ->first() ?? 0;
@@ -169,8 +169,6 @@ class CashClosingController extends Controller
     
         return view('admin.cashclosing.show', compact('cashclosing', 'cashOpening', 'totalSales', 'subtotal', 'cashTotal', 'totalCashSales', 'totalCardSales', 'sale', 'difference'));
     }
-    
-    
     
     
 }

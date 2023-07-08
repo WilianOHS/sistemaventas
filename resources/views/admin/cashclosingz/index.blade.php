@@ -40,22 +40,20 @@
                                     <th>Usuario</th>
                                     <th>Fecha de Cierre</th>
                                     <th>Hora de Cierre</th>
-                                    <th>Dinero en Caja</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($cashClosings as $cashClosing)
+                                @foreach ($cashClosingzs as $cashClosingz)
                                 <tr>
-                                    <th scope="row">{{ $cashClosing->id }}</th>
-                                    <td>{{ $cashClosing->type }}</td>
-                                    <td>{{ $cashClosing->user->name }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($cashClosing->closings_date)->format('d-m-Y') }}</td>
-                                    <td>{{ $cashClosing->closings_hour }}</td>
-                                    <td>{{ $cashClosing->cash }}</td>
+                                    <th scope="row">{{ $cashClosingz->id }}</th>
+                                    <td>{{ $cashClosingz->type }}</td>
+                                    <td>{{ $cashClosingz->user->name }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($cashClosingz->closings_date)->format('d-m-Y') }}</td>
+                                    <td>{{ $cashClosingz->closings_hour }}</td>
                                     <td style="width: 20%;">
 
-                                    <a href="{{route('cashclosing.show', $cashClosing)}}" class="btn btn-outline-info"
+                                    <a href="{{route('cashclosingz.show', $cashClosingz)}}" class="btn btn-outline-info"
                                          title="Ver detalles"><i class="far fa-eye"></i></a>
 
                                     </td>
@@ -88,10 +86,10 @@
 			"<'row'<'col-sm-5'i><'col-sm-7'p>>", 
             buttons: [
                 {
-                    text: '<i class="fas fa-plus"></i> Nuevo Cierre de Caja C',
+                    text: '<i class="fas fa-plus"></i> Nuevo Cierre de Caja Z',
                     className: 'btn btn-info',
                     action: function (e, dt, node, conf) {
-                        window.location.href = "{{ route('cashclosing.create') }}"
+                        window.location.href = "{{ route('cashclosingz.create') }}"
                     }
                 }
             ]

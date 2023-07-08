@@ -49,7 +49,13 @@ class Handler extends ExceptionHandler
      * @throws \Throwable
      */
     public function render($request, Throwable $exception)
-    {
-        return parent::render($request, $exception);
+{
+    if ($exception instanceof \Shinobi\Exceptions\UnauthorizedException) {
+        return redirect()->back()->with('error', 'No tienes permiso para acceder a esta página.');
     }
+
+    return parent::render($request, $exception);
+}
+
+
 }

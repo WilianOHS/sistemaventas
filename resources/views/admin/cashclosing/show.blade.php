@@ -22,9 +22,13 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-group row">
-                        <div class="col-md-4 text-center">
+                    <div class="col-md-4 text-center">
                             <label class="form-control-label" style="font-size: 18px"><strong>Corte Tipo</strong></label>
                             <p style="font-size: 18px">{{ $cashclosing->type }}</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <label class="form-control-label" style="font-size: 18px"><strong>Corte de caja</strong></label>
+                            <p style="font-size: 18px">{{ $cashclosing->id }}</p>
                         </div>
                         <div class="col-md-4 text-center">
                             <label class="form-control-label" style="font-size: 18px"><strong>Empleado</strong></label>

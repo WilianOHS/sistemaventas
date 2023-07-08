@@ -41,7 +41,10 @@
                       <a class="nav-link" href="{{ route('cashopening.index') }}">Apertura de caja</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="{{ route('cashclosing.index') }}">Cierre de caja</a>
+                      <a class="nav-link" href="{{ route('cashclosing.index') }}">Cierre de caja c</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ route('cashclosingz.index') }}">Cierre de caja z</a>
                   </li>
               </ul>
           </div>
