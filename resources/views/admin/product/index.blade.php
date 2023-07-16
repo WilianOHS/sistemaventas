@@ -75,13 +75,9 @@
                             </td>
                             @endif
                             @endcan
-
-                           
-
                             <td>{{$product->category->name}}</td>
                             <td style="width: 20%;">
-                                {!! Form::open(['route'=>['products.destroy',
-                                $product], 'method'=>'DELETE']) !!}
+                            {!! Form::open(['route'=>['products.destroy', $product], 'method'=>'DELETE', 'id' => 'delete-product-form-' . $product->id]) !!}
                                 @can('product.edit') 
                                 <a class="btn btn-outline-info" href="
                                 {{route('products.edit',$product)}}"
@@ -90,13 +86,12 @@
                                 </a>
                                 @endcan
                                 @can('product.destroy') 
-                                <button class="btn btn-outline-danger" 
-                                type="submit" title="Eliminar">
+                                <button class="btn btn-outline-danger" type="button" title="Eliminar"
+                                    onclick="confirmDelete('{{ $product->id }}')">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
                                 @endcan
                                 {!! Form::close() !!}
-
                             </td>
                         </tr>                   
                         @endforeach
@@ -104,9 +99,6 @@
                     </table>
                   </div>
                 </div>
-
-
-
             </div>
         </div>
     </div>
@@ -141,5 +133,12 @@
 
         });
     });
+</script>
+<script>
+    function confirmDelete(productId) {
+        if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+            document.getElementById('delete-product-form-' + productId).submit();
+        }
+    }
 </script>
 @endsection

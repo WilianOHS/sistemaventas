@@ -149,8 +149,77 @@ public function ticket(Sale $sale)
      }
 }
 
+public function envoice(Sale $sale)
+{
+    $subtotal = 0;
+    $saleDetails = $sale->saleDetails;
+    foreach ($saleDetails as $saleDetail){
+        $subtotal += $saleDetail->quantity * $saleDetail->price - (($saleDetail->quantity * $saleDetail->price)*($saleDetail->discount/100));
+    }
+    
+    // Convertir la fecha a un objeto Carbon
+    $saleDate = Carbon::parse($sale->sale_date);
+    
+     try {
+    //     $printer_name = $sale->printer->name;
+    //      $connector = new WindowsPrintConnector($printer_name);
+    //      $printer = new Printer($connector);
+        
+    //      // Establecer los ajustes del formato de impresión
+    //      $printer->setJustification(Printer::JUSTIFY_CENTER);
+        
+    //      // Imprimir el contenido del ticket
+    //      $printer->text("Fecha: " . $saleDate->format('d/m/Y h:i A') . "\n");
+    //      $printer->text($business->name . "\n");
+    //      $printer->text($business->address . "\n");
+    //      $printer->text("Tel: " . $business->number . "\n");
+        
+    // //     // ... Más contenido del ticket ...
+        
+    //      $printer->cut();
+    //      $printer->close();
+        
+        return view('admin.sale.envoice', compact('sale', 'saleDetails', 'subtotal','saleDate'));
+     } catch (\Throwable $th) {
+         return redirect()->back();
+     }
+}
 
-
+public function tax_credit(Sale $sale)
+{
+    $subtotal = 0;
+    $saleDetails = $sale->saleDetails;
+    foreach ($saleDetails as $saleDetail){
+        $subtotal += $saleDetail->quantity * $saleDetail->price - (($saleDetail->quantity * $saleDetail->price)*($saleDetail->discount/100));
+    }
+    
+    // Convertir la fecha a un objeto Carbon
+    $saleDate = Carbon::parse($sale->sale_date);
+    
+     try {
+    //     $printer_name = $sale->printer->name;
+    //      $connector = new WindowsPrintConnector($printer_name);
+    //      $printer = new Printer($connector);
+        
+    //      // Establecer los ajustes del formato de impresión
+    //      $printer->setJustification(Printer::JUSTIFY_CENTER);
+        
+    //      // Imprimir el contenido del ticket
+    //      $printer->text("Fecha: " . $saleDate->format('d/m/Y h:i A') . "\n");
+    //      $printer->text($business->name . "\n");
+    //      $printer->text($business->address . "\n");
+    //      $printer->text("Tel: " . $business->number . "\n");
+        
+    // //     // ... Más contenido del ticket ...
+        
+    //      $printer->cut();
+    //      $printer->close();
+        
+        return view('admin.sale.tax_credit', compact('sale', 'saleDetails', 'subtotal','saleDate'));
+     } catch (\Throwable $th) {
+         return redirect()->back();
+     }
+}
 
     public function print(Sale $sale){
         try {

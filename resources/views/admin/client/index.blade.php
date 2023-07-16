@@ -53,8 +53,7 @@
                             <td>{{$client->phone}}</td>
                             <td>{{$client->email}}</td>
                             <td style="width: 20%;">
-                                {!! Form::open(['route'=>['clients.destroy',
-                                $client], 'method'=>'DELETE']) !!}
+                            {!! Form::open(['route'=>['clients.destroy', $client], 'method'=>'DELETE', 'onsubmit' => 'return confirm("¿Estás seguro de que deseas eliminar este cliente?")']) !!}
                                 @can('clients.edit')
                                 <a class="btn btn-outline-info" href="
                                 {{route('clients.edit',$client)}}"

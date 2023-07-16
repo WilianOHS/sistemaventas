@@ -112,7 +112,9 @@
                                                             <th>Id</th>
                                                             <th>Fecha</th>
                                                             <th>Total</th>
+                                                            @can('change.status.sales')
                                                             <th>Estado</th>
+                                                            @endcan
                                                             <th style="width:50px;">Acciones</th>
                                                         </tr>
                                                     </thead>
@@ -124,6 +126,7 @@
                                                         </th>
                                                         <td>{{\Carbon\Carbon::parse($sale->sale_date)->format('d M y h:i a')}}</td>
                                                         <td>$ {{$sale->total}}</td>  
+                                                        @can('change.status.sales')
                                                         @if ($sale->status == 'VALID')
                                                         <td>
                                                         <a class="jsgrid-button btn btn-success" href="
@@ -141,6 +144,7 @@
                                                             </a>  
                                                         </td>
                                                         @endif
+                                                        @endcan
                                                             
                                                         <td style="width: 20%;">
 

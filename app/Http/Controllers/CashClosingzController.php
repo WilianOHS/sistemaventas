@@ -111,9 +111,20 @@ public function create()
     public function show(CashClosingz $cashclosingz)
 {
     // Cálculo de los totales
-    $totalTickets = $cashclosingz->end_ticket - $cashclosingz->start_ticket + 1;
-    $totalFacturas = $cashclosingz->end_invoice - $cashclosingz->start_invoice + 1;
-    $totalFiscales = $cashclosingz->end_tax_credit - $cashclosingz->start_tax_credit + 1;
+    if ($cashclosingz->end_ticket == 0 && $cashclosingz->start_ticket == 0)
+    {$totalTickets = 0;}
+    else
+    {$totalTickets = $cashclosingz->end_ticket - $cashclosingz->start_ticket + 1;}
+
+    if ($cashclosingz->end_invoice == 0 && $cashclosingz->start_invoice == 0)
+    {$totalFacturas = 0;}
+    else
+    {$totalFacturas = $cashclosingz->end_invoice - $cashclosingz->start_invoice + 1;}
+    
+    if ($cashclosingz->end_tax_credit == 0 && $cashclosingz->start_tax_credit == 0)
+    {$totalFiscales = 0;}
+    else
+    {$totalFiscales = $cashclosingz->end_tax_credit - $cashclosingz->start_tax_credit + 1;}
 
     return view('admin.cashclosingz.show', compact('cashclosingz', 'totalTickets', 'totalFacturas', 'totalFiscales'));
 }

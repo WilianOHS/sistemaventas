@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','información de producto')
+@section('title','Información de producto')
 @section('styles')
 <style>
     .img-xl {
@@ -57,8 +57,12 @@
                             Estado
                           </span>
                           <span class="float-right text-muted">
-                          {{$product->status}}
-                          </span>
+                            @if ($product->status == 'ACTIVE')
+                                Activo
+                            @else
+                                Desactivado
+                            @endif
+                            </span>
                         </p>
                         <p class="clearfix">
                           <span class="float-left">
@@ -81,13 +85,12 @@
                             </a>
                           </span>
                         </p>
-                      </div>
-                            
-                            @if ($product->status == 'ACTIVE')
-                            <button class="btn btn-success btn-block">{{$product->status}}</button>
-                            @else
-                            <button class="btn btn-warning btn-block">{{$product->status}}</button>
-                            @endif
+                      </div>        
+                        @if ($product->status == 'ACTIVE')
+                            <button class="btn btn-success btn-block">ACTIVO</button>
+                        @else
+                            <button class="btn btn-warning btn-block">DESACTIVADO</button>
+                        @endif
                         </div>      
                         <div class="col-lg-8 pl-lg-5">
                             <div class="d-flex justify-content-between">

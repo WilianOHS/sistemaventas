@@ -34,23 +34,23 @@
         <input type="text" name="start_ticket" id="start_ticket" value="{{ $firstTicket->document_number ?? '0' }}" class="form-control" readonly>
     </div>
     <div class="form-group col-md-3">
-        <label for="end_ticket">Último ticket</label>
-        <input type="text" name="end_ticket" id="end_ticket" value="{{ $lastTicket->document_number ?? '0' }}" class="form-control" readonly>
+        <label for="start_invoice">Primera factura</label>
+        <input type="text" name="start_invoice" id="start_invoice" value="{{ $firstInvoice->document_number ?? '0' }}" class="form-control" readonly>
+    </div>
+    <div class="form-group col-md-3">
+        <label for="start_tax_credit">Primer crédito fiscal</label>
+        <input type="text" name="start_tax_credit" id="start_tax_credit" value="{{ $firstTaxCredit->document_number ?? '0' }}" class="form-control" readonly>
     </div>
 </div>
 
 <div class="form-row">
     <div class="form-group col-md-3">
-        <label for="start_invoice">Primera factura</label>
-        <input type="text" name="start_invoice" id="start_invoice" value="{{ $firstInvoice->document_number ?? '0' }}" class="form-control" readonly>
+        <label for="end_ticket">Último ticket</label>
+        <input type="text" name="end_ticket" id="end_ticket" value="{{ $lastTicket->document_number ?? '0' }}" class="form-control" readonly>
     </div>
     <div class="form-group col-md-3">
         <label for="end_invoice">Última factura</label>
         <input type="text" name="end_invoice" id="end_invoice" value="{{ $lastInvoice->document_number ?? '0' }}" class="form-control" readonly>
-    </div>
-    <div class="form-group col-md-3">
-        <label for="start_tax_credit">Primer crédito fiscal</label>
-        <input type="text" name="start_tax_credit" id="start_tax_credit" value="{{ $firstTaxCredit->document_number ?? '0' }}" class="form-control" readonly>
     </div>
     <div class="form-group col-md-3">
         <label for="end_tax_credit">Último crédito fiscal</label>

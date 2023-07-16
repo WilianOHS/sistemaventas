@@ -43,6 +43,8 @@ Route::get('sales/pdf/{sale}', 'SaleController@pdf')->name('sales.pdf');
 Route::get('sales/print/{sale}', 'SaleController@print')->name('sales.print');
 
 Route::get('sales/ticket/{sale}', 'SaleController@ticket')->name('sales.ticket');
+Route::get('sales/envoice/{sale}', 'SaleController@envoice')->name('sales.envoice');
+Route::get('sales/tax_credit/{sale}', 'SaleController@tax_credit')->name('sales.tax_credit');
 
 Route::get('exportar/', 'SaleController@exportar')->name('sales.exportar');
 

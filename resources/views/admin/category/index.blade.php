@@ -56,15 +56,14 @@
                             </td>    
                             <td>{{$category->description}}</td>      
                             <td style="width: 20%;">
-                                {!! Form::open(['route'=>['categories.destroy',
-                                $category], 'method'=>'DELETE']) !!}
+                            {!! Form::open(['route'=>['categories.destroy', $category], 'method'=>'DELETE', 'id' => 'delete-category-form-' . $category->id]) !!}
                                 @can('categories.edit')
                                 <a href="{{route('categories.edit',$category)}}" class="btn btn-outline-info"
                                  title="Editar"><i class="far fa-edit"></i></a>
                                  @endcan
-                                 @can('categories.show')
-                                 <button class="btn btn-outline-danger" 
-                                type="submit" title="Eliminar">
+                                 @can('categories.destroy')
+                                 <button class="btn btn-outline-danger" type="button" title="Eliminar"
+                                    onclick="confirmDelete('{{ $category->id }}')">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
                                 @endcan
@@ -116,5 +115,12 @@
             ]
         });
     });
+</script>
+<script>
+    function confirmDelete(categoryId) {
+        if (confirm('¿Estás seguro de que deseas eliminar esta categoría?')) {
+            document.getElementById('delete-category-form-' + categoryId).submit();
+        }
+    }
 </script>
 @endsection

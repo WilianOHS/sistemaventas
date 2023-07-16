@@ -68,7 +68,7 @@
                             <tr>
                                 <th>Total</th>
                                 <td style="padding-right: 10px;">
-                                    {{ $cashclosingz->total_sale_ticket + $cashclosingz->total_sale_invoice + $cashclosingz->total_sale_tax_credit }}
+                                    {{ number_format($cashclosingz->total_sale_ticket + $cashclosingz->total_sale_invoice + $cashclosingz->total_sale_tax_credit, 2) }}
                                 </td>
                             </tr>
                             <tr>
@@ -124,15 +124,13 @@
                                 </td>
                             </tr>
                             <tr>
-    <th>Total</th>
-    <td style="padding-right: 10px;"></td>
-    <td style="padding-left: 10px;"></td>
-    <td style="padding-left: 10px;">
-        {{ $totalTickets + $totalFacturas + $totalFiscales }}
-    </td>
-</tr>
-
-
+                                <th>Total</th>
+                                <td style="padding-right: 10px;"></td>
+                                <td style="padding-left: 10px;"></td>
+                                <td style="padding-left: 10px;">
+                                    {{ $totalTickets + $totalFacturas + $totalFiscales }}
+                                </td>
+                            </tr>
                               <tr>
                                 <td colspan="2"><br></td>
                               </tr>

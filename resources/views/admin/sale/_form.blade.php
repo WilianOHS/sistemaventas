@@ -30,14 +30,15 @@
 </div>
     <hr>
     <div class="form-row">
-  <label for="client_id">Cliente</label>
-  <select id="client_id" class="form-control" name="client_id" required>
-    <option value="" disabled selected>Seleccione un cliente</option>
-    @foreach ($clients as $client)
-      <option value="{{$client->id}}">{{$client->name}}</option>
-    @endforeach
-  </select>
+    <label for="client_id">Cliente</label>
+    <select id="client_id" class="form-control selectpicker" data-live-search="true" name="client_id" required>
+        <option value="" disabled selected>Seleccione un cliente (Asegurese de tener registrado el cliente)</option>
+        @foreach ($clients as $client)
+            <option value="{{$client->id}}">{{$client->name}}</option>
+        @endforeach
+    </select>
 </div>
+
 
 
 <hr>
@@ -47,15 +48,16 @@
 </div>
 <hr>
 
-        <div class="form-row">
-        <label for="product_id">Producto</label>
-            <select class="form-control" data-live-search="true" id="product_id" name="product_id">
-            <option value="" disabled selected>Seleccione un producto</option>
-            @foreach ($products as $product)
+<div class="form-row">
+    <label for="product_id">Producto</label>
+    <select class="form-control selectpicker" data-live-search="true" id="product_id" name="product_id">
+        <option value="" disabled selected>Seleccione un producto</option>
+        @foreach ($products as $product)
             <option value="{{$product->id}}_{{$product->stock}}_{{$product->sale_price}}">{{$product->name}}</option>
-            @endforeach
-            </select>
-        </div>
+        @endforeach
+    </select>
+</div>
+
         <hr>
 
         <div class="form-row">

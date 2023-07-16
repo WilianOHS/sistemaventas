@@ -57,16 +57,15 @@
                             <td>{{$provider->email}}</td>      
                             <td>{{$provider->phone}}</td>
                             <td style="width: 20%;">
-                                {!! Form::open(['route'=>['providers.destroy',
-                                $provider], 'method'=>'DELETE']) !!}
+                            {!! Form::open(['route'=>['providers.destroy', $provider], 'method'=>'DELETE', 'onsubmit' => 'return confirm("¿Estás seguro de que deseas eliminar este proveedor?")']) !!}
                                 @can('providers.edit')
                                 <a class="btn btn-outline-info" href="
                                 {{route('providers.edit',$provider)}}"
                                 title="Editar">
                                     <i class="far fa-edit"></i>
-                                </a>
-                                @can('providers.destroy')
+                                </a>                                
                                 @endcan
+                                @can('providers.destroy')
                                 <button class="btn btn-outline-danger" 
                                 type="submit" title="Eliminar">
                                     <i class="far fa-trash-alt"></i>

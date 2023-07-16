@@ -38,7 +38,7 @@
 
                     <div class="form-group">
                         <label for="email">Correo electrónico</label>
-                        <input type="email" class="form-control" name="email" id="email" value="{{$provider->email}}" aria-describedby="emailhelpId" placeholder="ejemplo@gmail.com" required>
+                        <input type="email" class="form-control" name="email" id="email" value="{{$provider->email}}" aria-describedby="emailhelpId" placeholder="ejemplo@gmail.com">
                     </div>
 
                     <div class="form-group">
@@ -48,17 +48,17 @@
 
                     <div class="form-group">
                         <label for="address">Dirección 1</label>
-                        <input type="text" class="form-control" name="address" id="address" value="{{$provider->address}}" aria-describedby="helpId" required>
+                        <input type="text" class="form-control" name="address" id="address" value="{{$provider->address}}" aria-describedby="helpId">
                     </div>
 
                     <div class="form-group">
                         <label for="second_address">Dirección 2</label>
-                        <input type="text" class="form-control" name="second_address" id="second_address" value="{{$provider->second_address}}" aria-describedby="helpId" required>
+                        <input type="text" class="form-control" name="second_address" id="second_address" value="{{$provider->second_address}}" aria-describedby="helpId">
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Numero de contacto 1</label>
-                        <input type="text" class="form-control phone-input" name="phone" id="phone" value="{{$provider->phone}}" aria-describedby="helpId" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="9">
+                        <input type="text" class="form-control phone-input" name="phone" id="phone" value="{{$provider->phone}}" aria-describedby="helpId" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="9" required>
                     </div>
 
                     <div class="form-group">

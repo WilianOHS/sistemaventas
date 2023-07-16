@@ -73,17 +73,21 @@
 	<header>
         <div>
 			<h1>Reporte de venta</h1>
-			<p><strong>Número de venta:</strong> {{$sale->id}}</p>
+			<p><strong>Tipo de comprobante:</strong> 
+			@if($sale->document_type == 'credito_fiscal')
+                Crédito Fiscal
+            @else
+                {{$sale->document_type}}
+            @endif</p>
+			<p><strong>Número de comprobante:</strong> {{$sale->document_number}}</p>
 		</div>
 		<div>
 			<p><strong>DATOS DEL VENDEDOR</strong></p>
 			<p><strong>Nombre:</strong> {{$sale->user->name}}</p>
-			<!-- <p>Email: {{$sale->user->email}}</p> -->
 		</div>
         <div>
 			<p><strong>DATOS DEL CLIENTE</strong></p>
 			<p><strong>Nombre:</strong> {{$sale->client->name}}</p>
-			<!-- <p>Email: {{$sale->user->email}}</p> -->
 		</div>
 	</header>
 	<section>

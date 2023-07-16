@@ -45,7 +45,13 @@
                         </div>
                         <div class="col-md-4 text-center">
                             <label class="form-control-label" style="font-size: 18px"><strong>Tipo de documento</strong></label>
-                            <p style="font-size: 18px">{{$sale->document_type}}</p>
+                            <p style="font-size: 18px">
+                                @if($sale->document_type == 'credito_fiscal')
+                                    Crédito Fiscal
+                                @else
+                                    {{$sale->document_type}}
+                                @endif
+                            </p>
                         </div>
                         <div class="col-md-4 text-center">
                             <label class="form-control-label" style="font-size: 18px"><strong>Número de documento</strong></label>

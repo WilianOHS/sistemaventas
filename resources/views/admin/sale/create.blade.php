@@ -177,6 +177,16 @@ $(document).on('keyup', '#code', function() {
     }
 });
 
+$(document).on('change', '#product_id', function() {
+    var selectedProduct = $(this).val();
+    if (selectedProduct) {
+        var parts = selectedProduct.split("_");
+        var code = parts[0];
+        $("#code").val(code);
+    } else {
+        $("#code").val("");
+    }
+});
 
 
 function agregar() {
@@ -345,5 +355,11 @@ function handleKeyDown(event) {
     event.preventDefault(); // Evita la acción predeterminada de la tecla Enter
   }
 }
+</script>
+<script>
+  $(document).ready(function() {
+    $('.selectpicker').selectpicker();
+});
+
 </script>
 @endsection

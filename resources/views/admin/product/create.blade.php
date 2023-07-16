@@ -69,18 +69,18 @@ input:focus {
                 <div class="card-body">
                   
                     {!! Form::open(['route'=>'products.store','method'=>'POST','files'=>true]) !!}
-                    <div class="form-group">
+                    <div class="form-row">
                         <label for="name">Nombre</label>
                         <input type="text" name="name" id="name" class="form-control" aria-describedby="helpId" required>
                     </div>
 
 
-                    <div class="form-group">
+                    <div class="form-row">
                         <label for="code">Código de barra</label>
                         <input type="text" name="code" id="code" class="form-control" aria-describedby="helpId">
                     </div>
-                    <div class="form-group">
-                        <label for="sale_price">Precio de venta</label>
+                    <div class="form-row">
+                        <label for="sale_price">Precio unitario de venta</label>
                         <input type="number" name="sale_price" id="sale_price" class="form-control" aria-describedby="helpId" step=".01" required>
                     </div>
 
@@ -91,6 +91,9 @@ input:focus {
                             <option value="" disabled selected>Seleccione una presentación</option>
                             <option value="Unidad">Unidad</option>
                             <option value="Peso">Peso</option>
+                            <option value="Volumen">Volumen</option>
+                            <option value="Longitud">Longitud</option>
+                            <option value="Área">Área</option>
                             </select>
                         </div>
                         <div class="col">
@@ -99,28 +102,26 @@ input:focus {
                         </div>
                         <div class="col">
                             <label for="weight">Cantidad</label>
-                            <input type="number" name="weight" id="weight" class="form-control" aria-describedby="helpId" style="height: 45px" required>
+                            <input type="number" name="weight" id="weight" class="form-control" aria-describedby="helpId" style="height: 45px" step=".01" required>
                         </div>
-                        
-
                     </div>
 
                     <div class="form-row">
-                        <label for="year">Año</label>
-                        <input type="number" name="year" id="year" class="form-control" aria-describedby="helpId">
+                        <div class="col">
+                            <label for="year">Año</label>
+                            <input type="number" name="year" id="year" class="form-control" aria-describedby="helpId">
+                        </div>
+                        <div class="col">
+                            <label for="model">Modelo</label>
+                            <input type="text" name="model" id="model" class="form-control" aria-describedby="helpId">
+                        </div>
+                        <div class="col">
+                            <label for="marca">Marca</label>
+                            <input type="text" name="marca" id="marca" class="form-control" aria-describedby="helpId">
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="model">Modelo</label>
-                        <input type="text" name="model" id="model" class="form-control" aria-describedby="helpId">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="marca">Marca</label>
-                        <input type="text" name="marca" id="marca" class="form-control" aria-describedby="helpId">
-                    </div>
-
-                    <div class="form-group">
+                    <div class="form-row">
                         <label for="category_id">Categoría</label>
                         <select id="category_id" class="form-control" name="category_id">
                             @foreach ($categories as $category)
@@ -129,7 +130,7 @@ input:focus {
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-row">
                         <label for="provider_id">Proveedor</label>
                         <select id="provider_id" class="form-control" name="provider_id">
                             @foreach ($providers as $provider)
@@ -141,7 +142,7 @@ input:focus {
                   <div class="card-body">
                         <h4 class="card-title d-flex">Imagen de producto
                             <small class="ml-auto align-self-end">
-                            <a href="dropify.html" class="font-weight-light" target="_blank">Seleccionar Archivo</a>
+                            <!-- <a href="dropify.html" class="font-weight-light" target="_blank">Seleccionar Archivo</a> -->
                             </small>
                         </h4>
                         <input type="file" name="picture" id="picture" class="dropify" />
@@ -167,10 +168,13 @@ input:focus {
 {!! Html::script('melody/js/data-table.js') !!}
 {!! Html::script('melody/js/dropify.js') !!}
 <script>
-    var presentations={
-      Unidad:['Unidad','Metro','Yarda','Pie'],
-      Peso:['Libra','Kilogramo','Onza']
-    }
+    var presentations = {
+    Unidad: ['Unidad', 'Trío', 'Cuarteto', 'Quinteto', 'Media docena', 'Decena', 'Docena', 'Veintena', 'Cincuentena','Centena'],
+    Peso: ['Libra', 'Kilogramo', 'Onza', 'Gramo', 'Miligramo', 'Tonelada', 'Quintal', 'Stone', 'Arroba'],
+    Volumen: ['Litro', 'Mililitro', 'Galón', 'Barril', 'Taza', 'Cucharada', 'Cucharadita'],
+    Longitud: ['Centímetro', 'Milímetro', 'Pulgada', 'Metro', 'Kilómetro', 'Milla', 'Yarda','Pie'],
+    Área: ['Metro cuadrado', 'Kilómetro cuadrado', 'Hectárea', 'Acre', 'Pulgada cuadrada', 'Pie cuadrado', 'Yarda cuadrada']
+    };
     var main= document.getElementById('m_menu');
     var sub= document.getElementById('s_menu');
 
