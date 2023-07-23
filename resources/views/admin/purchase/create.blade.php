@@ -1,6 +1,7 @@
 @extends('layouts.admin')
  @section('title','Registro de compra')
  @section('styles')
+ {!! Html::style('bootstrap-select-1.13.14/dist/css/bootstrap-select.min.css') !!}
  @endsection
  @section('options')
 @endsection
@@ -26,9 +27,6 @@
                 {!! Form::open(['route'=>'purchases.store','method'=>'POST']) !!}
                 <div class="card-body">
                   
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Registro de compra</h4>    
-                    </div>
                     @include('admin.purchase._form')
                     
                    
@@ -48,6 +46,8 @@
 @section('scripts')
 {!! Html::script('melody/js/alerts.js') !!}
 {!! Html::script('melody/js/avgrund.js') !!}
+{!! Html::script('bootstrap-select-1.13.14/dist/js/bootstrap-select.min.js') !!}
+
 
 <script>
 
@@ -63,36 +63,52 @@ subtotal = [];
 
 $("#guardar").hide();
 
+var product_id1 = $('#product_id1');
+
+product_id1.change(function() {
+    $.ajax({
+        url: "{{ route('get_products_by_id') }}",
+        method: 'GET',
+        data: {
+            product_id: product_id1.val(),
+        },
+        success: function(data) {
+            $("#code").val(data.code);
+        }
+    });
+});
+
+$(obtener_registro());
+
 function obtener_registro(code) {
     $.ajax({
-        url: "{{ route('get_product_by_barcode') }}",
+        url: "{{ route('get_products_by_barcode') }}",
         type: 'GET',
         data: {
             code: code
         },
         dataType: 'json',
         success: function(data) {
-            if (data) {
-                $("#product_id").val(data.id).change();
-            } else {
-                $("#product_id").val("").change();
-            }
+            console.log(data);
+            $("#product_id").val(data.id).selectpicker('refresh');
         },
         error: function() {
-            $("#product_id").val("").change();
+            $("#product_id").val("").selectpicker('refresh');
         }
     });
 }
 
-
 $(document).on('keyup', '#code', function() {
-    var code = $(this).val();
-    if (code !== "") {
-        obtener_registro(code);
+    var valorResultado = $(this).val();
+    if (valorResultado != "") {
+        obtener_registro(valorResultado);
     } else {
-        $("#product_id").val("").change();
+        obtener_registro();
     }
 });
+
+
+
 
 function agregar() {
 

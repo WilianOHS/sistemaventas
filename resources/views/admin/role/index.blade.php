@@ -30,23 +30,8 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Roles del sistema</h4>
-                          <div class="btn-group">
-                          <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v"></i>
-                          </a>
-                          <div class="dropdown-menu dropdown-menu-right">
-                          @can('roles.create')
-                          <a href="{{route('roles.create')}}" class="dropdown-item">Agregar</a>
-                          @endcan
-                          </div>
-                        </div>
-                    </div>
-
                   <div class="table-responsive">
-                    <table id="order-listing" class="table">
+                    <table id="roles_listing" class="table">
                       <thead>
                         <tr>
                           <th>Id</th>
@@ -67,24 +52,20 @@
                                 @endcan                    
                             </td>    
                             <td>{{$role->description}}</td>      
-                            <td style="width:50px">
-                                {!! Form::open(['route'=>['roles.destroy',
-                                $role], 'method'=>'DELETE']) !!}
-                                @can('roles.edit')
-                                <a class="jsgrid-button jsgrid-edit-button" href="
-                                {{route('roles.edit',$role)}}"
-                                title="editar">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                                  @endcan
-                                  @can('roles.destroy')
-                                <button class="jsgrid-button jsgrid-delete-button unstyled-button" 
-                                type="submit" title="Eliminar">
-                                    <i class="far fa-trash-alt"></i>
-                                </button>
-                                @endcan
-                                {!! Form::close() !!}
+                            <td style="width:20%">
+                            {!! Form::open(['route'=>['roles.destroy', $role], 'method'=>'DELETE', 'id' => 'delete-role-form-' . $role->id]) !!}
+                              @can('roles.edit')
+                              <a class="btn btn-outline-info" href="{{ route('roles.edit', $role) }}" title="editar">
+                                  <i class="far fa-edit"></i>
+                              </a>
+                              @endcan
 
+                              @can('roles.destroy')
+                              <button class="btn btn-outline-danger" type="button" title="Eliminar" onclick="confirmDelete('{{ $role->id }}')">
+                                  <i class="far fa-trash-alt"></i>
+                              </button>
+                              @endcan
+                          {!! Form::close() !!}
                             </td>
                         </tr>                   
                         @endforeach
@@ -102,4 +83,40 @@
 @endsection
 @section('scripts')
 {!! Html::script('melody/js/data-table.js') !!}
+<script>
+    function confirmDelete(roleId) {
+        var deleteFormId = 'delete-role-form-' + roleId;
+        if (confirm('¿Estás seguro de que deseas eliminar este rol? Esta acción no se puede deshacer.')) {
+            document.getElementById(deleteFormId).submit();
+        }
+    }
+</script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var table = $('#roles_listing').DataTable({
+            responsive: true,
+            order: [[ 0, "desc" ]],
+            language: {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            },
+            dom:
+			"<'row'<'col-sm-2'l><'col-sm-7 text-right'B><'col-sm-3'f>>" +
+			"<'row'<'col-sm-12'tr>>" +
+			"<'row'<'col-sm-5'i><'col-sm-7'p>>", 
+            buttons: [
+              @can('roles.create')
+                {
+                    text: '<i class="fas fa-plus"></i> Agregar Roles',
+                    className: 'btn btn-info',
+                    action: function ( e, dt, node, conf ) {
+                        window.location.href = "{{route('roles.create')}}"
+                    }
+                }
+                @endcan
+            ]
+        });
+    });
+</script>
 @endsection

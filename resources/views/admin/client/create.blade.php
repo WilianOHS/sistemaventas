@@ -73,7 +73,6 @@
                           </div>
                       </div>
                   </div>
-
                     <div class="form-group">
                         <label for="phone">Telefóno / Celular</label>
                         <input type="text" name="phone" id="phone" class="form-control" aria-describedby="helpId" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="9">
@@ -83,10 +82,6 @@
                         <label for="email">Correo electrónico</label>
                         <input type="email" name="email" id="email" class="form-control" aria-describedby="helpId">
                     </div>
-
-
-
-
                     <button type="submit" class="btn btn-primary mr-2">Registrar</button>
                     <a href="{{route('clients.index')}}" class="btn btn-light">
                         Cancelar

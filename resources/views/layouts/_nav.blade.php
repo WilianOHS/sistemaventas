@@ -149,10 +149,11 @@
 
         
           <li class="nav-item">
-            <a class="nav-link" href="pages/documentation.html">
+            <a class="nav-link" href="{{ asset('manual_de_usuario.pdf') }}" target="_blank">
               <i class="far fa-file-pdf menu-icon"></i>
               <span class="menu-title">Manual</span>
             </a>
           </li>
+
         </ul>
       </nav>

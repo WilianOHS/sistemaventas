@@ -83,11 +83,27 @@
 		</div>
 		<div>
 			<p><strong>DATOS DEL VENDEDOR</strong></p>
-			<p><strong>Nombre:</strong> {{$sale->user->name}}</p>
+			<p><strong>Nombre:</strong> 
+				@isset($sale->user)
+					{{$sale->user->name}}
+				@else
+					Usuario Eliminado
+				@endisset
+			</p>
+
 		</div>
         <div>
-			<p><strong>DATOS DEL CLIENTE</strong></p>
-			<p><strong>Nombre:</strong> {{$sale->client->name}}</p>
+		<p><strong>DATOS DEL CLIENTE</strong></p>
+		@if(isset($sale->client))
+			<p><strong>Nombre:</strong> {{ $sale->client->name }}</p>
+			@if($sale->client->dui)
+				<p><strong>DUI:</strong> {{ $sale->client->dui }}</p>
+			@else
+				<p><strong>DUI:</strong> </p>
+			@endif
+		@else
+		<p><strong>Nombre:</strong> Cliente Eliminado</p>
+		@endif
 		</div>
 	</header>
 	<section>

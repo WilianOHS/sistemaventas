@@ -84,6 +84,13 @@
                                                     {{$user->email}}
                                                 </p>
                                                 <hr>
+                                                <strong>
+                                                    <i class="fas fa-mobile mr-1"></i>
+                                                    Nombre de Usuario</strong>
+                                                <p class="text-muted">
+                                                    {{$user->username}}
+                                                </p>
+                                                <hr>
                                             </div>
 
                                             
@@ -103,64 +110,65 @@
                                     <div class="profile-feed">
                                         <div class="d-flex align-items-start profile-feed-item">
     
-                                            <div class="table-responsive">
-                                                <table id="purchases_listing" class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Id</th>
-                                                            <th>Fecha</th>
-                                                            <th>Total</th>
-                                                            <th>Estado</th>
-                                                            <th style="width:50px;">Acciones</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    @foreach ($user->purchases as $purchase)
-                                                    <tr>
-                            <th scope="row">
-                              <a href="{{route('purchases.show',$purchase)}}">{{$purchase->id}}</a>
-                            </th>  
-                            <td>
-                            {{\Carbon\Carbon::parse($purchase->purchase_date)->format('d M y h:i a')}}
-                            </td>
-                            <td>{{$purchase->total}}</td>  
-                            @if ($purchase->status == 'VALID')
-                            <td>
-                            <a class="jsgrid-button btn btn-success" href="
-                                {{route('change.status.purchases',$purchase)}}"
-                                title="editar">
-                                Activo<i class="fas fa-check"></i>
-                                </a>  
-                            </td>
-                            @else   
-                            <td>
-                            <a class="jsgrid-button btn btn-danger" href="
-                                {{route('change.status.purchases',$purchase)}}"
-                                title="editar">
-                                Desactivado <i class="fas fa-times"></i>
-                                </a>  
-                            </td>
-                            @endif       
-                            <td style="width: 20%;">
-
-
-                                <!-- <button class="jsgrid-button jsgrid-delete-button unstyled-button" 
-                                type="submit" title="Eliminar">
-                                    <i class="far fa-trash-alt"></i>
-                                </button> -->
-
-                                <a href="{{route('purchases.pdf',$purchase)}}" class="btn btn-outline-danger"><i class="fas fa-file-pdf"></i></a>
-                                <!-- <a href="#" class="jsgrid-button jsgrid-edit-button"><i class="fas fa-print"></i></a> -->
-                                <a href="{{route('purchases.show',$purchase)}}" class="btn btn-outline-info"><i class="fas fa-eye"></i></a>
-                                
-        
-
-                            </td>
-                        </tr>           
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                        <div class="table-responsive">
+                                            <table id="purchases_listing" class="table">
+                                            <thead>
+                                                <tr>
+                                                <th>Id</th>
+                                                <th>Fecha</th>
+                                                <th>Total</th>
+                                                @can('change.status.purchases')
+                                                <th>Estado</th>
+                                                @endcan
+                                                <th style="width: 50px;">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($purchases as $purchase)
+                                                <tr>
+                                                    <th scope="row">
+                                                    @can('purchases.show')
+                                                    <a href="{{route('purchases.show',$purchase)}}">{{$purchase->id}}</a>
+                                                    @else
+                                                            <span>{{$purchase->id}}</span>
+                                                    @endcan
+                                                    </th>  
+                                                    <td>
+                                                    {{\Carbon\Carbon::parse($purchase->purchase_date)->format('d M y h:i a')}}
+                                                    </td>
+                                                    <td>{{$purchase->total}}</td>  
+                                                    @can('change.status.purchases')
+                                                    @if ($purchase->status == 'VALID')
+                                                    <td>
+                                                    <a class="jsgrid-button btn btn-success" href="
+                                                        {{route('change.status.purchases',$purchase)}}"
+                                                        title="editar">
+                                                        Activo<i class="fas fa-check"></i>
+                                                        </a>  
+                                                    </td>
+                                                    @else   
+                                                    <td>
+                                                    <a class="jsgrid-button btn btn-danger" href="
+                                                        {{route('change.status.purchases',$purchase)}}"
+                                                        title="editar">
+                                                        Desactivado <i class="fas fa-times"></i>
+                                                        </a>  
+                                                    </td>
+                                                    @endif  
+                                                    @endcan     
+                                                    <td style="width: 20%;">
+                                                    @can('purchases.pdf')
+                                                    <a href="{{route('purchases.pdf',$purchase)}}" class="btn btn-outline-danger"><i class="fas fa-file-pdf"></i></a>
+                                                    @endcan  
+                                                    @can('purchases.show')
+                                                    <a href="{{route('purchases.show',$purchase)}}" class="btn btn-outline-info"><i class="fas fa-eye"></i></a>
+                                                    @endcan  
+                                                    </td>
+                                                </tr>                   
+                                                @endforeach
+                                            </tbody>
+                                            </table>
+                                        </div>
     
                                         </div>
                                     </div>
@@ -176,29 +184,50 @@
                                     <div class="profile-feed">
                                         <div class="d-flex align-items-start profile-feed-item">
     
-                                            <div class="table-responsive">
-                                                <table id="sales_listing" class="table">
-                                                    <thead>
+                                        <div class="table-responsive">
+                    <table id="sales_listing" class="table">
+                      <thead>
                         <tr>
                           <th>Id</th>
                           <th>Cliente</th>
                           <th>Fecha</th>
                           <th>Total</th>
                           <th>Tipo de documento</th>
+                          @can('change.status.sales')
                           <th>Estado</th>
+                          @endcan
                           <th style="width: 50px;">Acciones</th>
                         </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    @foreach ($user->sales as $sale)
+                      </thead>
+                      <tbody>
+                        @foreach ($sales as $sale)
                         <tr>
                             <th scope="row">
+                              @can('sales.show')
                               <a href="{{route('sales.show',$sale)}}">{{$sale->id}}</a>
+                              @else
+                                    <span>{{$sale->id}}</span>
+                              @endcan
                             </th>
-                            <td>{{$sale->client->name}}</td>  
+                            <td>
+                                @if(isset($sale->client))
+                                    {{ $sale->client->name }}
+                                @else
+                                    Cliente Eliminado
+                                @endif
+                            </td>
+  
                             <td>{{\Carbon\Carbon::parse($sale->sale_date)->format('d M y h:i a')}}</td>
                             <td>$ {{$sale->total}}</td>
-                            <td>{{$sale->document_type}}</td>  
+                            <td>
+                                @if($sale->document_type == 'credito_fiscal')
+                                    Crédito Fiscal
+                                @else
+                                    {{$sale->document_type}}
+                                @endif
+                            </td>
+ 
+                            @can('change.status.sales')
                             @if ($sale->status == 'VALID')
                             <td>
                             <a class="jsgrid-button btn btn-success" href="
@@ -216,22 +245,43 @@
                                 </a>  
                             </td>
                             @endif
-                                  
+                            @endcan   
                             <td style="width: 20%;">
-
+                            @can('sales.pdf')
                             <a href="{{route('sales.pdf', $sale)}}" class="btn btn-outline-danger"
                             title="Generar PDF"><i class="far fa-file-pdf"></i></a>
-                            <a href="{{route('sales.print', $sale)}}" class="btn btn-outline-warning"
-                            title="Imprimir boleta"><i class="fas fa-print"></i></a>
+                            @endcan
+                            @can('sales.print')
+                            <!-- <a href="{{route('sales.print', $sale)}}" class="btn btn-outline-warning"
+                            title="Imprimir boleta"><i class="fas fa-print"></i></a> -->
+                            @endcan
+                            @can('sales.show')
                             <a href="{{route('sales.show', $sale)}}" class="btn btn-outline-info"
                             title="Ver detalles"><i class="far fa-eye"></i></a>
-                                   
+                            @endcan
+                            @can('sales.print')
+                            @if($sale->document_type == 'Ticket')
+                                <a href="{{route('sales.ticket', $sale)}}" class="btn btn-outline-danger" title="Imprimir Ticket">
+                                    <i class="fas fa-print"></i>
+                                </a>
+                            @endif
+                            @if($sale->document_type == 'Factura')
+                                <a href="{{route('sales.envoice', $sale)}}" class="btn btn-outline-danger" title="Imprimir Factura">
+                                    <i class="fas fa-print"></i>
+                                </a>
+                            @endif
+                            @if($sale->document_type == 'credito_fiscal')
+                                <a href="{{route('sales.tax_credit', $sale)}}" class="btn btn-outline-danger" title="Imprimir Crédito Fiscal">
+                                    <i class="fas fa-print"></i>
+                                </a>
+                            @endif
+                            @endcan    
                             </td>
                         </tr>                   
                         @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                      </tbody>
+                    </table>
+                  </div>
     
                                         </div>
                                     </div>

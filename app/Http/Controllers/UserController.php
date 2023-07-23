@@ -49,12 +49,31 @@ class UserController extends Controller
         $roles = Role::get();
         return view('admin.user.edit',compact('user','roles'));
     }
-    public function update(Request $request, User $user)
-    {
-        $user->update($request->all());
-        $user->roles()->sync($request->get('roles'));
-        return redirect()->route('users.index');
+   
+
+public function update(Request $request, User $user)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'username' => 'required|string|max:255|unique:users,username,'.$user->id,
+        'email' => 'string|email|max:255|unique:users,email,'.$user->id,
+        'password' => 'nullable|string|min:8', // Elimina la regla de confirmación ya que no se necesita aquí
+    ]);
+
+    $user->name = $request->input('name');
+    $user->username = $request->input('username');
+    $user->email = $request->input('email');
+
+    if ($request->filled('password')) {
+        $user->password = Hash::make($request->input('password')); // Encriptar la contraseña nueva antes de actualizar
     }
+
+    $user->save();
+    $user->roles()->sync($request->get('roles'));
+
+    return redirect()->route('users.index')->with('success', 'Usuario actualizado correctamente.');
+}
+
     public function destroy(User $user)
     {
         $user->delete();

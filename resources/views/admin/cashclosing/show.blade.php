@@ -32,7 +32,9 @@
                         </div>
                         <div class="col-md-4 text-center">
                             <label class="form-control-label" style="font-size: 18px"><strong>Empleado</strong></label>
-                            <p style="font-size: 18px">{{ $cashclosing->user->name }}</p>
+                            <p style="font-size: 18px">
+                                {{ $cashclosing->user->name ?? 'Usuario Eliminado' }}
+                            </p>
                         </div>
                         <div class="col-md-4 text-center">
                             <label class="form-control-label" style="font-size: 18px"><strong>Fecha</strong></label>

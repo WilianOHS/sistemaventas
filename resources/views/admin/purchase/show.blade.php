@@ -35,7 +35,15 @@
                 <div class="form-group row">
                         <div class="col-md-6 text-center">
                             <label class="form-control-label" style="font-size: 18px" for="nombre"><strong>Proveedor</strong></label>
-                            <p style="font-size: 18px">{{$purchase->provider->name}}</p>
+                            <p style="font-size: 18px">
+                                @isset($purchase->provider)
+                                    <a href="{{ route('providers.show', ['provider' => $purchase->provider->id]) }}">
+                                        {{ $purchase->provider->name }}
+                                    </a>
+                                @else
+                                    Proveedor Eliminado
+                                @endisset
+                            </p>
                         </div>
                         <div class="col-md-6 text-center">
                             <label class="form-control-label" style="font-size: 18px" for="num_compra"><strong>Número Compra</strong></label>

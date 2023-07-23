@@ -64,8 +64,21 @@
         <div class="info">
             <p>Fecha: {{ $saleDate->format('d/m/Y h:i A') }}</p>
             <p>Número de ticket: {{$sale->document_number}}</p>
-            <p>Cliente: {{$sale->client->name}}</p>
-            <p>Vendedor: {{$sale->user->name}}</p>
+            <p>Cliente: 
+                @isset($sale->client)
+                    {{$sale->client->name}}
+                @else
+                    Cliente Eliminado
+                @endisset
+            </p>
+            <p>Vendedor: 
+                @isset($sale->user)
+                    {{$sale->user->name}}
+                @else
+                    Usuario Eliminado
+                @endisset
+            </p>
+
         </div>
         <div class="items">
             <table>

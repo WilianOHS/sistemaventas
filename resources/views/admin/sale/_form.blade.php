@@ -1,6 +1,17 @@
 <div class="row">
   <div class="col">
-    <div class="form-row">
+    <div class="form-group">
+      <label for="client_id">Cliente</label>
+      <select id="client_id" class="form-control selectpicker" data-live-search="true" name="client_id" data-dropup-auto="false" required>
+        <option value="" disabled selected>Seleccione un cliente (Asegúrese de tener registrado el cliente)</option>
+        @foreach ($clients as $client)
+            <option value="{{$client->id}}">{{$client->name}}</option>
+        @endforeach
+      </select>
+    </div>
+  </div>
+  <div class="col col-auto">
+    <div class="form-group">
       <label for="payment_method">Método de Pago:</label>
       <select id="payment_method" class="form-control" name="payment_method">
         <option value="Efectivo">Efectivo</option>
@@ -8,57 +19,47 @@
       </select>
     </div>
   </div>
-  
+  <div class="col col-auto">
+    <div class="form-group">
+      <label for="document_type">Tipo de comprobante:</label>
+      <select id="document_type" class="form-control" name="document_type" required>
+        <option value="Ticket">Ticket</option>
+        <option value="Factura">Factura</option>
+        <option value="credito_fiscal">Crédito Fiscal</option>
+      </select>
+    </div>
+  </div>
+  <div class="col col-auto">
+    <div class="form-group">
+      <label for="document_number">Número de comprobante:</label>
+      <input type="text" class="form-control" name="document_number" id="document_number" aria-describedby="helpId" required>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col col-auto">
+    <div class="form-group">
+      <label for="code">Código de barras</label>
+      <input type="text" name="code" id="code" class="form-control" placeholder="" aria-describedby="helpId" onkeydown="handleKeyDown(event)">
+    </div>
+  </div>
   <div class="col">
-  <div class="form-row">
-    <label for="document_type">Tipo de comprobante:</label>
-    <select id="document_type" class="form-control" name="document_type" required>
-      <option value="Ticket">Ticket</option>
-      <option value="Factura">Factura</option>
-      <option value="credito_fiscal">Crédito Fiscal</option>
-    </select>
-  </div>
-</div>
-
-<div class="col">
-  <div class="form-row">
-    <label for="document_number">Número de comprobante:</label>
-    <input type="text" class="form-control" name="document_number" id="document_number" aria-describedby="helpId" required>
-  </div>
-</div>
-
-</div>
-    <hr>
-    <div class="form-row">
-    <label for="client_id">Cliente</label>
-    <select id="client_id" class="form-control selectpicker" data-live-search="true" name="client_id" required>
-        <option value="" disabled selected>Seleccione un cliente (Asegurese de tener registrado el cliente)</option>
-        @foreach ($clients as $client)
-            <option value="{{$client->id}}">{{$client->name}}</option>
-        @endforeach
-    </select>
-</div>
-
-
-
-<hr>
-<div class="form-group">
-  <label for="code">Código de barras</label>
-  <input type="text" name="code" id="code" class="form-control" placeholder="" aria-describedby="helpId" onkeydown="handleKeyDown(event)">
-</div>
-<hr>
-
-<div class="form-row">
-    <label for="product_id">Producto</label>
-    <select class="form-control selectpicker" data-live-search="true" id="product_id" name="product_id">
+    <div class="form-group">
+      <label for="product_id">Producto</label>
+      <select class="form-control selectpicker" data-live-search="true" id="product_id" name="product_id" data-dropup-auto="false">
         <option value="" disabled selected>Seleccione un producto</option>
         @foreach ($products as $product)
             <option value="{{$product->id}}_{{$product->stock}}_{{$product->sale_price}}">{{$product->name}}</option>
         @endforeach
-    </select>
+      </select>
+    </div>
+  </div>
 </div>
 
-        <hr>
+
+
 
         <div class="form-row">
             <div class="col">
@@ -80,7 +81,6 @@
 
         </div>
 
-<hr>
         <div class="form-group">
             <button type="button" id="agregar" class="btn btn-primary float-right">Agregar producto</button>
         </div>

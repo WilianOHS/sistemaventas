@@ -16,9 +16,14 @@
 <body>
 	<header>
         <div>
-        <pre><strong>          </strong> {{$sale->client->name}}</pre>
-        <pre><strong>          </strong> {{$sale->client->dui}}</pre>
-        <pre><strong>          </strong> {{$sale->client->address}}</pre>
+        <p><strong>DATOS DEL CLIENTE</strong></p>
+        @isset($sale->client)
+            <pre><strong>Nombre:    </strong> {{$sale->client->name}}</pre>
+            <pre><strong>DUI:       </strong> {{$sale->client->dui}}</pre>
+            <pre><strong>Dirección: </strong> {{$sale->client->address}}</pre>
+        @else
+            <p>Cliente Eliminado</p>
+        @endisset
 		</div>
 	</header>
 	<section>

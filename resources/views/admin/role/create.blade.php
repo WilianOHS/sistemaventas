@@ -24,26 +24,20 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Registro de rol</h4>    
-                    </div>
                     {!! Form::open(['route'=>'roles.store','method'=>'POST']) !!}
 
                     <div class="form-group">
                     <label for="name">Nombre</label>
-                    <input type="text" name="name" id="name" class="form-control" placeholder="" aria-describedby="helpId">
+                    <input type="text" name="name" id="name" class="form-control" placeholder="" aria-describedby="helpId" required>
                     </div>
                     <div class="form-group">
                     <label for="slug">URL</label>
-                    <input type="text" name="slug" id="slug" class="form-control" placeholder="" aria-describedby="helpId">
+                    <input type="text" name="slug" id="slug" class="form-control" placeholder="" aria-describedby="helpId" required>
                     </div>
                     <div class="form-group">
                     <label for="description">Descripción</label>
                     <textarea class="form-control" name="description" id="description" rows="3"></textarea>
                     </div>
-
-
 
                     @include('admin.role._form')
                     <button type="submit" class="btn btn-primary mr-2">Registrar</button>

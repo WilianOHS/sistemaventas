@@ -24,10 +24,6 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Editar rol</h4>    
-                    </div>
                     {!! Form::model($role,['route'=>['roles.update',$role],'method'=>'PUT']) !!}
 
                     <div class="form-group">

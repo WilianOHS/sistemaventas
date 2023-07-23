@@ -124,7 +124,9 @@
                                                 <th>Id</th>
                                                 <th>Nombre</th>
                                                 <th>Stock</th>
+                                                @can('change.status.products') 
                                                 <th>Estado</th>
+                                                @endcan
                                                 <th>Categoría</th>
                                                 <th>Acciones</th>
                                                 </tr>
@@ -134,9 +136,14 @@
                                                 <tr>
                                                     <th scope="row">{{$product->id}}</th>
                                                     <td>
-                                                        <a href="{{route('products.show',$product)}}">{{$product->name}}</a>                                
+                                                        @can('product.show')
+                                                        <a href="{{route('products.show',$product)}}">{{$product->name}}</a>  
+                                                        @else
+                                                            <span>{{$product->name}}</span>
+                                                        @endcan                               
                                                     </td>    
-                                                    <td>{{$product->stock}}</td>     
+                                                    <td>{{$product->stock}}</td> 
+                                                    @can('change.status.products') 
                                                     @if ($product->status == 'ACTIVE')
                                                     <td>
                                                     <a class="jsgrid-button btn btn-success" href="
@@ -154,27 +161,30 @@
                                                         </a>  
                                                     </td>
                                                     @endif
-
-                                                
-
-                                                    <td>{{$product->category->name}}</td>
+                                                    @endcan
+                                                    <td>
+                                                        @isset($product->category)
+                                                            {{$product->category->name}}
+                                                        @else
+                                                            Categoría Eliminada
+                                                        @endisset
+                                                    </td>
                                                     <td style="width: 20%;">
-                                                        {!! Form::open(['route'=>['products.destroy',
-                                                        $product], 'method'=>'DELETE']) !!}
-
+                                                    {!! Form::open(['route'=>['products.destroy', $product], 'method'=>'DELETE', 'id' => 'delete-product-form-' . $product->id]) !!}
+                                                        @can('product.edit') 
                                                         <a class="btn btn-outline-info" href="
                                                         {{route('products.edit',$product)}}"
                                                         title="editar">
                                                             <i class="far fa-edit"></i>
                                                         </a>
-
-                                                        <button class="btn btn-outline-danger" 
-                                                        type="submit" title="Eliminar">
+                                                        @endcan
+                                                        @can('product.destroy') 
+                                                        <button class="btn btn-outline-danger" type="button" title="Eliminar"
+                                                            onclick="confirmDelete('{{ $product->id }}')">
                                                             <i class="far fa-trash-alt"></i>
                                                         </button>
-
+                                                        @endcan
                                                         {!! Form::close() !!}
-
                                                     </td>
                                                 </tr>                   
                                                 @endforeach

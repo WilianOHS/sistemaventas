@@ -24,17 +24,14 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Registro de usuario</h4>
-                    </div>
                     {!! Form::open(['route'=>'users.store','method'=>'POST']) !!}
                     <div class="form-group">
                         <label for="name">Nombre</label>
-                        <input type="text" name="name" id="name" class="form-control" placeholder="" aria-describedby="helpId">
+                        <input type="text" name="name" id="name" class="form-control" placeholder="" aria-describedby="helpId" required>
                     </div>
                     <div class="form-group">
                         <label for="username">Nombre de Usuario</label>
-                        <input type="text" name="username" id="username" class="form-control" placeholder="" aria-describedby="helpId">
+                        <input type="text" name="username" id="username" class="form-control" placeholder="" aria-describedby="helpId"  required>
                     </div>
                     <div class="form-group">
                         <label for="email">Correo Electrónico</label>
@@ -42,7 +39,7 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Contraseña</label>
-                        <input type="password" name="password" id="password" class="form-control" placeholder="" aria-describedby="helpId">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="" aria-describedby="helpId"  required>
                     </div>
                     @include('admin.user._form')
                     <button type="submit" class="btn btn-primary mr-2">Registrar</button>

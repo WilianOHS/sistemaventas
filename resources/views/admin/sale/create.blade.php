@@ -60,7 +60,7 @@
           @csrf
           <div class="form-group">
             <label for="name">Nombre</label>
-            <input type="text" name="name" id="name" class="form-control">
+            <input type="text" name="name" id="name" class="form-control" required>
           </div>
           <div class="form-group">
             <label for="dui">DUI</label>
@@ -158,15 +158,29 @@ function obtener_registro(code) {
         success: function(data) {
             if (data) {
                 $("#product_id").val(data.id + "_" + data.stock + "_" + data.sale_price).change();
+                $("#code").val(data.code); // Agregar esta línea para actualizar el campo de entrada del código de barras
             } else {
                 $("#product_id").val("").change();
+                $("#code").val(""); // Agregar esta línea para borrar el campo de entrada del código de barras si no se encuentra ningún producto
             }
         },
         error: function() {
             $("#product_id").val("").change();
+            $("#code").val(""); // Agregar esta línea para borrar el campo de entrada del código de barras en caso de error
         }
     });
 }
+
+$(document).on('change', '#product_id', function() {
+    var selectedValue = $(this).val();
+    if (selectedValue !== "") {
+        var parts = selectedValue.split("_");
+        var code = parts[0]; // Extraer el código de la opción seleccionada
+        $("#code").val(code);
+    } else {
+        $("#code").val(""); // Agregar esta línea para borrar el campo de entrada del código de barras si no se ha seleccionado ningún producto
+    }
+});
 
 $(document).on('keyup', '#code', function() {
     var code = $(this).val();
@@ -177,16 +191,8 @@ $(document).on('keyup', '#code', function() {
     }
 });
 
-$(document).on('change', '#product_id', function() {
-    var selectedProduct = $(this).val();
-    if (selectedProduct) {
-        var parts = selectedProduct.split("_");
-        var code = parts[0];
-        $("#code").val(code);
-    } else {
-        $("#code").val("");
-    }
-});
+
+
 
 
 function agregar() {
@@ -228,12 +234,12 @@ function limpiar() {
     $("#price").val("");
 }
 function totales() {
-    $("#total").html("USD " + total.toFixed(2));
+    $("#total").html("$ " + total.toFixed(2));
 
     //total_impuesto = total * impuesto / 100;
     total_pagar = total;
     //$("#total_impuesto").html("USD " + total_impuesto.toFixed(2));
-    $("#total_pagar_html").html("USD " + total_pagar.toFixed(2));
+    $("#total_pagar_html").html("$ " + total_pagar.toFixed(2));
     $("#total_pagar").val(total_pagar.toFixed(2));
 }
 function evaluar() {
@@ -247,9 +253,9 @@ function eliminar(index) {
     total = total - subtotal[index];
     //total_impuesto = total * impuesto / 100;
     total_pagar_html = total;
-    $("#total").html("USD" + total);
+    $("#total").html("$ " + total);
     //$("#total_impuesto").html("USD" + total_impuesto);
-    $("#total_pagar_html").html("USD" + total_pagar_html);
+    $("#total_pagar_html").html("$ " + total_pagar_html);
     $("#total_pagar").val(total_pagar_html.toFixed(2));
     $("#fila" + index).remove();
     evaluar();

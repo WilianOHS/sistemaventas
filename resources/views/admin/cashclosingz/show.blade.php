@@ -32,7 +32,13 @@
                         </div>
                         <div class="col-md-4 text-center">
                             <label class="form-control-label" style="font-size: 18px"><strong>Empleado</strong></label>
-                            <p style="font-size: 18px">{{ $cashclosingz->user->name }}</p>
+                            <p style="font-size: 18px">
+                                @isset($cashclosingz->user)
+                                    {{ $cashclosingz->user->name }}
+                                @else
+                                    Usuario Eliminado
+                                @endisset
+                            </p>
                         </div>
                         <div class="col-md-4 text-center">
                             <label class="form-control-label" style="font-size: 18px"><strong>Fecha</strong></label>

@@ -48,7 +48,13 @@
                                 <tr>
                                     <th scope="row">{{ $cashClosingz->id }}</th>
                                     <td>{{ $cashClosingz->type }}</td>
-                                    <td>{{ $cashClosingz->user->name }}</td>
+                                    <td>
+                                        @isset($cashClosingz->user)
+                                            {{ $cashClosingz->user->name }}
+                                        @else
+                                            Usuario Eliminado
+                                        @endisset
+                                    </td>
                                     <td>{{ \Carbon\Carbon::parse($cashClosingz->closings_date)->format('d-m-Y') }}</td>
                                     <td>{{ $cashClosingz->closings_hour }}</td>
                                     <td style="width: 20%;">

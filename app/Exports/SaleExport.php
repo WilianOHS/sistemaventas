@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Sale;//<—modelo creado
+use App\Sale;
 use App\Client;
 use App\saleDetail;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -36,12 +36,15 @@ class SaleExport implements FromCollection,WithHeadings,WithMapping,WithColumnWi
     }
     public function map($sale): array
     {
+        // Verificar si el cliente ha sido eliminado
+        $clientName = isset($sale->client) ? $sale->client->name : 'Cliente Eliminado';
+
         $saleDetails = $sale->saleDetails; // Obtener los detalles de venta para esta venta
         $productNames = $saleDetails->pluck('product.name')->implode(', '); // Obtener los nombres de los productos de los detalles de venta
 
         return [
             $sale->id,
-            $sale->client->name,
+            $clientName, // Utilizamos la variable $clientName en lugar de $sale->client->name
             $productNames,
             $sale->sale_date,
             $sale->document_type,

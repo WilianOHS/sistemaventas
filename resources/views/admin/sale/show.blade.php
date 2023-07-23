@@ -33,11 +33,23 @@
                 <div class="form-group row">
                         <div class="col-md-4 text-center">
                             <label class="form-control-label" style="font-size: 18px"><strong>Cliente</strong></label>
+                            <p style="font-size: 18px">
+                            @if(isset($sale->client))
                             <p style="font-size: 18px"><a href="{{route('clients.show', $sale->client)}}">{{$sale->client->name}}</a></p>
+                            @else
+                                Cliente Eliminado
+                                @endif
+                            </p>
                         </div>
                         <div class="col-md-4 text-center">
                             <label class="form-control-label" style="font-size: 18px"><strong>Vendedor</strong></label>
-                            <p style="font-size: 18px">{{$sale->user->name}}</p>
+                            <p style="font-size: 18px">
+                                @isset($sale->user)
+                                    {{ $sale->user->name }}
+                                @else
+                                    Usuario Eliminado
+                                @endisset
+                            </p>
                         </div>
                         <div class="col-md-4 text-center">
                             <label class="form-control-label" style="font-size: 18px"><strong>Número Venta</strong></label>

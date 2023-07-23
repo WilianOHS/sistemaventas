@@ -57,8 +57,7 @@
                             <td>{{$user->username}}</td>
                             <td>{{$user->email}}</td>       
                             <td style="width: 20%;">
-                                {!! Form::open(['route'=>['users.destroy',
-                                $user], 'method'=>'DELETE']) !!}
+                                {!! Form::open(['route'=>['users.destroy', $user], 'method'=>'DELETE', 'id' => 'delete-user-form-' . $user->id]) !!}
                                 @can('users.edit')
                                 <a class="btn btn-outline-info" href="
                                 {{route('users.edit',$user)}}"
@@ -67,8 +66,7 @@
                                 </a>
                                 @endcan
                                 @can('users.destroy')
-                                <button class="btn btn-outline-danger" 
-                                type="submit" title="Eliminar">
+                                <button class="btn btn-outline-danger" type="button" title="Eliminar" onclick="confirmDelete('{{ $user->id }}')">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
                                 @endcan
@@ -116,5 +114,13 @@
             ]
         });
     });
+</script>
+<script>
+    function confirmDelete(userId) {
+        var deleteFormId = 'delete-user-form-' + userId;
+        if (confirm('¿Estás seguro de que deseas eliminar este usuario? Esta acción no se puede deshacer.')) {
+            document.getElementById(deleteFormId).submit();
+        }
+    }
 </script>
 @endsection

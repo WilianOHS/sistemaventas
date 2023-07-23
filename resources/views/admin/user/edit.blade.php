@@ -24,9 +24,6 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Editar usuario</h4>
-                    </div>
                     {!! Form::model($user,['route'=>['users.update',$user],'method'=>'PUT']) !!}
 
                     <div class="form-group">
@@ -41,11 +38,11 @@
                         <label for="email">Correo Electrónico</label>
                         <input type="email" name="email" id="email" value="{{$user->email}}" class="form-control" placeholder="" aria-describedby="helpId">
                     </div>
-                    <!-- <div class="form-group">
+                    <div class="form-group">
                         <label for="password">Contraseña</label>
                         <input type="password" name="password" id="password" class="form-control" placeholder="" aria-describedby="helpId">
                         <small id="helpId" class="text-muted">Rellenar solo si desea cambiar la contraseña.</small>
-                    </div> -->
+                    </div>
 
                     @include('admin.user._form')
                     <button type="submit" class="btn btn-primary mr-2">Actualizar</button>

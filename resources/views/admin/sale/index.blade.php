@@ -68,7 +68,14 @@
                                     <span>{{$sale->id}}</span>
                               @endcan
                             </th>
-                            <td>{{$sale->client->name}}</td>  
+                            <td>
+                                @if(isset($sale->client))
+                                    {{ $sale->client->name }}
+                                @else
+                                    Cliente Eliminado
+                                @endif
+                            </td>
+  
                             <td>{{\Carbon\Carbon::parse($sale->sale_date)->format('d M y h:i a')}}</td>
                             <td>$ {{$sale->total}}</td>
                             <td>

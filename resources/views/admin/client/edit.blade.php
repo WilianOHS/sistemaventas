@@ -25,9 +25,7 @@
               <div class="card">
                 <div class="card-body">
                   
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Edición de cliente</h4>    
-                    </div>
+                    
                     {!! Form::model($client,['route'=>['clients.update',$client],'method'=>'PUT','files'=> true]) !!}
                     
                     <div class="form-group">

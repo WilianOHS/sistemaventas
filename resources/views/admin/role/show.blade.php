@@ -18,8 +18,8 @@
             {{$role->name}}
         </h3>
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb breadcrumb-custom">
-                <li class="breadcrumb-item"><a href="{{route('home')}}">Panel administrador</a></li>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Panel administrador</a></li>
                 <li class="breadcrumb-item"><a href="{{route('roles.index')}}">Roles</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{$role->name}}</li>
             </ol>
@@ -118,13 +118,18 @@
                                                             <td style="width: 50px;">
                                                                 {!! Form::open(['route'=>['users.destroy',$user], 'method'=>'DELETE']) !!}
                         
-                                                                <a class="jsgrid-button jsgrid-edit-button" href="{{route('users.edit', $user)}}" title="Editar">
+                                                                @can('users.edit')
+                                                                <a class="btn btn-outline-info" href="
+                                                                {{route('users.edit',$user)}}"
+                                                                title="editar">
                                                                     <i class="far fa-edit"></i>
                                                                 </a>
-                                                                
-                                                                <button class="jsgrid-button jsgrid-delete-button unstyled-button" type="submit" title="Eliminar">
+                                                                @endcan
+                                                                @can('users.destroy')
+                                                                <button class="btn btn-outline-danger" type="button" title="Eliminar" onclick="confirmDelete('{{ $user->id }}')">
                                                                     <i class="far fa-trash-alt"></i>
                                                                 </button>
+                                                                @endcan
                         
                                                                 {!! Form::close() !!}
                                                             </td>

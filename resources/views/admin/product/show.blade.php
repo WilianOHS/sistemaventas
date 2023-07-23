@@ -65,25 +65,32 @@
                             </span>
                         </p>
                         <p class="clearfix">
-                          <span class="float-left">
-                            Proveedor
-                          </span>
-                          <span class="float-right text-muted">
-                            <a href="{{route('providers.show',$product->provider->id)}}">
-                          {{$product->provider->name}}
-                            </a>
-                          </span>
+                            <span class="float-left">
+                                Proveedor
+                            </span>
+                            <span class="float-right text-muted">
+                                @isset($product->provider)
+                                    <a href="{{route('providers.show', $product->provider->id)}}">
+                                        {{$product->provider->name}}
+                                    </a>
+                                @else
+                                    Proveedor Eliminado
+                                @endisset
+                            </span>
                         </p>
                         <p class="clearfix">
-                          <span class="float-left">
-                            Categoría
-                          </span>
-                            <!-- PRODUCTOS POR CATEGORIA -->
-                          <span class="float-right text-muted">
-                            <a href="{{route('categories.show',$product->category->id)}}">
-                            {{$product->category->name}}
-                            </a>
-                          </span>
+                            <span class="float-left">
+                                Categoría
+                            </span>
+                            <span class="float-right text-muted">
+                                @isset($product->category)
+                                    <a href="{{route('categories.show', $product->category->id)}}">
+                                        {{$product->category->name}}
+                                    </a>
+                                @else
+                                    Categoría Eliminada
+                                @endisset
+                            </span>
                         </p>
                       </div>        
                         @if ($product->status == 'ACTIVE')
@@ -100,41 +107,57 @@
                             </div>
                             <div class="profile-feed">
                                 <div class="d-flex align-items-start profile-feed-item">
-                                    <div class="form-group col-md-6">
-                                    <strong><i class="fas fa-barcode mr-1"></i> Código de barras</strong>
-                                        <p class="text-muted">
-                                        {{$product->code}}
-                                        </p>
+                                <div class="form-group col-md-6">
+                                        <strong><i class="fas fa-barcode mr-1"></i> Código de barras</strong>
+                                        <p class="text-muted">{{$product->code}}</p>
 
                                         <hr>
                                         <strong><i class="fab fa-product-hunt mr-1"></i> Nombre de producto</strong>
-                                        <p class="text-muted">
-                                            {{$product->name}}
-                                        </p>
+                                        <p class="text-muted">{{$product->name}}</p>
+
                                         <hr>
                                         <strong><i class="fas fa-boxes mr-1"></i> Stock</strong>
-                                        <p class="text-muted">
-                                            {{$product->stock}}
-                                        </p>
+                                        <p class="text-muted">{{$product->stock}}</p>
+
                                         <hr>
                                         <strong><i class="fas fa-dollar-sign mr-1"></i> Precio de venta</strong>
-                                        <p class="text-muted">
-                                           $ {{$product->sale_price}}
-                                        </p>
+                                        <p class="text-muted">$ {{$product->sale_price}}</p>
+
                                         <hr>
+                                        <strong><i class="fas fa-shopping-cart mr-1"></i> Detalles de Compra Relacionada</strong>
+                                        @foreach ($purchaseDetails as $purchaseDetail)
+                                            <p class="text-muted mb-1"><strong>Fecha:</strong> {{ $purchaseDetail->created_at->format('d/m/Y') }}</p>
+                                            <p class="text-muted mb-1"><strong>Precio de Compra:</strong> ${{ $purchaseDetail->price }}</p>
+                                            <p class="text-muted my-1"><strong>Cantidad:</strong> {{ $purchaseDetail->quantity }}</p>
+                                            <hr>
+                                        @endforeach
+
+                                        <!-- Agregar paginación -->
+                                        {{ $purchaseDetails->links() }}
                                     </div>
+
                                     <div class="form-group col-md-6">
-                                        <strong><i class="fas fa-file-powerpoint mr-1"></i> Presentación</strong>
-                                        <p class="text-muted">
-                                            {{$product->presentation}}
-                                        </p>
+                                    <div class="row">
+                                    <div class="col-md-6">
                                         <strong>
-                                            <i class="fas fa-weight-hanging mr-1"></i>
-                                            Peso</strong>
+                                        <i class="fas fa-weight-hanging mr-1"></i>
+                                        Peso o Cantidad
+                                        </strong>
                                         <p class="text-muted">
-                                            {{$product->weight}}
+                                        {{$product->weight}}
                                         </p>
-                                        <hr>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>
+                                        <i class="fas fa-file-powerpoint mr-1"></i>
+                                        Presentación
+                                        </strong>
+                                        <p class="text-muted">
+                                        {{$product->presentation}}
+                                        </p>
+                                    </div>
+                                    </div>
+                                        <hr>                                        
                                         <strong><i class="fas fa-calendar-check mr-1"></i> Año</strong>
                                         <p class="text-muted">
                                             {{$product->year}}
@@ -157,6 +180,7 @@
                                         </p>
                                         <hr>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>

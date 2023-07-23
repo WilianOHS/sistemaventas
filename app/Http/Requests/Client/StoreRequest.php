@@ -24,11 +24,11 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'string|required|max:255',
-            'dui' => 'string|nullable|unique:clients|min:10|max:10',
-            'address' => 'string|nullable|max:255',
-            'phone' => 'string|nullable|unique:clients|min:9|max:9',
-            'email' => 'string|nullable|unique:clients|max:255|email:rfc,dns',
+            // 'name'=>'string|required|max:255',
+            // 'dui' => 'string|nullable|unique:clients|min:10|max:10',
+            // 'address' => 'string|nullable|max:255',
+            // 'phone' => 'string|nullable|unique:clients|min:9|max:9',
+            // 'email' => 'string|nullable|unique:clients|max:255|email:rfc,dns',
 
         ];
     }

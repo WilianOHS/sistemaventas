@@ -105,65 +105,96 @@
                                     <div class="profile-feed">
                                         <div class="d-flex align-items-start profile-feed-item">
     
-                                            <div class="table-responsive">
-                                                <table id="sales_listing" class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Id</th>
-                                                            <th>Fecha</th>
-                                                            <th>Total</th>
-                                                            @can('change.status.sales')
-                                                            <th>Estado</th>
-                                                            @endcan
-                                                            <th style="width:50px;">Acciones</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    @foreach ($sales as $sale)
-                                                    <tr>
-                                                        <th scope="row">
-                                                        <a href="{{route('sales.show',$sale)}}">{{$sale->id}}</a>
-                                                        </th>
-                                                        <td>{{\Carbon\Carbon::parse($sale->sale_date)->format('d M y h:i a')}}</td>
-                                                        <td>$ {{$sale->total}}</td>  
-                                                        @can('change.status.sales')
-                                                        @if ($sale->status == 'VALID')
-                                                        <td>
-                                                        <a class="jsgrid-button btn btn-success" href="
-                                                            {{route('change.status.sales',$sale)}}"
-                                                            title="editar">
-                                                            Activo<i class="fas fa-check"></i>
-                                                            </a>  
-                                                        </td>
-                                                        @else   
-                                                        <td>
-                                                        <a class="jsgrid-button btn btn-danger" href="
-                                                            {{route('change.status.sales',$sale)}}"
-                                                            title="editar">
-                                                            Desactivado <i class="fas fa-times"></i>
-                                                            </a>  
-                                                        </td>
+                                        <div class="table-responsive">
+                                            <table id="sales_listing" class="table">
+                                            <thead>
+                                                <tr>
+                                                <th>Id</th>
+                                                <th>Fecha</th>
+                                                <th>Total</th>
+                                                <th>Tipo de documento</th>
+                                                @can('change.status.sales')
+                                                <th>Estado</th>
+                                                @endcan
+                                                <th style="width: 50px;">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($sales as $sale)
+                                                <tr>
+                                                    <th scope="row">
+                                                    @can('sales.show')
+                                                    <a href="{{route('sales.show',$sale)}}">{{$sale->id}}</a>
+                                                    @else
+                                                            <span>{{$sale->id}}</span>
+                                                    @endcan
+                                                    </th>
+                        
+                                                    <td>{{\Carbon\Carbon::parse($sale->sale_date)->format('d M y h:i a')}}</td>
+                                                    <td>$ {{$sale->total}}</td>
+                                                    <td>
+                                                        @if($sale->document_type == 'credito_fiscal')
+                                                            Crédito Fiscal
+                                                        @else
+                                                            {{$sale->document_type}}
                                                         @endif
-                                                        @endcan
-                                                            
-                                                        <td style="width: 20%;">
-
-                                                        <a href="{{route('sales.pdf', $sale)}}" class="btn btn-outline-danger"
-                                                        title="Generar PDF"><i class="far fa-file-pdf"></i></a>
-                                                        <a href="{{route('sales.print', $sale)}}" class="btn btn-outline-warning"
-                                                        title="Imprimir boleta"><i class="fas fa-print"></i></a>
-                                                        <a href="{{route('sales.show', $sale)}}" class="btn btn-outline-info"
-                                                        title="Ver detalles"><i class="far fa-eye"></i></a>
-                                                            
-                                                        </td>
-                                                    </tr>                   
-                                                    @endforeach
-                                                    </tbody>
-                                                    <tfoot>
-                                                        
-                                                    </tfoot>
-                                                </table>
-                                            </div>
+                                                    </td>
+                        
+                                                    @can('change.status.sales')
+                                                    @if ($sale->status == 'VALID')
+                                                    <td>
+                                                    <a class="jsgrid-button btn btn-success" href="
+                                                        {{route('change.status.sales',$sale)}}"
+                                                        title="editar">
+                                                        Activo<i class="fas fa-check"></i>
+                                                        </a>  
+                                                    </td>
+                                                    @else   
+                                                    <td>
+                                                    <a class="jsgrid-button btn btn-danger" href="
+                                                        {{route('change.status.sales',$sale)}}"
+                                                        title="editar">
+                                                        Desactivado <i class="fas fa-times"></i>
+                                                        </a>  
+                                                    </td>
+                                                    @endif
+                                                    @endcan   
+                                                    <td style="width: 20%;">
+                                                    @can('sales.pdf')
+                                                    <a href="{{route('sales.pdf', $sale)}}" class="btn btn-outline-danger"
+                                                    title="Generar PDF"><i class="far fa-file-pdf"></i></a>
+                                                    @endcan
+                                                    @can('sales.print')
+                                                    <!-- <a href="{{route('sales.print', $sale)}}" class="btn btn-outline-warning"
+                                                    title="Imprimir boleta"><i class="fas fa-print"></i></a> -->
+                                                    @endcan
+                                                    @can('sales.show')
+                                                    <a href="{{route('sales.show', $sale)}}" class="btn btn-outline-info"
+                                                    title="Ver detalles"><i class="far fa-eye"></i></a>
+                                                    @endcan
+                                                    @can('sales.print')
+                                                    @if($sale->document_type == 'Ticket')
+                                                        <a href="{{route('sales.ticket', $sale)}}" class="btn btn-outline-danger" title="Imprimir Ticket">
+                                                            <i class="fas fa-print"></i>
+                                                        </a>
+                                                    @endif
+                                                    @if($sale->document_type == 'Factura')
+                                                        <a href="{{route('sales.envoice', $sale)}}" class="btn btn-outline-danger" title="Imprimir Factura">
+                                                            <i class="fas fa-print"></i>
+                                                        </a>
+                                                    @endif
+                                                    @if($sale->document_type == 'credito_fiscal')
+                                                        <a href="{{route('sales.tax_credit', $sale)}}" class="btn btn-outline-danger" title="Imprimir Crédito Fiscal">
+                                                            <i class="fas fa-print"></i>
+                                                        </a>
+                                                    @endif
+                                                    @endcan    
+                                                    </td>
+                                                </tr>                   
+                                                @endforeach
+                                            </tbody>
+                                            </table>
+                                        </div>
     
                                         </div>
                                     </div>

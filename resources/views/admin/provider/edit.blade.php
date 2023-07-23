@@ -24,10 +24,6 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title">Edición de proveedores</h4>    
-                    </div>
                     
                     {!! Form::model($provider,['route'=>['providers.update',$provider],'method'=>'PUT']) !!}
                     

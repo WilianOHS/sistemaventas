@@ -75,7 +75,13 @@
                             </td>
                             @endif
                             @endcan
-                            <td>{{$product->category->name}}</td>
+                            <td>
+                                @isset($product->category)
+                                    {{$product->category->name}}
+                                @else
+                                    Categoría Eliminada
+                                @endisset
+                            </td>
                             <td style="width: 20%;">
                             {!! Form::open(['route'=>['products.destroy', $product], 'method'=>'DELETE', 'id' => 'delete-product-form-' . $product->id]) !!}
                                 @can('product.edit') 

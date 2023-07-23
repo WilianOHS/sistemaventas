@@ -30,10 +30,10 @@
                         <input type="text" name="name" id="name" value="{{$product->name}}" class="form-control" aria-describedby="helpId" required>
                     </div>
 
-                    <!-- <div class="form-group">
-                        <label for="price">Precio</label>
-                        <input type="number" name="price" id="price"  value="{{$product->price}}"  class="form-control" aria-describedby="helpId" required>
-                    </div> -->
+                    <div class="form-group">
+                        <label for="code">Código de barra</label>
+                        <input type="text" name="code" id="code" class="form-control" value="{{$product->code}}"  aria-describedby="helpId" required>
+                    </div>
 
                     <div class="form-group">
                         <label for="sale_price">Precio de venta</label>
@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="weight">Peso</label>
+                        <label for="weight">Peso o cantidad</label>
                         <input type="number" name="weight" id="weight" value="{{$product->weight}}" class="form-control" aria-describedby="helpId" required>
                     </div>
 
@@ -69,11 +69,17 @@
                         <label for="category_id">Categoría</label>
                         <select id="category_id" class="form-control" name="category_id">
                             @foreach ($categories as $category)
-                            <option value="{{$category->id}}"
-                            @if ($category->id == $product->category_id)
-                            selected
-                            @endif
-                            >{{$category->name}}</option>
+                                <option value="{{$category->id}}"
+                                    @if ($category->id == $product->category_id)
+                                        selected
+                                    @endif
+                                >
+                                    @isset($category->name)
+                                        {{$category->name}}
+                                    @else
+                                        Categoría Eliminada
+                                    @endisset
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -81,20 +87,21 @@
                     <div class="form-group">
                         <label for="provider_id">Proveedor</label>
                         <select id="provider_id" class="form-control" name="provider_id">
-                            @foreach ($providers as $product)
-                            <option value="{{$product->id}}"
-                            @if ($product->id == $product->provider_id)
-                            selected
-                            @endif
-                            >{{$product->name}}</option>
+                            @foreach ($providers as $provider)
+                                <option value="{{$provider->id}}"
+                                    @if ($provider->id == $product->provider_id)
+                                        selected
+                                    @endif
+                                >
+                                    @isset($provider->name)
+                                        {{$provider->name}}
+                                    @else
+                                        Proveedor Eliminado
+                                    @endisset
+                                </option>
                             @endforeach
                         </select>
                     </div>
-
-                    <!-- <div class="custom-file mb-4">
-                        <input type="file" class="custom-file-input" name="image" id="image" lang="es">
-                        <label class="custom-file-label" for="image">Seleccionar Archivo</label>
-                    </div> -->
 
                     <div class="card-body">
                     <h4 class="card-title d-flex">Imagen de producto
