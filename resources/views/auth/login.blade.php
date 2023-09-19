@@ -36,7 +36,7 @@
         </div>
     </div>
     <p class="mt-2">
-    <a href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
+    <!-- <a href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a> -->
 </p>
 
     <div class="my-2 d-flex justify-content-between align-items-center">
