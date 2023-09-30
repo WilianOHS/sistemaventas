@@ -39,6 +39,21 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="nit">NIT</label>
+                        <input type="text" name="nit" id="nit" value="{{$client->nit}}" class="form-control" aria-describedby="helpId"   onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="16" oninput="formatNIT(this)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nrc">NRC</label>
+                        <input type="text" name="nrc" id="nrc" value="{{$client->nrc}}" class="form-control" aria-describedby="helpId" pattern="\d{6}-\d{1}" title="Formato: 000000-0" maxlength="8">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="giro">Giro</label>
+                        <input type="text" name="giro" id="giro" value="{{$client->giro}}" class="form-control" aria-describedby="helpId">
+                    </div>
+
+                    <div class="form-group">
                         <label for="address">Dirección</label>
                         <input type="text" name="address" id="address" value="{{$client->address}}" class="form-control" aria-describedby="helpId">
                     </div>
@@ -72,6 +87,41 @@
 @section('scripts')
 {!! Html::script('melody/js/data-table.js') !!}
 {!! Html::script('melody/js/dropify.js') !!}
+<script>
+		function formatNIT(nitField) {
+        // Remover cualquier guión existente
+        let nit = nitField.value.replace(/-/g, '');
+
+        // Agregar guiones después de ciertos números
+        if (nit.length > 4) {
+            nit = nit.substring(0, 4) + '-' + nit.substring(4);
+        }
+        if (nit.length > 10) {
+            nit = nit.substring(0, 10) + '-' + nit.substring(10);
+        }
+        if (nit.length > 14) {
+            nit = nit.substring(0, 14) + '-' + nit.substring(14);
+        }
+        if (nit.length > 16) {
+            nit = nit.substring(0, 16);
+        }
+
+        // Asignar el valor formateado al campo del NIT
+        nitField.value = nit;
+        }
+</script> 
+<script>
+    // Función para agregar guiones automáticamente al campo NRC mientras se escribe
+    document.getElementById('nrc').addEventListener('input', function (e) {
+        let input = e.target;
+        let value = input.value.replace(/\D/g, '');
+        if (value.length > 0) {
+            value = value.match(new RegExp('.{1,6}', 'g')).join('-');
+        }
+        input.value = value;
+    });
+</script>
+
     <script>
       const dui = document.querySelector('#dui')
       dui.addEventListener('keypress', () => {

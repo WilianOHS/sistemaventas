@@ -72,8 +72,25 @@
                                             {{$client->dui}}
                                         </p>
                                         <hr>
+                                        <strong><i class="fas fa-address-card mr-1"></i> Número de NIT</strong>
+                                        <p class="text-muted">
+                                            {{$client->nit}}
+                                        </p>
+                                        <hr>
+                                        <strong><i class="fas fa-address-card mr-1"></i> Número de NRC</strong>
+                                        <p class="text-muted">
+                                            {{$client->nrc}}
+                                        </p>
+                                        <hr>
                                     </div>
                                     <div class="form-group col-md-6">
+                                        <strong>
+                                            <i class="fas fa-industry mr-1"></i>
+                                            Giro</strong>
+                                        <p class="text-muted">
+                                            {{$client->giro}}
+                                        </p>
+                                        <hr>
                                         <strong>
                                             <i class="fas fa-map-marked-alt mr-1"></i>
                                             Dirección</strong>

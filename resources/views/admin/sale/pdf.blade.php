@@ -101,6 +101,11 @@
 			@else
 				<p><strong>DUI:</strong> </p>
 			@endif
+			@if($sale->document_type == 'credito_fiscal')
+			<p><strong>NIT:</strong> {{ $sale->client->nit }}</p>
+			<p><strong>NRC:</strong> {{ $sale->client->nrc }}</p>
+			<p><strong>Giro:</strong> {{ $sale->client->giro }}</p>
+            @endif
 		@else
 		<p><strong>Nombre:</strong> Cliente Eliminado</p>
 		@endif

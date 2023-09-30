@@ -10,9 +10,13 @@
 </style>
 <style>
 		#productosmasvendidos {
-			width: 40%;
-			margin: 0 auto;
+			width: 200px; /* Cambia el valor según tus necesidades */
+    height: auto; /* Para mantener la proporción original */
+    margin: 0 auto;
 		}
+        #mid {
+            height: 450px;
+        }
 	</style>
     <style>
          #miDiv {
@@ -146,7 +150,7 @@
                     <h4 class="text-center">Productos mas vendidos</h4>
                 </div>
                 <div class="card-content">
-                    <div class="ct-chart">
+                    <div class="ct-chart" id="mid">
                         <canvas id="productosmasvendidos"></canvas>
                     </div>
                 </div>
