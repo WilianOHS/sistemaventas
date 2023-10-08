@@ -36,6 +36,7 @@
                         <tr>
                           <th>Id</th>
                           <th>Nombre</th>
+                          <th>Precio</th>
                           <th>Stock</th>
                           @can('change.status.products') 
                           <th>Estado</th>
@@ -54,7 +55,8 @@
                                 @else
                                     <span>{{$product->name}}</span>
                                 @endcan                               
-                            </td>    
+                            </td>       
+                            <td>$ {{$product->sale_price}}</td>  
                             <td>{{$product->stock}}</td> 
                             @can('change.status.products') 
                             @if ($product->status == 'ACTIVE')

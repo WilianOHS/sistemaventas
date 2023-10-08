@@ -68,6 +68,8 @@ Route::get('ruta/para/filtrar', [HomeController::class, 'filtrar']);
 
 Route::post('/sales/store-client', 'SaleController@storeClient')->name('sales.storeClient');
 
+Route::post('/cotizaciones/store-client', 'CotizacionController@storeClient')->name('cotizaciones.storeClient');
+
 Route::resource('users', UserController::class)->names('users');
 
 Route::resource('roles', RoleController::class)->names('roles');
@@ -89,6 +91,16 @@ Route::get('get-by-barcode', 'ProductController@getProductByBarcode')->name('get
 
 Route::get('/get-latest-document-number', 'SaleController@getLatestDocumentNumber');
 
+Route::resource('cotizaciones', CotizacionController::class)->names('cotizaciones')->except([
+    'edit', 'update', 'destroy'
+]);
+
+Route::get('/reports-sales-purchases', 'SalePurchaseController@index')->name('reports_sales_purchases.index');
+
+Route::get('/export-sales-purchases', 'SalePurchaseController@exportSalesAndPurchasesToExcel')->name('export_sales_and_purchases');
+
+
+Route::get('cotizaciones/pdf/{cotizacion}', 'CotizacionController@pdf')->name('cotizaciones.pdf');
 
 Auth::routes();
 

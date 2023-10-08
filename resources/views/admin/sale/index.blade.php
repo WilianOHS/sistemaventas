@@ -125,12 +125,13 @@
                                 </a>
                             @endif
                             @if($sale->document_type == 'Factura')
-                                <a href="{{route('sales.envoice', $sale)}}" class="btn btn-outline-danger" title="Imprimir Factura">
-                                    <i class="fas fa-print"></i>
-                                </a>
-                            @endif
+    <a href="{{ route('sales.envoice', $sale) }}" class="btn btn-outline-danger" title="Imprimir Factura" target="_blank">
+        <i class="fas fa-print"></i>
+    </a>
+@endif
+
                             @if($sale->document_type == 'credito_fiscal')
-                                <a href="{{route('sales.tax_credit', $sale)}}" class="btn btn-outline-danger" title="Imprimir Crédito Fiscal">
+                                <a href="{{route('sales.tax_credit', $sale)}}" class="btn btn-outline-danger" title="Imprimir Crédito Fiscal"  target="_blank">
                                     <i class="fas fa-print"></i>
                                 </a>
                             @endif

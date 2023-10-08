@@ -11,23 +11,31 @@
     top: -9999px;
     left: -9999px;
   }
-.bottom-fixed{
+  .bottom-fixed{
     position: fixed;
-    bottom: 355px;
-font-size: 12px;
+    bottom: 130px;
+font-size: 20px;
 }
 .bottom-fixedd{
     position: fixed;
-    bottom: 305px;
-font-size: 12px;
+    bottom: 130px;
+font-size: 20px;
+width: 80px;
 }
 .bottom-fixedt{
     position: fixed;
-    bottom: 245px;
-font-size: 12px;
+    bottom: 60px;
+font-size: 20px;
+width: 80px;
+}
+.bottom-fixedc{
+    position: fixed;
+    bottom: -58px;
+font-size: 20px;
+width: 80px;
 }
 .espacio-superior {
-    margin-top: 138px; 
+    margin-top: 100px; 
   }
 </style>
 </head>
@@ -35,39 +43,47 @@ font-size: 12px;
 	<header>
         <div>
 <p class="espacio-superior"></p>
-            <pre style="font-size: 20px; line-height: 0.5;"><strong> 	  	 	</strong> {{\Carbon\Carbon::parse($sale->sale_date)->format('d/m/Y')}}</pre>
+            <pre style="font-size: 30px; line-height: 0.5;"><strong> 	  	 	</strong> {{\Carbon\Carbon::parse($sale->sale_date)->format('d/m/Y')}}</pre>
 
         @isset($sale->client)
-            <pre style="font-size: 12px; line-height: 0.5;"><strong>     </strong> {{$sale->client->name}}</pre>
-            <pre style="font-size: 12px; line-height: 0.8;"><strong>       </strong> {{$sale->client->address}}</pre>
-            <pre style="font-size: 18px; line-height: 0;"><strong>				</strong> {{$sale->client->dui}}</pre>
+            <pre style="font-size: 20px; line-height: 0.5;"><strong>     </strong> {{$sale->client->name}}</pre>
+            <pre style="font-size: 20px; line-height: 0.8;"><strong>       </strong> {{$sale->client->address}}</pre>
+            <pre style="font-size: 26px; line-height: 0;"><strong>				</strong> {{$sale->client->dui}}</pre>
         @else
             <p>Cliente Eliminado</p>
         @endisset
 		</div>
 	</header>
+  <script>
+    // Espera a que se cargue completamente la página
+    window.addEventListener("load", function() {
+        // Activa la función de impresión
+        window.print();
+    });
+</script>
+
 <br>
 	<section>
 		<table>
 			<thead>
             <tr>
-      <th style="width: 14px;"><span class="visually-hidden">Cantidad</span></th>
-      <th style="width: 260px;"><span class="visually-hidden">Producto</span></th>
-      <th style="width: 37px;"><span class="visually-hidden">Precio</span></th>
-      <th style="width: 35px;"></th>
-      <th style="width: 35px;"></th>
-      <th style="width: 45px;"><span class="visually-hidden">Subtotal</span></th>
+      <th style="width: 22px;"><span class="visually-hidden">Cantidad</span></th>
+      <th style="width: 350px;"><span class="visually-hidden">Producto</span></th>
+      <th style="width: 45px;"><span class="visually-hidden">Precio</span></th>
+      <th style="width: 43px;"></th>
+      <th style="width: 43px;"></th>
+      <th style="width: 80px;"><span class="visually-hidden">Subtotal</span></th>
     </tr>
 			</thead>
 			<tbody>
             @foreach ($saleDetails as $saleDetail)
                     <tr>
-                        <td style="font-size: 10px; width: 18px;">{{$saleDetail->quantity}}</td>
-                        <td style="font-size: 10px; width: 256px;">{{$saleDetail->product->name}}</td>
-                        <td  style="font-size: 10px; width: 37px;">$ {{$saleDetail->price}}</td>
-			                  <td style="width: 35px;"> </td>
-			                  <td style="width: 35px;"> </td>
-                        <td style="font-size: 12px; width: 45px;">$ {{number_format($saleDetail->quantity*$saleDetail->price - $saleDetail->quantity*$saleDetail->price*$saleDetail->discount/100,2)}}
+                        <td style="font-size: 18px; width: 26px;">{{$saleDetail->quantity}}</td>
+                        <td style="font-size: 18px; width: 350px;">{{$saleDetail->product->name}}</td>
+                        <td  style="font-size: 18px; width: 45px;">$ {{$saleDetail->price}}</td>
+			                  <td style="width: 43px;"> </td>
+			                  <td style="width: 43px;"> </td>
+                        <td style="font-size: 20px; width: 80px;">$ {{number_format($saleDetail->quantity*$saleDetail->price - $saleDetail->quantity*$saleDetail->price*$saleDetail->discount/100,2)}}
                         </td>
                     </tr>
                     @endforeach
@@ -80,9 +96,9 @@ font-size: 12px;
 				<td colspan="1"></td>
 				<td class="bottom-fixed" id="total-cell"> {{number_format($sale->total, 2)}}</td>
 				<td colspan="3"></td>
-				<td class="bottom-fixed">$ {{number_format($sale->total, 2)}}</td>
 				<td class="bottom-fixedd">$ {{number_format($sale->total, 2)}}</td>
 				<td class="bottom-fixedt">$ {{number_format($sale->total, 2)}}</td>
+				<td class="bottom-fixedc">$ {{number_format($sale->total, 2)}}</td>
 			</tr>
 		</table>
 	</section>

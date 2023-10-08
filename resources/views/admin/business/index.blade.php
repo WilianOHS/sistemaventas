@@ -83,7 +83,7 @@
                             <strong><i class="fas fa-exclamation-circle mr-1">Logo</i></strong><br>
                           </div>
                           <div class="col-md-6">
-                            <img style="width:50px ; height:50px ;" src="{{asset('image/'.$business->logo)}}" class="rounded float-left" alt="logo">
+                            <img style="height:50px ;" src="{{asset('image/'.$business->logo)}}" class="rounded float-left" alt="logo">
                           </div>
                         </div>
                         <hr>

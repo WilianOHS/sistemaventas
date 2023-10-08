@@ -27,7 +27,12 @@
                   </a>
               </li>
           @endcan
-
+          <li class="nav-item">
+                  <a class="nav-link" href="{{ route('cotizaciones.index') }}">
+                      <i class="fa fa-edit menu-icon"></i>
+                      <span class="menu-title">Cotizaciones</span>
+                  </a>
+              </li>
 
           <li class="nav-item">
           <a class="nav-link" data-toggle="collapse" href="#page-layouts3" aria-expanded="false" aria-controls="page-layouts3">
@@ -137,6 +142,7 @@
             </a>
             <div class="collapse" id="sidebar-layouts">
               <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="{{route('reports_sales_purchases.index')}}">Reportes Ventas y Compras</a></li>
               @can('reports.day')
                 <li class="nav-item"> <a class="nav-link" href="{{route('reports.day')}}">Reportes por día</a></li>
                 @endcan

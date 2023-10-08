@@ -97,6 +97,13 @@ font-size: 12px;
         @endisset
 		</div>
 	</header>
+  <script>
+    // Espera a que se cargue completamente la página
+    window.addEventListener("load", function() {
+        // Activa la función de impresión
+        window.print();
+    });
+</script>
 <br><br>
 	<section>
 		<table>
